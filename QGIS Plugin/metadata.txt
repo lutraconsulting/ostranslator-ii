@@ -1,0 +1,48 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=OS Translator II
+qgisMinimumVersion=2.0
+description=A plugin for loading Ordnance Survey Products.
+version=1.0
+author=Peter Wells for Lutra Consulting
+email=info@lutraconsulting.co.uk
+
+# End of mandatory metadata
+
+# Optional items:
+
+# Uncomment the following line and add your changelog:
+changelog=1.0 - New features:
+ - Added timing
+ - Added status bar and responsive and verbose indexing
+ - Added de-duplication step for chunked data
+ - Bug fixes:
+ - Added workarounds for ogr2ogr issues
+ - Added Pioneer file for ITN and topo
+ - Made indexer more granular for progress reporting
+ <p>0.2 - Bug fixes:
+ - Fix for "IOError: [Errno 2] No such file or directory: '/tmp..."
+ - Fix for "IOError: [Errno 9] Bad file descriptor"
+ - With thanks to the reporters
+ <p>0.1 - Initial release
+
+# Tags are comma separated with spaces allowed
+tags=ordnance survey,os,mastermap,master map,topography layer,integrated transport network,itn,addresslayer2,address layer,address layer 2,sites layer,gml,gml gz,gz,gml.gz,convert,translate,load,loader,import,postgis,postgresql,pg
+
+homepage=http://www.lutraconsulting.co.uk/products/ostranslator-ii/
+tracker=https://github.com/lutraconsulting/ostranslator-ii/issues
+repository=https://github.com/lutraconsulting/ostranslator-ii
+
+icon=osTrans_128px.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False

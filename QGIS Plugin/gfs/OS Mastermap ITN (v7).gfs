@@ -1,0 +1,746 @@
+<GMLFeatureClassList>
+  <!-- feature types with actual/or implied geometry -->
+  <GMLFeatureClass>
+    <Name>RoadLink</Name>
+    <ElementPath>RoadLink</ElementPath>
+    <GeometryType>2</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefNeg</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefPos</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationNeg</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationPos</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>length</Name>
+      <ElementPath>length</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>natureOfRoad</Name>
+      <ElementPath>natureOfRoad</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToTopographicArea</Name>
+      <ElementPath>referenceToTopographicArea@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadNode</Name>
+    <ElementPath>RoadNode</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToTopographicArea</Name>
+      <ElementPath>referenceToTopographicArea@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryNode</Name>
+    <ElementPath>FerryNode</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryLink</Name>
+    <ElementPath>FerryLink</ElementPath>
+    <GeometryType>2</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefNeg</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefPos</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationNeg</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationPos</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>InformationPoint</Name>
+    <ElementPath>InformationPoint</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>junctionName</Name>
+      <ElementPath>junctionName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <!-- feature types referencing geometry -->
+  <GMLFeatureClass>
+    <Name>Road</Name>
+    <ElementPath>Road</ElementPath>
+    <!-- TODO The bounding box is not pulled from the gml - this can be 
+    updated with a post-load SQL query. -->
+    <!-- <GeometryElementPath>boundedBy</GeometryElementPath> -->
+    <GeometryType>3</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>networkMember</Name>
+      <ElementPath>networkMember@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>roadNameEn</Name>
+      <ElementPath>roadName</ElementPath>
+      <Condition>@xml:lang='en'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>roadNameCy</Name>
+      <ElementPath>roadName</ElementPath>
+      <Condition>@xml:lang='cy'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>roadNameGd</Name>
+      <ElementPath>roadName</ElementPath>
+      <Condition>@xml:lang='gd'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryTerminal</Name>
+    <ElementPath>FerryTerminal</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToNetwork</Name>
+      <ElementPath>referenceToNetwork@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadNodeInformation</Name>
+    <ElementPath>RoadNodeInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- TODO environmentQualifier -->
+    <PropertyDefn>
+      <Name>gradeSeparation</Name>
+      <ElementPath>referenceToRoadNode@gradeSeparation</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>orientation</Name>
+      <ElementPath>referenceToRoadNode@orientation</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToRoadNode</Name>
+      <ElementPath>referenceToRoadNode@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO vehicleQualifier -->
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadLinkInformation</Name>
+    <ElementPath>RoadLinkInformation</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>distanceFromStart</Name>
+      <ElementPath>distanceFromStart</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <!-- TODO environmentQualifier -->
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToRoadLink</Name>
+      <ElementPath>referenceToRoadLink@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO vehicleQualifier -->
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadRouteInformation</Name>
+    <ElementPath>RoadRouteInformation</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkOrientation</Name>
+      <ElementPath>directedLink@orientation</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkRef</Name>
+      <ElementPath>directedLink@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>distanceFromStart</Name>
+      <ElementPath>distanceFromStart</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <!-- TODO environmentQualifier -->
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO vehicleQualifier -->
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadPartialLinkInformation</Name>
+    <ElementPath>RoadPartialLinkInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- TODO environmentQualifier -->
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToRoadLink</Name>
+      <ElementPath>referenceToRoadLink@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>subsectionDistance</Name>
+      <ElementPath>subsectionDistance</ElementPath>
+      <Type>RealList</Type>
+    </PropertyDefn>
+    <!-- TODO subsectionPoint -->
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO vehicleQualifier -->
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>RoadPartialRouteInformation</Name>
+    <ElementPath>RoadPartialRouteInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkOrientation</Name>
+      <ElementPath>directedLink@orientation</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkRef</Name>
+      <ElementPath>directedLink@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO environmentQualifier -->
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>subsectionDistance</Name>
+      <ElementPath>subsectionDistance</ElementPath>
+      <Type>RealList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- TODO vehicleQualifier -->
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+</GMLFeatureClassList>
