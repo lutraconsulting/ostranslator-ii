@@ -347,6 +347,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         for ch in self.schema_name:
             if not ch in string.ascii_lowercase and not ch == '_':
                 QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must currently consist of lower case characters and underscores.')
+                return
         if len(self.schema_name) == 0:
             errMsg = 'No destination schema was specified. Do you wish to import into the public schema?'
             reply = QtGui.QMessageBox.question(self.parent, 'No Schema Specified', errMsg, QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
