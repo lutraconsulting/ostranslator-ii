@@ -351,12 +351,6 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>roadNameEn</Name>
-      <ElementPath>roadName</ElementPath>
-      <Condition>@xml:lang='en'</Condition>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>roadNameCy</Name>
       <ElementPath>roadName</ElementPath>
       <Condition>@xml:lang='cy'</Condition>
@@ -366,6 +360,14 @@
       <Name>roadNameGd</Name>
       <ElementPath>roadName</ElementPath>
       <Condition>@xml:lang='gd'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- the next element should capture empty lang attribute (defaults 
+    to en and also those with values of en -->
+    <PropertyDefn>
+      <Name>roadNameEn</Name>
+      <ElementPath>roadName</ElementPath>
+      <Condition>@xml:lang!='cy' and @xml:lang!='gd'</Condition>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
