@@ -96,6 +96,12 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         destSchema = self.destSchema.text()
         s.setValue("OsTranslatorII/destSchema", destSchema)
         
+        createSpatialIndex = self.createSpatialIndexCheckBox.checkState()
+        s.setValue("OsTranslatorII/createSpatialIndex", createSpatialIndex)
+        
+        removeDuplicates = self.removeDuplicatesCheckBox.checkState()
+        s.setValue("OsTranslatorII/removeDuplicates", removeDuplicates)
+        
     
     def populateDatasets(self):
         """ Read the content of the gfs folder """
@@ -180,6 +186,10 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         #)
         
         self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '')) )
+        
+        self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked) )
+                
+        self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked) )
         
         try:
             val, status = s.value("OsTranslatorII/simultaneousJobs", -1).toInt()
@@ -458,7 +468,11 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.statusLabel.setText('Indexing - grab a sleeping bag..')
         self.indexingErrors = []
         cur = self.getDbCur()
-        self.indexerThread = IndexerThread(cur, self.schema_name, self.destTables)
+        self.indexerThread = IndexerThread( cur, 
+                                            self.schema_name, 
+                                            self.destTables, 
+                                            self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
+                                            self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked)
         self.indexerThread.finished.connect(self.importFinished)
         self.indexerThread.error.connect(self.onIndexerError)
         self.indexerThread.progressChanged.connect(self.onProgressChanged)
