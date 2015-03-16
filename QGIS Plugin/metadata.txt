@@ -10,7 +10,7 @@
 name=OS Translator II
 qgisMinimumVersion=2.0
 description=A plugin for loading Ordnance Survey Products.
-version=1.0
+version=1.1
 author=Peter Wells for Lutra Consulting
 email=info@lutraconsulting.co.uk
 
@@ -19,7 +19,13 @@ email=info@lutraconsulting.co.uk
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog=1.0 - New features:
+changelog=1.1 - New features:
+ - Added UI elements to allow user control over spatial indexing and de-duplication
+ - Bug fixes:
+ - Fixed issue #2 import continues even after errors with input fields are detected
+ - Fixed issue #7 road names not being imported
+ - Fixed issue #5 geometry-less features seen at 0,0 and some tables not being indexed or de-duplicated
+ <p>1.0 - New features:
  - Added timing
  - Added status bar and responsive and verbose indexing
  - Added de-duplication step for chunked data
