@@ -48,7 +48,7 @@ repository=https://github.com/lutraconsulting/ostranslator-ii
 
 icon=osTrans_128px.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False

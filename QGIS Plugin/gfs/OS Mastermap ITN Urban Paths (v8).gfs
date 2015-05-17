@@ -1,0 +1,920 @@
+<GMLFeatureClassList>
+  
+  <!-- feature types with actual/or implied geometry -->
+  
+  <GMLFeatureClass>
+    <Name>PathLink</Name>
+    <ElementPath>PathLink</ElementPath>
+    <GeometryType>2</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>make</Name>
+      <ElementPath>make</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>length</Name>
+      <ElementPath>length</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefNeg</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefPos</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationNeg</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationPos</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToTopographicArea</Name>
+      <ElementPath>referenceToTopographicArea@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>PathNode</Name>
+    <ElementPath>PathNode</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToTopographicArea</Name>
+      <ElementPath>referenceToTopographicArea@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>ConnectingNode</Name>
+    <ElementPath>ConnectingNode</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToITN</Name>
+      <ElementPath>referenceToITN@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryNode</Name>
+    <ElementPath>FerryNode</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>ConnectingLink</Name>
+    <ElementPath>ConnectingLink</ElementPath>
+    <GeometryType>2</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefNeg</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefPos</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationNeg</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationPos</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryLink</Name>
+    <ElementPath>FerryLink</ElementPath>
+    <GeometryType>2</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefNeg</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedNodeRefPos</Name>
+      <ElementPath>directedNode@xlink:href</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationNeg</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='-'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gradeSeparationPos</Name>
+      <ElementPath>directedNode@gradeSeparation</ElementPath>
+      <Condition>@orientation='+'</Condition>
+      <Type>Integer</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  <!-- feature types referencing geometry -->
+  
+  <GMLFeatureClass>
+    <Name>Path</Name>
+    <ElementPath>Path</ElementPath>
+    <!-- TODO The bounding box is not pulled from the gml - this can be 
+    updated with a post-load SQL query. -->
+    <!-- <GeometryElementPath>boundedBy</GeometryElementPath> -->
+    <GeometryType>3</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathNameCy</Name>
+      <ElementPath>pathName</ElementPath>
+      <Condition>@xml:lang='cy'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathNameGd</Name>
+      <ElementPath>pathName</ElementPath>
+      <Condition>@xml:lang='gd'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- the next element should capture empty lang attribute (defaults 
+    to en and also those with values of en -->
+    <PropertyDefn>
+      <Name>pathNameEn</Name>
+      <ElementPath>pathName</ElementPath>
+      <Condition>@xml:lang!='cy' and @xml:lang!='gd'</Condition>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>networkMember</Name>
+      <ElementPath>networkMember@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>FerryTerminal</Name>
+    <ElementPath>FerryTerminal</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveTerm</Name>
+      <ElementPath>descriptiveTerm</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToNetwork</Name>
+      <ElementPath>referenceToNetwork@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  <GMLFeatureClass>
+    <Name>PathNodeInformation</Name>
+    <ElementPath>PathNodeInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <!-- Start of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- End of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>referenceToNode</Name>
+      <ElementPath>referenceToNode@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToNodeOrientation</Name>
+      <ElementPath>referenceToNode@orientation</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>referenceToNodeGradeSeparation</Name>
+      <ElementPath>referenceToNode@gradeSeparation</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <!-- TODO dateTimeQualifier -->
+    <!-- TODO environmentalQualifier -->
+    <!-- TODO vehicleQualifier -->
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>PathLinkInformation</Name>
+    <ElementPath>PathLinkInformation</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <!-- Start of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- End of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>referenceToPathLink</Name>
+      <ElementPath>referenceToPathLink@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>distanceFromStart</Name>
+      <ElementPath>distanceFromStart</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <!-- TODO Ensure point actually comes through -->
+    <!-- TODO dateTimeQualifier -->
+    <!-- TODO environmentalQualifier -->
+    <!-- TODO vehicleQualifier -->
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>PathRouteInformation</Name>
+    <ElementPath>PathRouteInformation</ElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <!-- Start of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- End of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>directedLinkOrientation</Name>
+      <ElementPath>directedLink@orientation</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkRef</Name>
+      <ElementPath>directedLink@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>distanceFromStart</Name>
+      <ElementPath>distanceFromStart</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <!-- TODO Ensure point actually comes through -->
+    <!-- TODO dateTimeQualifier -->
+    <!-- TODO environmentalQualifier -->
+    <!-- TODO vehicleQualifier -->
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>PathPartialLinkInformation</Name>
+    <ElementPath>PathPartialLinkInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <!-- Start of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- End of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>referenceToLink</Name>
+      <ElementPath>referenceToLink@xlink:href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>subsectionDistance</Name>
+      <ElementPath>subsectionDistance</ElementPath>
+      <Type>RealList</Type>
+    </PropertyDefn>
+    <!-- TODO subsectionPoint -->
+    <!-- TODO dateTimeQualifier -->
+    <!-- TODO environmentalQualifier -->
+    <!-- TODO vehicleQualifier -->
+  </GMLFeatureClass>
+  <GMLFeatureClass>
+    <Name>PathPartialRouteInformation</Name>
+    <ElementPath>PathPartialRouteInformation</ElementPath>
+    <!-- TODO should be geometry-less -->
+    <GeometryType>1</GeometryType>
+    <SRSName>osgb:BNG</SRSName>
+    <!-- Start of AbstractFeatureType -->
+    <!-- The fid attribute is found automatically and we do not need to 
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>fid</Name>
+      <ElementPath>@fid</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>version</Name>
+      <ElementPath>version</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>versionDate</Name>
+      <ElementPath>versionDate</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>theme</Name>
+      <ElementPath>theme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- End of AbstractFeatureType -->
+    <!-- Start of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>changeDate</Name>
+      <ElementPath>changeHistory|changeDate</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>changeHistory|reasonForChange</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptiveGroup</Name>
+      <ElementPath>descriptiveGroup</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- End of AbstractPathInformationType -->
+    <PropertyDefn>
+      <Name>directedLinkOrientation</Name>
+      <ElementPath>directedLink@orientation</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>directedLinkRef</Name>
+      <ElementPath>directedLink@xlink:href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>subsectionDistance</Name>
+      <ElementPath>subsectionDistance</ElementPath>
+      <Type>RealList</Type>
+    </PropertyDefn>
+    <!-- TODO subsectionPoint -->
+    <!-- TODO dateTimeQualifier -->
+    <!-- TODO environmentalQualifier -->
+    <!-- TODO vehicleQualifier -->
+  </GMLFeatureClass>
+</GMLFeatureClassList>

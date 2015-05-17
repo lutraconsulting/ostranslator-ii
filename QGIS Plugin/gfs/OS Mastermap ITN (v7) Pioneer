@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osgb:FeatureCollection
+xmlns:osgb='http://www.ordnancesurvey.co.uk/xml/namespaces/osgb'
+xmlns:gml='http://www.opengis.net/gml'
+xmlns:xlink='http://www.w3.org/1999/xlink'
+xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+xsi:schemaLocation='http://www.ordnancesurvey.co.uk/xml/namespaces/osgb http://www.ordnancesurvey.co.uk/xml/schema/v7/OSDNFFeatures.xsd'
+fid='XXX-00000-0'>
+<gml:description>Ordnance Survey, (c) Crown Copyright. All rights reserved, 2009-07-30</gml:description>
+<gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy>
+<osgb:queryTime>1970-01-01T00:00:00</osgb:queryTime>
+<osgb:queryExtent>
+<osgb:Rectangle srsName='osgb:BNG'>
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</osgb:Rectangle>
+</osgb:queryExtent>
+
+<osgb:networkMember>
+<osgb:FerryLink fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Ferry Connection</osgb:descriptiveGroup>
+<osgb:directedNode orientation='-' xlink:href='#osgb----------------'/>
+<osgb:directedNode orientation='+' xlink:href='#osgb----------------'/>
+</osgb:FerryLink>
+</osgb:networkMember>
+
+<osgb:roadInformationMember>
+<osgb:RoadNodeInformation fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Routing Information</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Road Routing Information</osgb:descriptiveGroup>
+<osgb:environmentQualifier>
+<osgb:classification>Mini Roundabout</osgb:classification>
+</osgb:environmentQualifier>
+<osgb:referenceToRoadNode xlink:href='#osgb----------------'/>
+</osgb:RoadNodeInformation>
+</osgb:roadInformationMember>
+
+<osgb:networkMember>
+<osgb:RoadLink fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Road Topology</osgb:descriptiveGroup>
+<osgb:descriptiveTerm>Private Road - Restricted Access</osgb:descriptiveTerm>
+<osgb:natureOfRoad>Single Carriageway</osgb:natureOfRoad>
+<osgb:length>1.0</osgb:length>
+<osgb:polyline>
+<gml:LineString srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0 1.0,1.0</gml:coordinates>
+</gml:LineString>
+</osgb:polyline>
+<osgb:directedNode orientation='-' xlink:href='#osgb----------------'/>
+<osgb:directedNode orientation='+' xlink:href='#osgb----------------'/>
+<osgb:referenceToTopographicArea xlink:href='#osgb----------------'/>
+<osgb:referenceToTopographicArea xlink:href='#osgb----------------'/>
+</osgb:RoadLink>
+</osgb:networkMember>
+
+<osgb:roadInformationMember>
+<osgb:InformationPoint fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Information Point</osgb:descriptiveGroup>
+<osgb:junctionName></osgb:junctionName>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0</gml:coordinates>
+</gml:Point>
+</osgb:point>
+</osgb:InformationPoint>
+</osgb:roadInformationMember>
+
+<osgb:networkMember>
+<osgb:FerryTerminal fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Network Connection</osgb:descriptiveGroup>
+<osgb:descriptiveTerm>Road</osgb:descriptiveTerm>
+<osgb:descriptiveTerm>Ferry</osgb:descriptiveTerm>
+<osgb:referenceToNetwork xlink:href='#osgb----------------'/>
+</osgb:FerryTerminal>
+</osgb:networkMember>
+
+<osgb:networkMember>
+<osgb:RoadNode fid='osgb----------------'>
+<osgb:version>4</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Road Topology</osgb:descriptiveGroup>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0</gml:coordinates>
+</gml:Point>
+</osgb:point>
+<osgb:referenceToTopographicArea xlink:href='#osgb----------------'/>
+</osgb:RoadNode>
+</osgb:networkMember>
+
+<osgb:networkMember>
+<osgb:FerryNode fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Ferry Connection</osgb:descriptiveGroup>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0</gml:coordinates>
+</gml:Point>
+</osgb:point>
+</osgb:FerryNode>
+</osgb:networkMember>
+
+<osgb:roadInformationMember>
+<osgb:RoadLinkInformation fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Routing Information</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Road Routing Information</osgb:descriptiveGroup>
+<osgb:environmentQualifier>
+<osgb:classification>Gate</osgb:classification>
+</osgb:environmentQualifier>
+<osgb:referenceToRoadLink xlink:href='#osgb----------------'/>
+<osgb:distanceFromStart>1.0</osgb:distanceFromStart>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0</gml:coordinates>
+</gml:Point>
+</osgb:point>
+</osgb:RoadLinkInformation>
+</osgb:roadInformationMember>
+
+<osgb:roadInformationMember>
+<osgb:RoadRouteInformation fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Routing Information</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Road Routing Information</osgb:descriptiveGroup>
+<osgb:environmentQualifier>
+<osgb:instruction>One Way</osgb:instruction>
+</osgb:environmentQualifier>
+<osgb:directedLink orientation='-' xlink:href='#osgb----------------'/>
+</osgb:RoadRouteInformation>
+</osgb:roadInformationMember>
+
+<osgb:roadMember>
+<osgb:Road fid='osgb----------------'>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Road Network</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Named Road</osgb:descriptiveGroup>
+<osgb:roadName></osgb:roadName>
+<osgb:networkMember xlink:href='#osgb----------------'/>
+<osgb:boundedBy>
+<gml:Box srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0 1.0,1.0</gml:coordinates>
+</gml:Box>
+</osgb:boundedBy>
+</osgb:Road>
+</osgb:roadMember>
+
+<osgb:boundedBy>
+<gml:Box srsName='osgb:BNG'>
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</gml:Box>
+</osgb:boundedBy>
+</osgb:FeatureCollection>
