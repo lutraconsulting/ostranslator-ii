@@ -285,7 +285,14 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 # Output the mandatory elements required
                 childElems = root.findall('./GMLFeatureClass/[Name="%s"]/*' % tli.text(0))
                 for childElem in childElems:
-                    if childElem.tag != 'PropertyDefn':
+                    if childElem.tag == 'Name':
+                        # Here we modify the Name tag in the dynamic 
+                        # .gfs file to import the data into a temporary 
+                        # table before modifications are made to it.
+                        modifiedNameTag = ET.Element('Name')
+                        modifiedNameTag.text = childElem.text + '_tmp'
+                        gMLFeatureClassElement.append(modifiedNameTag)
+                    elif childElem.tag != 'PropertyDefn':
                         gMLFeatureClassElement.append(childElem)
                     else:
                         # This is an attribute element
