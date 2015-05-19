@@ -24,8 +24,7 @@
 import psycopg2
 from PyQt4.QtCore import *
 
-# TODO: Rename this class to PostProcessorThread
-class IndexerThread(QThread):
+class PostProcessorThread(QThread):
     
     error = pyqtSignal(str)
     progressChanged = pyqtSignal(int)

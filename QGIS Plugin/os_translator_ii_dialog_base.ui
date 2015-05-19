@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
+    <width>849</width>
     <height>326</height>
    </rect>
   </property>
@@ -282,7 +282,7 @@
       <widget class="QTreeWidget" name="fieldsTreeWidget">
        <property name="minimumSize">
         <size>
-         <width>340</width>
+         <width>354</width>
          <height>0</height>
         </size>
        </property>
@@ -364,7 +364,7 @@
    <item row="1" column="4">
     <widget class="QLabel" name="statusLabel">
      <property name="text">
-      <string>Status Label</string>
+      <string>Status label</string>
      </property>
     </widget>
    </item>

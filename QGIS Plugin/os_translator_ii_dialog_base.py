@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'os_translator_ii_dialog_base.ui'
 #
-# Created: Thu Mar 12 12:48:54 2015
-#      by: PyQt4 UI code generator 4.10.2
+# Created: Tue May 19 12:21:33 2015
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,22 +12,13 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+    _fromUtf8 = lambda s: s
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.setEnabled(True)
-        Dialog.resize(835, 326)
+        Dialog.resize(849, 326)
         self.gridLayout_4 = QtGui.QGridLayout(Dialog)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
         self.gridLayout = QtGui.QGridLayout()
@@ -36,7 +27,7 @@ class Ui_Dialog(object):
         self.simultaneousJobsSpinBox = QtGui.QSpinBox(Dialog)
         self.simultaneousJobsSpinBox.setMinimum(1)
         self.simultaneousJobsSpinBox.setMaximum(128)
-        self.simultaneousJobsSpinBox.setProperty("value", 2)
+        self.simultaneousJobsSpinBox.setProperty(_fromUtf8("value"), 2)
         self.simultaneousJobsSpinBox.setObjectName(_fromUtf8("simultaneousJobsSpinBox"))
         self.gridLayout.addWidget(self.simultaneousJobsSpinBox, 4, 2, 1, 2)
         self.label_4 = QtGui.QLabel(Dialog)
@@ -150,7 +141,7 @@ class Ui_Dialog(object):
         self.label_9.setObjectName(_fromUtf8("label_9"))
         self.gridLayout_3.addWidget(self.label_9, 0, 0, 1, 1)
         self.fieldsTreeWidget = QtGui.QTreeWidget(Dialog)
-        self.fieldsTreeWidget.setMinimumSize(QtCore.QSize(340, 0))
+        self.fieldsTreeWidget.setMinimumSize(QtCore.QSize(354, 0))
         self.fieldsTreeWidget.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
         self.fieldsTreeWidget.setObjectName(_fromUtf8("fieldsTreeWidget"))
         self.fieldsTreeWidget.headerItem().setText(0, _fromUtf8("1"))
@@ -173,7 +164,7 @@ class Ui_Dialog(object):
         self.progressBar = QtGui.QProgressBar(Dialog)
         self.progressBar.setEnabled(False)
         self.progressBar.setMaximum(99)
-        self.progressBar.setProperty("value", 0)
+        self.progressBar.setProperty(_fromUtf8("value"), 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.gridLayout_4.addWidget(self.progressBar, 1, 2, 1, 2)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
@@ -217,25 +208,25 @@ class Ui_Dialog(object):
         Dialog.setTabOrder(self.helpPushButton, self.aboutPushButton)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "OS Translator II", None))
-        self.label_4.setText(_translate("Dialog", "Processor Cores", None))
-        self.deleteTaskPushButton.setText(_translate("Dialog", "Delete", None))
-        self.newTaskPushButton.setText(_translate("Dialog", "New", None))
-        self.label.setText(_translate("Dialog", "Import Tasks", None))
-        self.label_8.setText(_translate("Dialog", "Dataset", None))
-        self.label_2.setText(_translate("Dialog", "Label", None))
-        self.modeComboBox.setItemText(0, _translate("Dialog", "Create or Replace", None))
-        self.modeComboBox.setItemText(1, _translate("Dialog", "Append", None))
-        self.label_5.setText(_translate("Dialog", "Mode", None))
-        self.label_3.setText(_translate("Dialog", "Connection", None))
-        self.inputLabel.setText(_translate("Dialog", "Input", None))
-        self.label_6.setText(_translate("Dialog", "Schema", None))
-        self.batchModeCheckBox.setText(_translate("Dialog", "Recursively process a directory", None))
-        self.browsePushButton.setText(_translate("Dialog", "...", None))
-        self.createSpatialIndexCheckBox.setText(_translate("Dialog", "Create spatial index", None))
-        self.removeDuplicatesCheckBox.setText(_translate("Dialog", "Remove duplicates (chunk artefacts)", None))
-        self.label_9.setText(_translate("Dialog", "Fields", None))
-        self.helpPushButton.setText(_translate("Dialog", "Help", None))
-        self.aboutPushButton.setText(_translate("Dialog", "About", None))
-        self.statusLabel.setText(_translate("Dialog", "Status Label", None))
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "OS Translator II", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("Dialog", "Processor Cores", None, QtGui.QApplication.UnicodeUTF8))
+        self.deleteTaskPushButton.setText(QtGui.QApplication.translate("Dialog", "Delete", None, QtGui.QApplication.UnicodeUTF8))
+        self.newTaskPushButton.setText(QtGui.QApplication.translate("Dialog", "New", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("Dialog", "Import Tasks", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_8.setText(QtGui.QApplication.translate("Dialog", "Dataset", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("Dialog", "Label", None, QtGui.QApplication.UnicodeUTF8))
+        self.modeComboBox.setItemText(0, QtGui.QApplication.translate("Dialog", "Create or Replace", None, QtGui.QApplication.UnicodeUTF8))
+        self.modeComboBox.setItemText(1, QtGui.QApplication.translate("Dialog", "Append", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("Dialog", "Mode", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Connection", None, QtGui.QApplication.UnicodeUTF8))
+        self.inputLabel.setText(QtGui.QApplication.translate("Dialog", "Input", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("Dialog", "Schema", None, QtGui.QApplication.UnicodeUTF8))
+        self.batchModeCheckBox.setText(QtGui.QApplication.translate("Dialog", "Recursively process a directory", None, QtGui.QApplication.UnicodeUTF8))
+        self.browsePushButton.setText(QtGui.QApplication.translate("Dialog", "...", None, QtGui.QApplication.UnicodeUTF8))
+        self.createSpatialIndexCheckBox.setText(QtGui.QApplication.translate("Dialog", "Create spatial index", None, QtGui.QApplication.UnicodeUTF8))
+        self.removeDuplicatesCheckBox.setText(QtGui.QApplication.translate("Dialog", "Remove duplicates (chunk artefacts)", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_9.setText(QtGui.QApplication.translate("Dialog", "Fields", None, QtGui.QApplication.UnicodeUTF8))
+        self.helpPushButton.setText(QtGui.QApplication.translate("Dialog", "Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.aboutPushButton.setText(QtGui.QApplication.translate("Dialog", "About", None, QtGui.QApplication.UnicodeUTF8))
+        self.statusLabel.setText(QtGui.QApplication.translate("Dialog", "Status label", None, QtGui.QApplication.UnicodeUTF8))
 

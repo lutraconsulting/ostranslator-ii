@@ -27,7 +27,7 @@ import xml.etree.ElementTree as ET
 from PyQt4 import QtGui, QtCore, uic
 from import_manager import *
 from result_dialog import *
-from indexer_thread import *
+from post_processor_thread import *
 # from about_dialog import *
 import resources_rc
 
@@ -64,7 +64,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.labelLineEdit.textChanged.connect(self.updateImportTaskName)
 
         self.im = ImportManager()
-        self.im.finished.connect(self.createSpatialIndex)
+        self.im.finished.connect(self.postProcess)
         self.im.progressChanged.connect(self.onProgressChanged)
 
         self.log = ''
@@ -470,24 +470,24 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
     def onProgressChanged(self, prog):
         self.progressBar.setValue(prog)
 
-    def createSpatialIndex(self):
+    def postProcess(self):
         # Todo parallelise this function
-        self.statusLabel.setText('Indexing - grab a sleeping bag..')
-        self.indexingErrors = []
+        self.statusLabel.setText('Post-processing - grab a sleeping bag..')
+        self.ppErrors = []
         cur = self.getDbCur()
-        self.indexerThread = IndexerThread( cur, 
-                                            self.schema_name, 
-                                            self.destTables, 
-                                            self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
-                                            self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked)
-        self.indexerThread.finished.connect(self.importFinished)
-        self.indexerThread.error.connect(self.onIndexerError)
-        self.indexerThread.progressChanged.connect(self.onProgressChanged)
+        self.ppThread = PostProcessorThread( cur, 
+                                             self.schema_name, 
+                                             self.destTables, 
+                                             self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
+                                             self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked)
+        self.ppThread.finished.connect(self.importFinished)
+        self.ppThread.error.connect(self.onPostProcessorError)
+        self.ppThread.progressChanged.connect(self.onProgressChanged)
         self.progressBar.setValue(0)
-        self.indexerThread.start()
+        self.ppThread.start()
     
-    def onIndexerError(self, error):
-        self.indexingErrors.append(error)
+    def onPostProcessorError(self, error):
+        self.ppErrors.append(error)
         
     def importFinished(self):
         
@@ -513,10 +513,10 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.log += 'Warning - some import jobs did not complete successfully.\n'
         else:
             self.log += 'All jobs completed successfully.\n'
-        if len(self.indexingErrors) > 0:
+        if len(self.ppErrors) > 0:
             self.log += '\nFailed to create one or more spatial indices:\n\n'
-            for indexFail in self.indexingErrors:
-                self.log += '%s\n' % indexFail
+            for ppFail in self.ppErrors:
+                self.log += '%s\n' % ppFail
         loadTimeSecs = (time.time() - self.im.startTime)
         self.log += '\nLoaded in %.1f hours (%d seconds).\n' % ((loadTimeSecs / 3600.0), loadTimeSecs)
 
