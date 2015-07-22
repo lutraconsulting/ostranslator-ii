@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 
-import os, sys, time, psycopg2, string, multiprocessing
+import os, sys, time, psycopg2, string, multiprocessing, traceback
 import xml.etree.ElementTree as ET
 
 from PyQt4 import QtGui, QtCore, uic
@@ -30,6 +30,9 @@ from result_dialog import *
 from post_processor_thread import *
 # from about_dialog import *
 import resources_rc
+
+# QGIS Imports
+from qgis.core import QgsDataSourceURI
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'os_translator_ii_dialog_base.ui'))
@@ -102,6 +105,19 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         removeDuplicates = self.removeDuplicatesCheckBox.checkState()
         s.setValue("OsTranslatorII/removeDuplicates", removeDuplicates)
         
+    def storeStyleSettings(self):
+        if not self.uiInitialised:
+            return
+        
+        s = QtCore.QSettings()
+        
+        addStyleFields = self.addOsStylingFieldsCheckBox.checkState()
+        s.setValue("OsTranslatorII/addStyleFields", addStyleFields)
+        
+        applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
+        s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
+        
+        # TODO: Improve the logic around the second option requiring the first
     
     def populateDatasets(self):
         """ Read the content of the gfs folder """
@@ -170,31 +186,31 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.postgisConnectionComboBox.addItem(connectionName)
         s.endGroup()
         
-        dataset = str(s.value("OsTranslatorII/dataset", ''))
+        dataset = str(s.value("OsTranslatorII/dataset", '', type=str))
         self.datasetComboBox.setCurrentIndex(
             self.datasetComboBox.findText(dataset)
         )
         
-        connection = str(s.value("OsTranslatorII/connection", ''))
+        connection = str(s.value("OsTranslatorII/connection", '', type=str))
         self.postgisConnectionComboBox.setCurrentIndex(
             self.postgisConnectionComboBox.findText(connection)
         )
         
-        mode = str(s.value("OsTranslatorII/mode", ''))
+        mode = str(s.value("OsTranslatorII/mode", '', type=str))
         #self.modeComboBox.setCurrentIndex(
         #    self.modeComboBox.findText(mode)
         #)
         
-        self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '')) )
+        self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '', type=str)) )
         
-        self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked) )
+        self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked, type=int) )
                 
-        self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked) )
+        self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
         
         try:
             val, status = s.value("OsTranslatorII/simultaneousJobs", -1).toInt()
         except:
-            val = int(s.value("OsTranslatorII/simultaneousJobs", -1))
+            val = int(s.value("OsTranslatorII/simultaneousJobs", -1, type=int))
         if val == -1:
             val = multiprocessing.cpu_count() / 2 # div by 2 in case of HT
         self.simultaneousJobsSpinBox.setValue( val )
@@ -285,14 +301,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 # Output the mandatory elements required
                 childElems = root.findall('./GMLFeatureClass/[Name="%s"]/*' % tli.text(0))
                 for childElem in childElems:
-                    if childElem.tag == 'Name':
-                        # Here we modify the Name tag in the dynamic 
-                        # .gfs file to import the data into a temporary 
-                        # table before modifications are made to it.
-                        modifiedNameTag = ET.Element('Name')
-                        modifiedNameTag.text = childElem.text + '_tmp'
-                        gMLFeatureClassElement.append(modifiedNameTag)
-                    elif childElem.tag != 'PropertyDefn':
+                    if childElem.tag != 'PropertyDefn':
                         gMLFeatureClassElement.append(childElem)
                     else:
                         # This is an attribute element
@@ -320,27 +329,35 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             return
         
         s = QtCore.QSettings()
-        self.host = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, ''))
-        if len(self.host) == 0:
+        self.database = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, '', type=str))
+        if len(self.database) == 0:
             # Looks like the preferred connection could not be found
             raise Exception('Details of the selected PostGIS connection could not be found, please check your settings')
-        self.database = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, ''))
-        self.user = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, ''))
-        self.password = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, ''))
+        self.host = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, '', type=str))
+        self.user = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, '', type=str))
+        self.password = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, '', type=str))
         try:
             self.port, dummy = s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432).toInt()
         except:
-            self.port = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432))
+            self.port = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432, type=int))
         
     def getDbCur(self):
-        dbConn = psycopg2.connect( database = self.database,
-                                   user = self.user,
-                                   password = self.password,
-                                   host = self.host,
-                                   port = self.port)
+        if len(self.user) == 0:
+            dbConn = psycopg2.connect( database = self.database)
+        else:
+            dbConn = psycopg2.connect( database = self.database,
+                                       user = self.user,
+                                       password = self.password,
+                                       host = self.host,
+                                       port = self.port)
         dbConn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         return dbConn.cursor()
         
+    def getUri(self):
+        uri = QgsDataSourceURI()
+        uri.setConnection(self.host, str(self.port), self.database, self.user, self.password)
+        return uri
+    
     def accept(self):
         
         # Check the user entered a folder path
@@ -361,9 +378,12 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         # Ensure destination schema exists - promt to create it
         self.schema_name = str(self.destSchema.text())
+        if self.schema_name[0] in string.digits:
+            QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must not start with a number.')
+            return
         for ch in self.schema_name:
-            if not ch in string.ascii_lowercase and not ch == '_':
-                QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must currently consist of lower case characters and underscores.')
+            if not ch in string.ascii_lowercase and not ch in string.digits and not ch == '_':
+                QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must currently consist of lower case characters, numbers and underscores.')
                 return
         if len(self.schema_name) == 0:
             errMsg = 'No destination schema was specified. Do you wish to import into the public schema?'
@@ -375,29 +395,31 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         try:
             cur = self.getDbCur()
         except:
-            QtGui.QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database - please check your connection settings.')
+            QtGui.QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
             return
 
-        try:
-            qDic = {'schema_name' : self.schema_name}
-            cur.execute("""SELECT schema_name FROM information_schema.schemata WHERE schema_name = %(schema_name)s;""", qDic)
-        except:
-            QtGui.QMessageBox.critical(None, 'Failed to Query Schemas', 'Failed to determine whether destination already exists - please check your connection settings.')
-            return
-        if cur.rowcount < 1:
-            # The schema does not already exist - create it
+        for schemaName in [self.schema_name, self.schema_name + '_tmp']:
             try:
-                cur.execute("""CREATE SCHEMA """ + self.schema_name, qDic)
-                if cur.statusmessage != 'CREATE SCHEMA':
-                    raise Exception()
+                qDic = {'schema_name' : schemaName}
+                cur.execute("""SELECT schema_name FROM information_schema.schemata WHERE schema_name = %(schema_name)s;""", qDic)
             except:
-                QtGui.QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema - please check your connection settings.')
+                QtGui.QMessageBox.critical(None, 'Failed to Query Schemas', 'Failed to determine whether destination already exists, detailed error was:\n\n%s' % traceback.format_exc())
                 return
+            if cur.rowcount < 1:
+                # The schema does not already exist - create it
+                try:
+                    cur.execute("""CREATE SCHEMA """ + schemaName, qDic)
+                    if cur.statusmessage != 'CREATE SCHEMA':
+                        raise Exception()
+                except:
+                    QtGui.QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema, detailed error was:\n\n%s' % traceback.format_exc())
+                    return
         
         gfsFilePath = self.buildGfs()
-
+        
         # If mode is create or replace, issue a warning
         if self.modeComboBox.currentText() == 'Create or Replace':
+            qDic['schema_name'] = self.schema_name
             # See if the table exists
             existingTables = []
             for dTable in self.destTables:
@@ -407,7 +429,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                                     WHERE table_schema = %(schema_name)s AND 
                                     table_name = %(table_name)s;""", qDic)
                 except:
-                    QtGui.QMessageBox.critical(None, 'Failed to Query Tables', 'Failed to determine whether destination table already exists - please check your connection settings.')
+                    QtGui.QMessageBox.critical(None, 'Failed to Query Tables', 'Failed to determine whether destination table already exists, detailed error was:\n\n%s' % traceback.format_exc())
                     return
                 if cur.rowcount > 0:
                     existingTables.append(dTable)
@@ -431,8 +453,13 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         """ Add the jobs to the import manager """
         
-        pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
-            (self.database, self.host, self.port, self.schema_name, self.user, self.password)
+        if len(self.user) == 0:
+            pgSource = 'PG:dbname=\'%s\' active_schema=%s' % \
+                (self.database, self.schema_name + '_tmp')
+        else:
+            pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
+                (self.database, self.host, self.port, self.schema_name + '_tmp', self.user, self.password)
+                # Note we are loading into a temporary schema
 
         self.im.reset()
 
@@ -476,10 +503,13 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.ppErrors = []
         cur = self.getDbCur()
         self.ppThread = PostProcessorThread( cur, 
+                                             self.getUri(),
                                              self.schema_name, 
                                              self.destTables, 
                                              self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
-                                             self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked)
+                                             self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked,
+                                             self.addOsStylingFieldsCheckBox.checkState() == QtCore.Qt.Checked,
+                                             self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked)
         self.ppThread.finished.connect(self.importFinished)
         self.ppThread.error.connect(self.onPostProcessorError)
         self.ppThread.progressChanged.connect(self.onProgressChanged)
@@ -547,7 +577,11 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                       self.inputLineEdit,
                       self.browsePushButton,
                       self.fieldsTreeWidget,
-                      self.buttonBox]
+                      self.buttonBox,
+                      self.createSpatialIndexCheckBox,
+                      self.removeDuplicatesCheckBox,
+                      self.addOsStylingFieldsCheckBox,
+                      self.applyDefaultOsStyleCheckBox]
 
         for ie in uiElements:
             ie.setEnabled(False)
@@ -568,10 +602,15 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                       self.inputLineEdit,
                       self.browsePushButton,
                       self.fieldsTreeWidget,
-                      self.buttonBox]
+                      self.buttonBox,
+                      self.createSpatialIndexCheckBox,
+                      self.removeDuplicatesCheckBox]
 
         for ie in uiElements:
             ie.setEnabled(True)
+        
+        # Style-related options are dataset-dependant
+        self.updateStyleOptions(self.datasetComboBox.currentText())
 
     def getInputFiles(self):
         inputFiles = []
@@ -595,7 +634,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         """ Open a browse for files dialog - for the moment set to 
         browse directory mode """
         settings = QtCore.QSettings()
-        startingDir = str(settings.value("OsTranslatorII/lastInputFolder", os.path.expanduser("~")))
+        startingDir = str(settings.value("OsTranslatorII/lastInputFolder", os.path.expanduser("~"), type=str))
         d = str( QtGui.QFileDialog.getExistingDirectory(None, 'Browse For Input', startingDir) )
         if d <> os.sep and d.lower() <> 'c:\\' and d <> '':
             settings.setValue("OsTranslatorII/lastInputFolder", d)
@@ -608,3 +647,24 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         aboutDlg = AboutDialog(self)
         aboutDlg.show()
         aboutDlg.exec_()
+
+    def updateStyleOptions(self, datasetName):
+        
+        # We disconnect from storeSettings here to ensure deactivating these options is not saved as a user preference
+        self.addOsStylingFieldsCheckBox.stateChanged.disconnect(self.storeStyleSettings)
+        self.applyDefaultOsStyleCheckBox.stateChanged.disconnect(self.storeStyleSettings)
+            
+        if 'Topography' in datasetName:
+            s = QtCore.QSettings()
+            self.addOsStylingFieldsCheckBox.setEnabled(True)
+            self.addOsStylingFieldsCheckBox.setCheckState( s.value("OsTranslatorII/addStyleFields", QtCore.Qt.Checked, type=int) )
+            self.applyDefaultOsStyleCheckBox.setEnabled(True)
+            self.applyDefaultOsStyleCheckBox.setCheckState( s.value("OsTranslatorII/applyDefaultOsStyle", QtCore.Qt.Checked, type=int) )
+        else:
+            self.addOsStylingFieldsCheckBox.setEnabled(False)
+            self.addOsStylingFieldsCheckBox.setChecked(False)
+            self.applyDefaultOsStyleCheckBox.setEnabled(False)
+            self.applyDefaultOsStyleCheckBox.setChecked(False)
+        
+        self.addOsStylingFieldsCheckBox.stateChanged.connect(self.storeStyleSettings)
+        self.applyDefaultOsStyleCheckBox.stateChanged.connect(self.storeStyleSettings)
