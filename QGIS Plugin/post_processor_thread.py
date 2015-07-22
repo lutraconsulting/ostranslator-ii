@@ -23,6 +23,7 @@
 
 import psycopg2
 import traceback
+import sys
 from PyQt4.QtCore import *
 from styler import *
 
@@ -44,6 +45,7 @@ class PostProcessorThread(QThread):
                  createSpatialIndex=True, dedup=True, 
                  addTopoStyleColumns=True, applyDefaultStyle=True):
         QThread.__init__(self)
+        self.debug = False
         self.cur = cur
         self.uri = uri
         self.schema = schema
@@ -86,7 +88,11 @@ class PostProcessorThread(QThread):
                 if self.addTopoStyleColumns:
                     self.styler.addFields(table)
                 if self.applyDefaultStyle:
-                    self.styler.applyDefaultStyle(table)
+                    # We don't want this to kill-off this thread:
+                    try:
+                        self.styler.applyDefaultStyle(table)
+                    except:
+                        self.error.emit( 'Post-processor error: ' + str(sys.exc_info()[1]) )
                 
                 if self.createSpatialIndex:
                     try:
@@ -208,4 +214,7 @@ class PostProcessorThread(QThread):
                 progress = int( float(i) / (len(self.tables)*self.post_processing_steps) * 100.0 )
                 self.progressChanged.emit(progress)
         except:
-            self.error.emit( traceback.format_exc() )
+            if self.debug:
+                self.error.emit( 'Post-processor error: ' + str(traceback.format_exc()) )
+            else:
+                self.error.emit( 'Post-processor error: ' + str(sys.exc_info()[1]) )

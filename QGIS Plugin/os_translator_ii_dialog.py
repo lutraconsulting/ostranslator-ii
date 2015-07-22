@@ -49,6 +49,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # self.<objectname>, and you can use autoconnect slots - see
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
+        self.helpUrl = 'http://www.lutraconsulting.co.uk/products/ostranslator-ii/'
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(':/plugins/OsTranslatorII/icon.png')))
         
@@ -544,9 +545,13 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         else:
             self.log += 'All jobs completed successfully.\n'
         if len(self.ppErrors) > 0:
-            self.log += '\nFailed to create one or more spatial indices:\n\n'
+            self.log += '\nFailed to complete one or more post-processing tasks:\n\n'
             for ppFail in self.ppErrors:
                 self.log += '%s\n' % ppFail
+        
+        if self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked:
+            self.log += '\nYou opted to apply the default OS style. Please ensure you also set up SVG paths and fonts for those who will be using the layers. See %s for more information.\n' % self.helpUrl
+        
         loadTimeSecs = (time.time() - self.im.startTime)
         self.log += '\nLoaded in %.1f hours (%d seconds).\n' % ((loadTimeSecs / 3600.0), loadTimeSecs)
 
@@ -641,7 +646,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.inputLineEdit.setText(d)
 
     def helpPressed(self):
-        QtGui.QDesktopServices.openUrl(QUrl('http://www.lutraconsulting.co.uk/products/ostranslator-ii/'))
+        QtGui.QDesktopServices.openUrl(QUrl(self.helpUrl))
 
     def aboutPressed(self):
         aboutDlg = AboutDialog(self)

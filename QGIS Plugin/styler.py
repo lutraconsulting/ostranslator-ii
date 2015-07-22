@@ -90,6 +90,8 @@ class Styler():
         # Read the QML
         qmlPath = self.downloadStyle(table)
         domDoc = QDomDocument('default')
+        # In odd circumstances (sh*tty wifi connections that require you to register or login) we may have ended up downloading 
+        # some odd HTML document.
         with open(qmlPath, 'r') as inf:
             domDoc.setContent(inf.read())
         
@@ -97,7 +99,7 @@ class Styler():
         
         success, message = pgLayer.importNamedStyle(domDoc)
         if not success:
-            raise Exception('Failed to load layer style: %s' % message)
+            raise Exception('Failed to load layer style: %s\n\nThis can happen when using free wifi connections requiring registration.' % message)
         try:
             # Technically we should only pass .. bool, string but there are some 
             # issues with SIP that will be resolved shortly
@@ -143,10 +145,14 @@ class Styler():
             urllib2.install_opener(opener)
         
         url = self.qmlLocations[table]
-        conn = urllib2.urlopen(url)
-        
-        #TODO: The line above freezes for some time and partial qml downloads have been seen
-        # this results in an invalid style being saved to the DB.
+        generalDownloadFailureMessage = '\n\nPlease check your network settings. Styles may need to be added manually. This does not affect the loaded data.'
+        try:
+            conn = urllib2.urlopen(url, timeout=30) # Allow 30 seconds for completion
+            if conn.getcode() != 200:
+                # It looks like the request was unsuccessful
+                raise Exception('Failed to download the stylesheet at %s\n\nThe HTTP status code was %d.' % (url,conn.getcode()) + generalDownloadFailureMessage)
+        except urllib2.URLError as e:
+            raise Exception('Failed to download the stylesheet at %s\n\nThe reason was %s.' % (url, e.reason) + generalDownloadFailureMessage)
         
         destinationFileName = os.path.join(destFolder, table + '.qml')
         if os.path.isfile(destinationFileName):
