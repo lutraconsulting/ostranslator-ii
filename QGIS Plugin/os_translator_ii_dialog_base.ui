@@ -635,34 +635,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>addOsStylingFieldsCheckBox</sender>
+   <sender>applyDefaultOsStyleCheckBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>Dialog</receiver>
-   <slot>storeStyleSettings()</slot>
+   <slot>applyDefaultOsStyleCheckBoxChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>295</x>
-     <y>203</y>
+     <x>444</x>
+     <y>227</y>
     </hint>
     <hint type="destinationlabel">
-     <x>246</x>
-     <y>141</y>
+     <x>425</x>
+     <y>193</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>applyDefaultOsStyleCheckBox</sender>
+   <sender>addOsStylingFieldsCheckBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>Dialog</receiver>
-   <slot>storeStyleSettings()</slot>
+   <slot>storeSettings()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>398</x>
-     <y>227</y>
+     <x>293</x>
+     <y>203</y>
     </hint>
     <hint type="destinationlabel">
-     <x>445</x>
-     <y>246</y>
+     <x>256</x>
+     <y>207</y>
     </hint>
    </hints>
   </connection>
@@ -674,6 +674,6 @@
   <slot>helpPressed()</slot>
   <slot>aboutPressed()</slot>
   <slot>updateStyleOptions()</slot>
-  <slot>storeStyleSettings()</slot>
+  <slot>applyDefaultOsStyleCheckBoxChanged(int)</slot>
  </slots>
 </ui>

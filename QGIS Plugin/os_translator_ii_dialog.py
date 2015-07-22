@@ -106,20 +106,12 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         removeDuplicates = self.removeDuplicatesCheckBox.checkState()
         s.setValue("OsTranslatorII/removeDuplicates", removeDuplicates)
         
-    def storeStyleSettings(self):
-        if not self.uiInitialised:
-            return
-        
-        s = QtCore.QSettings()
-        
         addStyleFields = self.addOsStylingFieldsCheckBox.checkState()
         s.setValue("OsTranslatorII/addStyleFields", addStyleFields)
         
         applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
         s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
         
-        # TODO: Improve the logic around the second option requiring the first
-    
     def populateDatasets(self):
         """ Read the content of the gfs folder """
         thisDir = os.path.dirname(__file__)
@@ -499,7 +491,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.progressBar.setValue(prog)
 
     def postProcess(self):
-        # Todo parallelise this function
+        # TODO parallelise this function
         self.statusLabel.setText('Post-processing - grab a sleeping bag..')
         self.ppErrors = []
         cur = self.getDbCur()
@@ -652,12 +644,23 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         aboutDlg = AboutDialog(self)
         aboutDlg.show()
         aboutDlg.exec_()
-
+    
+    def applyDefaultOsStyleCheckBoxChanged(self, newCheckState):
+        """ The user has either checked or uncheck this checkbox.
+        This option required the one above it so if we're switching it on, ensure the one above is also 
+        selected.  When this is done, call storeStyleSettings() to store everything
+        """
+        if newCheckState == QtCore.Qt.Checked:
+            self.addOsStylingFieldsCheckBox.blockSignals(True)
+            self.addOsStylingFieldsCheckBox.setCheckState( QtCore.Qt.Checked )
+            self.addOsStylingFieldsCheckBox.blockSignals(False)
+        self.storeSettings()
+            
     def updateStyleOptions(self, datasetName):
         
         # We disconnect from storeSettings here to ensure deactivating these options is not saved as a user preference
-        self.addOsStylingFieldsCheckBox.stateChanged.disconnect(self.storeStyleSettings)
-        self.applyDefaultOsStyleCheckBox.stateChanged.disconnect(self.storeStyleSettings)
+        self.addOsStylingFieldsCheckBox.blockSignals(True)
+        self.applyDefaultOsStyleCheckBox.blockSignals(True)
             
         if 'Topography' in datasetName:
             s = QtCore.QSettings()
@@ -671,5 +674,5 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.applyDefaultOsStyleCheckBox.setEnabled(False)
             self.applyDefaultOsStyleCheckBox.setChecked(False)
         
-        self.addOsStylingFieldsCheckBox.stateChanged.connect(self.storeStyleSettings)
-        self.applyDefaultOsStyleCheckBox.stateChanged.connect(self.storeStyleSettings)
+        self.addOsStylingFieldsCheckBox.blockSignals(False)
+        self.applyDefaultOsStyleCheckBox.blockSignals(False)
