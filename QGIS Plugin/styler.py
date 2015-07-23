@@ -87,6 +87,8 @@ class Styler():
         if not table in self.qmlLocations.keys():
             return False
         
+        defaultStyleName = 'Default OS Style'
+        
         # Read the QML
         qmlPath = self.downloadStyle(table)
         domDoc = QDomDocument('default')
@@ -95,7 +97,9 @@ class Styler():
         with open(qmlPath, 'r') as inf:
             domDoc.setContent(inf.read())
         
-        pgLayer = QgsVectorLayer(self.getLayerUri(table), 'tmp_layer', 'postgres')
+        pgLayer = QgsVectorLayer(self.getLayerUri(table, schemaType='tmp'), 'tmp_layer', 'postgres')
+        if not pgLayer.isValid():
+            raise Exception('Failed to load layer %s for applying default style.' % table)
         
         success, message = pgLayer.importNamedStyle(domDoc)
         if not success:
@@ -104,21 +108,41 @@ class Styler():
             # Technically we should only pass .. bool, string but there are some 
             # issues with SIP that will be resolved shortly
             # 2/7/15 Updated call below based on Martin's feedback of the 27/5/15
-            pgLayer.saveStyleToDatabase('Default OS Style', '', True, '', None)
+            pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '', None)
         except TypeError:
             # For the case when the SIP files are fixed
-            # TODO: Clean this up
-            pgLayer.saveStyleToDatabase('Default OS Style', '', True, '')
+            # TODO: Clean this up (eventually)
+            pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '')
         
         del pgLayer # Unload
         
+        # Update layer_styles to ensure the relavant row references the destination schema
+        qDic = {}
+        qDic['dest_schema'] = self.schema
+        qDic['tmp_schema'] = self.schema + '_tmp'
+        qDic['table'] = table
+        qDic['style_name'] = defaultStyleName
+        self.cur.execute("""UPDATE layer_styles SET 
+                                f_table_schema = %(dest_schema)s 
+                            WHERE 
+                                f_table_schema = %(tmp_schema)s AND 
+                                f_table_name = %(table)s AND 
+                                f_geometry_column = 'wkb_geometry' AND 
+                                stylename = %(style_name)s""", qDic)
+        
         return True
 
-    def getLayerUri(self, table):
+    def getLayerUri(self, table, schemaType='destination'):
         # set database schema, table name, geometry column and optionally
         # subset (WHERE clause)
         # Note that this function returns the destination schema, not temporary
-        self.uri.setDataSource(self.schema, table, 'wkb_geometry')
+        if schemaType == 'destination':
+            schema = self.schema
+        elif schemaType == 'tmp':
+            schema = self.schema + '_tmp'
+        else:
+            raise Exception('getLayerUri: Unexpected schemaType argument')
+        self.uri.setDataSource(schema, table, 'wkb_geometry')
         return self.uri.uri()
     
     def downloadStyle(self, table):

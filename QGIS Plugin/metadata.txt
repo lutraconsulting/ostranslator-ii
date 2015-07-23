@@ -11,7 +11,7 @@ name=OS Translator II
 qgisMinimumVersion=2.0
 description=A plugin for loading Ordnance Survey Products.
 about=OS Translator II makes loading GML-based datasets into PostGIS easy. It also performs a number of post-processing tasks on the data such as adding additional fields for styling and downloading 3rd-party stylesheets.
-version=1.2.1
+version=1.2.2
 author=Peter Wells for Lutra Consulting
 email=info@lutraconsulting.co.uk
 
@@ -20,7 +20,14 @@ email=info@lutraconsulting.co.uk
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog=1.2.1 - New features:
+changelog=1.2.2 - Bug fixes:
+ - Cleaned-up error messages
+ - Added hints about setting up prerequisites for OS styles
+ - Much improved error checking and reporting on downloading of styles
+ - Ensured failing stylesheet download does not kill post-processor thread
+ - Improved logic around style-related controls
+ - Fixes bug where styles only applied when data already existed in database
+ <p>1.2.1 - New features:
  - Updated metadata.txt to new requirements
  <p>1.2 - New features:
  - Automatic addition of new fields required for Ordnance Survey QGIS styles
@@ -58,7 +65,7 @@ repository=https://github.com/lutraconsulting/ostranslator-ii
 
 icon=osTrans_128px.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False

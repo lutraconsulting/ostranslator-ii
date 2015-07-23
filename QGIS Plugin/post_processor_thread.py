@@ -79,7 +79,7 @@ class PostProcessorThread(QThread):
             * ANALYZE
             
         """
-        # Todo parallelise this function
+        # TODO parallelise this function
         try:
             qDic = {}
             i = 0
@@ -192,6 +192,7 @@ class PostProcessorThread(QThread):
                             # If we have previously imported a layer with this name there will already be a reference to it in 
                             # the public.geometry_columns table.  In order to not violate the integrity of this table we must delete 
                             # any old reference an re-insert.
+                            # 
                             # TODO: What's the implication of not also matching the f_table_catelog column?
                             qDic['f_table_catalog'], qDic['f_geometry_column'], qDic['coord_dimension'], qDic['srid'], qDic['type'] = self.cur.fetchone()
                             self.cur.execute("""DELETE FROM UPDATE public.geometry_columns WHERE f_table_schema = %(schema)s AND f_table_name = %(table)s""", qDic)

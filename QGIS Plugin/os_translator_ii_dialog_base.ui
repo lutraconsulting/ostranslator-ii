@@ -283,7 +283,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Apply default OS style (experimental)</string>
+        <string>Apply default OS style</string>
        </property>
       </widget>
      </item>
