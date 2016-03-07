@@ -11,7 +11,7 @@ name=OS Translator II
 qgisMinimumVersion=2.0
 description=A plugin for loading Ordnance Survey Products.
 about=OS Translator II makes loading GML-based datasets into PostGIS easy. It also performs a number of post-processing tasks on the data such as adding additional fields for styling and downloading 3rd-party stylesheets.
-version=1.2.2
+version=1.2.3
 author=Peter Wells for Lutra Consulting
 email=info@lutraconsulting.co.uk
 
@@ -20,7 +20,12 @@ email=info@lutraconsulting.co.uk
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog=1.2.2 - Bug fixes:
+changelog=1.2.3 - Bug fixes:
+ - Fixed "no COPY in progress" error seen in QGIS 2.14.0
+ - Fixed traceback seen when schema left blank
+ - Tidied line endings in reporting
+ - Provided better error reporting the event of being unable to save styles to the db
+ <p>1.2.2 - Bug fixes:
  - Cleaned-up error messages
  - Added hints about setting up prerequisites for OS styles
  - Much improved error checking and reporting on downloading of styles

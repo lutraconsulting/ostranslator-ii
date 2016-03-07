@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 
-import os, urllib2
+import os, urllib2, traceback, psycopg2
 from qgis.core import QgsVectorLayer
 from PyQt4.QtCore import QSettings
 from PyQt4.Qt import QDomDocument
@@ -113,7 +113,7 @@ class Styler():
             # For the case when the SIP files are fixed
             # TODO: Clean this up (eventually)
             pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '')
-        
+
         del pgLayer # Unload
         
         # Update layer_styles to ensure the relavant row references the destination schema
@@ -122,13 +122,23 @@ class Styler():
         qDic['tmp_schema'] = self.schema + '_tmp'
         qDic['table'] = table
         qDic['style_name'] = defaultStyleName
-        self.cur.execute("""UPDATE layer_styles SET 
-                                f_table_schema = %(dest_schema)s 
-                            WHERE 
-                                f_table_schema = %(tmp_schema)s AND 
-                                f_table_name = %(table)s AND 
-                                f_geometry_column = 'wkb_geometry' AND 
-                                stylename = %(style_name)s""", qDic)
+        failedDbStyleSaveError = 'Failed to save style to database (postgres). Please first ensure you can successfully save ' \
+                                 'layer styles to the database normally in QGIS: Right click a layer > Properties > Style > ' \
+                                 'Save Style > Save in database (postgres). This error usually indicates an underlying ' \
+                                 'database permissions issue.'
+        try:
+            self.cur.execute("""UPDATE layer_styles SET
+                                    f_table_schema = %(dest_schema)s
+                                WHERE
+                                    f_table_schema = %(tmp_schema)s AND
+                                    f_table_name = %(table)s AND
+                                    f_geometry_column = 'wkb_geometry' AND
+                                    stylename = %(style_name)s""", qDic)
+            if self.cur.rowcount != 1:
+                # Either no rows have been updated or oddly more than one has
+                raise Exception('Error: %s' % failedDbStyleSaveError)
+        except psycopg2.ProgrammingError:
+            raise Exception('Error: %s' % failedDbStyleSaveError)
         
         return True
 

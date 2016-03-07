@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 
-import os, sys, time, psycopg2, string, multiprocessing, traceback
+import os, sys, time, psycopg2, string, multiprocessing
 import xml.etree.ElementTree as ET
 
 from PyQt4 import QtGui, QtCore, uic
@@ -371,6 +371,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         # Ensure destination schema exists - promt to create it
         self.schema_name = str(self.destSchema.text())
+        if len(self.schema_name) == 0:
+            QtGui.QMessageBox.critical(None, 'No Schema Specified', 'Please specify a destination schema.')
+            return
         if self.schema_name[0] in string.digits:
             QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must not start with a number.')
             return
@@ -460,10 +463,15 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         for inputFile in inputFiles:
             if inputFile.lower().endswith('.gz'):
                 inputFile = '/vsigzip/' + inputFile
-            args = ['-f', 'PostgreSQL',
-            '--config', 'PG_USE_COPY', 'YES',
-            '--config', 'GML_GFS_TEMPLATE', gfsFilePath,
-            pgSource, inputFile]
+            # -lyr_transaction added to negate
+            # ERROR 1: ERROR: current transaction is aborted, commands ignored until end of transaction block
+            #
+            # ERROR 1: no COPY in progress
+            args = ['-lyr_transaction',
+                    '-f', 'PostgreSQL',
+                    '--config', 'PG_USE_COPY', 'YES',
+                    '--config', 'GML_GFS_TEMPLATE', gfsFilePath,
+                    pgSource, inputFile]
 
             if i == 0:
                 args.insert(0, '-overwrite')
@@ -535,17 +543,17 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         if len(self.im.crashedJobs) > 0 or len(self.im.failedJobs) > 0:
             self.log += 'Warning - some import jobs did not complete successfully.\n'
         else:
-            self.log += 'All jobs completed successfully.\n'
+            self.log += 'All jobs completed successfully.\n\n'
         if len(self.ppErrors) > 0:
-            self.log += '\nFailed to complete one or more post-processing tasks:\n\n'
+            self.log += 'Failed to complete one or more post-processing tasks:\n\n'
             for ppFail in self.ppErrors:
-                self.log += '%s\n' % ppFail
+                self.log += '%s\n\n' % ppFail
         
         if self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked:
-            self.log += '\nYou opted to apply the default OS style. Please ensure you also set up SVG paths and fonts for those who will be using the layers. See %s for more information.\n' % self.helpUrl
+            self.log += 'You opted to apply the default OS style. Please ensure you also set up SVG paths and fonts for those who will be using the layers. See %s for more information.\n\n' % self.helpUrl
         
         loadTimeSecs = (time.time() - self.im.startTime)
-        self.log += '\nLoaded in %.1f hours (%d seconds).\n' % ((loadTimeSecs / 3600.0), loadTimeSecs)
+        self.log += 'Loaded in %.1f hours (%d seconds).\n\n' % ((loadTimeSecs / 3600.0), loadTimeSecs)
 
         self.progressBar.setValue(100)
         resD = ResultDialog(self)
