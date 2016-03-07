@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 
-import os, sys, time, psycopg2, string, multiprocessing
+import os, sys, time, psycopg2, string, multiprocessing, gdal
 import xml.etree.ElementTree as ET
 
 from PyQt4 import QtGui, QtCore, uic
@@ -463,16 +463,16 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         for inputFile in inputFiles:
             if inputFile.lower().endswith('.gz'):
                 inputFile = '/vsigzip/' + inputFile
-            # -lyr_transaction added to negate
-            # ERROR 1: ERROR: current transaction is aborted, commands ignored until end of transaction block
-            #
-            # ERROR 1: no COPY in progress
-            args = ['-lyr_transaction',
-                    '-f', 'PostgreSQL',
+            args = ['-f', 'PostgreSQL',
                     '--config', 'PG_USE_COPY', 'YES',
                     '--config', 'GML_GFS_TEMPLATE', gfsFilePath,
                     pgSource, inputFile]
-
+            if str(gdal.VersionInfo()).startswith('2'):
+                # -lyr_transaction added to negate
+                # ERROR 1: ERROR: current transaction is aborted, commands ignored until end of transaction block
+                #
+                # ERROR 1: no COPY in progress
+                args.insert(0, '-lyr_transaction')
             if i == 0:
                 args.insert(0, '-overwrite')
                 args.extend(['-lco', 'OVERWRITE=YES',
