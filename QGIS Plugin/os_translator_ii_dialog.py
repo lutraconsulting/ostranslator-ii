@@ -411,8 +411,6 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                     QtGui.QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema, detailed error was:\n\n%s' % traceback.format_exc())
                     return
         
-        gfsFilePath = self.buildGfs()
-        
         # If mode is create or replace, issue a warning
         if self.modeComboBox.currentText() == 'Create or Replace':
             qDic['schema_name'] = self.schema_name
@@ -439,31 +437,64 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                     return
         
         inputFiles = self.getInputFiles()
-        # Insert a 'pioneer' file which contains a feature of each table type
-        inputFiles.insert(0, self.getPioneerFile())
-        
+
         # Ensure the user has selected some files
         if len(inputFiles) == 0:
             QtGui.QMessageBox.critical(None, 'No Input Files Selected', 'Failed to find any GML files under the selected folder.')
             return
         
+        self.im.reset()
+
+        if self.importType() == 'GML':
+            self.prepareGmlJobs(inputFiles)
+        else:
+            self.prepareCsvJobs(inputFiles)
+
+        try:
+            self.im.start(self.simultaneousJobsSpinBox.value())
+        except:
+            QtGui.QMessageBox.critical(None, 'Failed to Start Process', 'Failed to start the import process - please ensure you have ogr2ogr installed.')
+            return
+        self.freezeUi()
+        self.progressBar.setEnabled(True)
+        self.progressBar.setValue(0)
+        self.statusLabel.setText('Loading - grab a snack..')
+
+    def importType(self):
+        return 'CSV'
+
+    def prepareCsvJobs(self, inputFiles):
+
+        # Drop the tables in the tmp schema if they exist
+        # Create a new set of tables depending on the type of CSV import
+        # Prepare a bumch of COPY commands
+
+        """"""
+        self.im.add('psql', args)
+
+    def prepareGmlJobs(self, inputFiles):
+
+        gfsFilePath = self.buildGfs()
+
+        # Insert a 'pioneer' file which contains a feature of each table type
+        inputFiles.insert(0, self.getPioneerFile())
+
         """ Add the jobs to the import manager """
-        
+
         if len(self.user) == 0:
             pgSource = 'PG:dbname=\'%s\' active_schema=%s' % \
                 (self.database, self.schema_name + '_tmp')
         else:
+
             pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
                 (self.database, self.host, self.port, self.schema_name + '_tmp', self.user, self.password)
                 # Note we are loading into a temporary schema
-
-        self.im.reset()
 
         i = 0
         for inputFile in inputFiles:
             if inputFile.lower().endswith('.gz'):
                 inputFile = '/vsigzip/' + inputFile
-            args = ['-f', 'PostgreSQL',
+            args = ['-`f', 'PostgreSQL',
                     '--config', 'PG_USE_COPY', 'YES',
                     '--config', 'GML_GFS_TEMPLATE', gfsFilePath,
                     pgSource, inputFile]
@@ -483,17 +514,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
 
             i += 1
 
-            self.im.add(args)
-
-        try:
-            self.im.start(self.simultaneousJobsSpinBox.value())
-        except:
-            QtGui.QMessageBox.critical(None, 'Failed to Start Process', 'Failed to start the import process - please ensure you have ogr2ogr installed.')
-            return
-        self.freezeUi()
-        self.progressBar.setEnabled(True)
-        self.progressBar.setValue(0)
-        self.statusLabel.setText('Loading - grab a snack..')
+            self.im.add('ogr2ogr', args)
 
     def onProgressChanged(self, prog):
         self.progressBar.setValue(prog)

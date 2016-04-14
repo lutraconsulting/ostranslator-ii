@@ -63,9 +63,9 @@ class ImportManager(QObject):
         self.runningJobs.append(job)
         job.start()
 
-    def add(self, args):
+    def add(self, cmd, args):
         """ Append an import job to the queue """
-        job = ImportTask(args)
+        job = ImportTask(cmd, args)
         job.finished.connect(self.onJobFinished)
         self.pendingJobs.insert(0, job)
         self.totalJobs += 1

@@ -30,8 +30,9 @@ class ImportTask(QObject):
     
     finished = pyqtSignal(str, int, int)
     
-    def __init__(self, args):
+    def __init__(self, cmd, args):
         QObject.__init__(self)
+        self.cmd = cmd
         self.args = args
         self.process = None
 
@@ -41,11 +42,7 @@ class ImportTask(QObject):
     def start(self):
         self.process = QProcess()
         self.process.finished.connect(self.onProcessFinished)
-        cmd = ''
-        for arg in self.args:
-            cmd += arg + ' '
-        # print 'Starting %s' % cmd
-        self.process.start('ogr2ogr', self.args)
+        self.process.start(self.cmd, self.args)
         if not self.process.waitForStarted():
             raise Exception('Failed to start process.')
 
