@@ -6,16 +6,40 @@ class CsvProcessor():
     """
     A base class for importing OS CSV-based datasets (e.g. AddressBase Premium)
 
-    Typical input looks like this:
-
-    10,"NAG Hub - GeoPlace",9999,2014-06-07,1,2014-06-07,09:01:38,"1.0","F"
-    11,"I",1,14200759,1,1110,2,1990-01-01,1,8,0,2003-07-02,,2007-07-19,2003-07-02,292906.00,093301.00,292968.00,093238.00,10
-    15,"I",2,14200759,"SILVER LANE","","EXETER","DEVON","ENG"
-    11,"I",3,14200769,1,1110,2,1990-01-01,1,8,0,2003-07-02,,2007-07-19,2003-07-02,292774.00,093582.00,292694.00,093519.00,10
-
     """
 
-    def __init__(self):
+    def __init__(self, parent, **kwargs):
+        # self.parent should should provide a method called getDbCur() which returns a psycopg2 db cursor. Each cursor returned
+        # should be on a seperate DB connection.
+        self.parent = parent
+        self.concurrent_jobs = kwargs.get('concurrent_jobs', 1)
+        self.dst_schema = kwargs.get('dest_schema', None)
+        self.input_file_paths = kwargs.get('input_files', list())  # Absolute paths to CSV files
+        if not hasattr(parent, 'getDbCur'):
+            raise Exception('parent must provide getDbCur method')
+        if self.dst_schema is None:
+            raise Exception('dest_schema must be specified')  # TODO: Ensure the parent has checked that this schema exists and that we have appropriate permissions on it
+
+
+    def prepare(self):
+        """
+        Defined in subclass. Typically used to create database tables before importing data.
+        :return:
+        """
+        pass
+
+    def process(self):
+        """
+        Defined in subclass. Typically used to import data using COPY.
+        :return:
+        """
+        pass
+
+    def post_process(self):
+        """
+        Defined in subclass. Typically used to create indices.
+        :return:
+        """
         pass
 
 

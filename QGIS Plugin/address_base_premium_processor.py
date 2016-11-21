@@ -5,21 +5,37 @@ import os, threading, psycopg2
 from csv_processor import CsvProcessor
 
 
-def copy_in(cur, stdin, table):
+def copy_in(cur, stdin, schema, table):
         """
 
         :param stdin:   A file-like object, most likely the read-side of a pipe object
         :return:
         """
-        cur.copy_expert("""COPY public.""" + table + """ FROM STDIN (FORMAT csv)""", stdin)
+        cur.copy_expert("""COPY """ + schema + """.""" + table + """ FROM STDIN (FORMAT csv)""", stdin)
 
 
 class AddressBasePremiumProcessor(CsvProcessor):
 
-    def __init__(self):
-        CsvProcessor.__init__(self)
+    """
 
-        self.identifiers = {
+    Class for importing Address Base Premium
+
+    Typical input looks like this:
+
+    10,"NAG Hub - GeoPlace",9999,2014-06-07,1,2014-06-07,09:01:38,"1.0","F"
+    11,"I",1,14200759,1,1110,2,1990-01-01,1,8,0,2003-07-02,,2007-07-19,2003-07-02,292906.00,093301.00,292968.00,093238.00,10
+    15,"I",2,14200759,"SILVER LANE","","EXETER","DEVON","ENG"
+    11,"I",3,14200769,1,1110,2,1990-01-01,1,8,0,2003-07-02,,2007-07-19,2003-07-02,292774.00,093582.00,292694.00,093519.00,10
+
+    """
+
+    def __init__(self, parent, **kwargs):
+        CsvProcessor.__init__(self, parent, **kwargs)
+
+        # self.dst_tables is a dictionary based on the numerical identifiers used in OS CSV-based datasets. Keys are the
+        # integer identifiers, values are the names of the destination tables.
+
+        self.dst_tables = {
             10: 'ab_prem_headers',
             11: 'ab_prem_streets',  # Street
             15: 'ab_prem_street_descriptors',
@@ -34,36 +50,26 @@ class AddressBasePremiumProcessor(CsvProcessor):
             99: 'ab_prem_trailers'
         }
 
-    def get_cur(self):
-        dbConn = psycopg2.connect( database = 'training',
-                                   user = 'postgres',
-                                   password = 'postgres',
-                                   host = 'localhost',
-                                   port = 5432)
-        dbConn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        return dbConn.cursor()
+    def prepare(self):
+        # Create or replace the required tables
+        self.prepare_application_cross_references()
+        self.prepare_blpus()
+        self.prepare_classifications()
+        self.prepare_delivery_point_addresses()
+        self.prepare_headers()
+        self.prepare_lpis()
+        self.prepare_metadata()
+        self.prepare_organisations()
+        self.prepare_successor_cross_references()
+        self.prepare_street_descriptors()
+        self.prepare_streets()
+        self.prepare_trailers()
 
-    def prepare(self, schema):
-        self.prepare_streets(schema)
-        self.prepare_street_descriptors(schema)
-
-        self.prepare_lpis(schema)
-
-        self.prepare_blpus(schema)
-        self.prepare_organisations(schema)
-        self.prepare_successor_cross_references(schema)
-        self.prepare_application_cross_references(schema)
-        self.prepare_classifications(schema)
-        self.prepare_delivery_point_addresses(schema)
-
-        self.prepare_headers(schema)
-        self.prepare_trailers(schema)
-        self.prepare_metadata(schema)
-
-    def prepare_streets(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_streets""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_streets (
+    def prepare_streets(self):
+        cur = self.parent.getDbCur()
+        # TODO: need to warn the user the dataset will be overwritten
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_streets""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_streets (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -83,12 +89,12 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            "STREET_START_Y" double precision NOT NULL,
                            -- These lat/long entries are in the standard but oddly not in the data - another mistake in the
                            -- tech docs?
-                           --"STREET_START_LAT" double precision NOT NULL,
-                           --"STREET_START_LONG" double precision NOT NULL,
+                           "STREET_START_LAT" double precision NOT NULL,
+                           "STREET_START_LONG" double precision NOT NULL,
                            "STREET_END_X" double precision NOT NULL,
                            "STREET_END_Y" double precision NOT NULL,
-                           --"STREET_END_LAT" double precision NOT NULL,
-                           --"STREET_END_LONG" double precision NOT NULL,
+                           "STREET_END_LAT" double precision NOT NULL,
+                           "STREET_END_LONG" double precision NOT NULL,
                            "STREET_TOLERANCE" smallint NOT NULL,
                            CONSTRAINT ab_prem_streets_pkey PRIMARY KEY ("USRN")
                        )
@@ -96,10 +102,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_street_descriptors(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_street_descriptors""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_street_descriptors (
+    def prepare_street_descriptors(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_street_descriptors""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_street_descriptors (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -118,10 +124,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_lpis(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_lpis""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_lpis (
+    def prepare_lpis(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_lpis""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_lpis (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -154,10 +160,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_blpus(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_blpus""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_blpus (
+    def prepare_blpus(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_blpus""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_blpus (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -186,16 +192,16 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_organisations(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_organisations""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_organisations (
+    def prepare_organisations(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_organisations""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_organisations (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
                            "UPRN" bigint NOT NULL,
                            -- FIXME:  Check through OS docs for primary keys
-                           "ORG_KEY" bigint NOT NULL,
+                           "ORG_KEY" character varying(14) NOT NULL,
                            "ORGANISATION" character varying(100) NOT NULL,
                            "LEGAL_NAME" character varying(60),
                            "START_DATE" date NOT NULL,
@@ -208,10 +214,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_classifications(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_classifications""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_classifications (
+    def prepare_classifications(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_classifications""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_classifications (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -231,10 +237,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_headers(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_headers""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_headers (
+    def prepare_headers(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_headers""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_headers (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CUSTODIAN_NAME" character varying(40) NOT NULL,
                            "LOCAL_CUSTODIAN_CODE" smallint NOT NULL,
@@ -249,10 +255,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_trailers(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_trailers""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_trailers (
+    def prepare_trailers(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_trailers""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_trailers (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "NEXT_VOLUME_NAME" smallint NOT NULL,
                            "RECORD_COUNT" bigint NOT NULL,
@@ -263,10 +269,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_metadata(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_metadata""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_metadata (
+    def prepare_metadata(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_metadata""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_metadata (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "GAZ_NAME" character varying(60) NOT NULL,
                            "GAZ_SCOPE" character varying(60) NOT NULL,
@@ -289,10 +295,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_successor_cross_references(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_successor_cross_references""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_successor_cross_references (
+    def prepare_successor_cross_references(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_successor_cross_references""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_successor_cross_references (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -309,10 +315,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_application_cross_references(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_application_cross_references""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_application_cross_references (
+    def prepare_application_cross_references(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_application_cross_references""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_application_cross_references (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -331,10 +337,10 @@ class AddressBasePremiumProcessor(CsvProcessor):
                            OIDS=FALSE
                        )""", dict())
 
-    def prepare_delivery_point_addresses(self, schema):
-        cur = self.get_cur()
-        cur.execute("""DROP TABLE IF EXISTS """ + schema + """.ab_prem_delivery_point_addresses""")
-        cur.execute("""CREATE TABLE """ + schema + """.ab_prem_delivery_point_addresses (
+    def prepare_delivery_point_addresses(self):
+        cur = self.parent.getDbCur()
+        cur.execute("""DROP TABLE IF EXISTS """ + self.dst_schema + """.ab_prem_delivery_point_addresses""")
+        cur.execute("""CREATE TABLE """ + self.dst_schema + """.ab_prem_delivery_point_addresses (
                            "RECORD_IDENTIFIER" smallint NOT NULL,
                            "CHANGE_TYPE" character varying(1) NOT NULL,
                            "PRO_ORDER" bigint NOT NULL,
@@ -372,68 +378,101 @@ class AddressBasePremiumProcessor(CsvProcessor):
 
     def process(self):
 
-        input_file = open(r'C:\tmp\stockton\SX9090.csv', 'r')
-        output_files = {}
-        for key, table in self.identifiers.iteritems():
-            p_r, p_w = os.pipe()
-            output_files[key] = {
+        output_pipes = {}
+        for table_identifier, table_name in self.dst_tables.iteritems():
+            p_r, p_w = os.pipe()  # Make a pipe (read and write ends)
+            output_pipes[table_identifier] = {
                 'read_pipe': p_r,
                 'write_pipe': p_w,
                 'read_f': os.fdopen(p_r),
-                'write_f': os.fdopen(p_w, 'w')
+                'write_f': os.fdopen(p_w, 'w'),
+                'write_count': 0
             }
-            cur = self.get_cur()
-            output_files[key]['copy_thread'] = threading.Thread(target=copy_in, args=(cur, output_files[key]['read_f'], table))
-            output_files[key]['copy_thread'].start()
+            cur = self.parent.getDbCur()  # These cursors could be part of the same connection.
+            output_pipes[table_identifier]['copy_thread'] = threading.Thread(target=copy_in,
+                                                                             args=(cur,
+                                                                                   output_pipes[table_identifier]['read_f'],
+                                                                                   self.dst_schema,
+                                                                                   table_name
+                                                                                   )
+                                                                             )
+            output_pipes[table_identifier]['copy_thread'].start()
 
-        for line in input_file:
-            # TODO: Optimise the ordering of this if/elif
-            if line.startswith('10,'):
-                continue  # FIXME
-                output_files[10]['write_f'].write(line)
-            elif line.startswith('11,'):
-                output_files[11]['write_f'].write(line)
-            elif line.startswith('15,'):
-                continue  # FIXME
-                output_files[15]['write_f'].write(line)
-            elif line.startswith('21,'):
-                continue  # FIXME
-                output_files[21]['write_f'].write(line)
-            elif line.startswith('23,'):
-                continue  # FIXME
-                output_files[23]['write_f'].write(line)
-            elif line.startswith('24,'):
-                continue  # FIXME
-                output_files[24]['write_f'].write(line)
-            elif line.startswith('28,'):
-                continue  # FIXME
-                output_files[28]['write_f'].write(line)
-            elif line.startswith('29,'):
-                continue  # FIXME
-                output_files[29]['write_f'].write(line)
-            elif line.startswith('30,'):
-                continue  # FIXME
-                output_files[30]['write_f'].write(line)
-            elif line.startswith('31,'):
-                continue  # FIXME
-                output_files[31]['write_f'].write(line)
-            elif line.startswith('32,'):
-                continue  # FIXME
-                output_files[32]['write_f'].write(line)
-            elif line.startswith('99,'):
-                continue  # FIXME
-                output_files[99]['write_f'].write(line)
+        for input_file_path in self.input_file_paths:
+            input_file = open(input_file_path, 'r')
+            for line in input_file:
+                if line.startswith('23,'):
+                    output_pipes[23]['write_f'].write(line)
+                    output_pipes[23]['write_count'] += 1
+                elif line.startswith('24,'):
+                    output_pipes[24]['write_f'].write(line)
+                    output_pipes[24]['write_count'] += 1
+                elif line.startswith('21,'):
+                    output_pipes[21]['write_f'].write(line)
+                    output_pipes[21]['write_count'] += 1
+                elif line.startswith('32,'):
+                    output_pipes[32]['write_f'].write(line)
+                    output_pipes[32]['write_count'] += 1
+                elif line.startswith('28,'):
+                    output_pipes[28]['write_f'].write(line)
+                    output_pipes[28]['write_count'] += 1
+                elif line.startswith('11,'):
+                    output_pipes[11]['write_f'].write(line)
+                    output_pipes[11]['write_count'] += 1
+                elif line.startswith('15,'):
+                    output_pipes[15]['write_f'].write(line)
+                    output_pipes[15]['write_count'] += 1
+                elif line.startswith('31,'):
+                    output_pipes[31]['write_f'].write(line)
+                    output_pipes[31]['write_count'] += 1
+                elif line.startswith('10,'):
+                    output_pipes[10]['write_f'].write(line)
+                    output_pipes[10]['write_count'] += 1
+                elif line.startswith('29,'):
+                    output_pipes[29]['write_f'].write(line)
+                    output_pipes[29]['write_count'] += 1
+                elif line.startswith('30,'):
+                    output_pipes[30]['write_f'].write(line)
+                    output_pipes[30]['write_count'] += 1
+                elif line.startswith('99,'):
+                    output_pipes[99]['write_f'].write(line)
+                    output_pipes[99]['write_count'] += 1
 
-        for key in self.identifiers.keys():
+            input_file.close()
+
+        for table_identifier in self.dst_tables.keys():
             # The following may block if the COPY is still pushing data into the DB
-            output_files[key]['write_f'].close()
-            output_files[key]['copy_thread'].join()
+            output_pipes[table_identifier]['write_f'].close()
+            output_pipes[table_identifier]['copy_thread'].join()
 
-        input_file.close()
+        print 'Counts:'
+        for k in output_pipes.keys():
+            print '\t%d: %d' % (k, output_pipes[k]['write_count'])
 
 def main():
-    p = AddressBasePremiumProcessor()
-    p.prepare('public')
+
+    import psycopg2
+
+    class dummy():
+
+        def __init__(self):
+            pass
+
+        def getDbCur(self):
+            # TODO: Pull this from the main plugin
+            dbConn = psycopg2.connect( database = 'training',
+                                       user = 'postgres',
+                                       password = 'postgres',
+                                       host = 'localhost',
+                                       port = 5432)
+            dbConn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+            return dbConn.cursor()
+
+    d = dummy()
+    p = AddressBasePremiumProcessor(d,
+                                    input_files=[r'C:\Users\Pete\Documents\Projects\Cleveland Police\Incoming\addressbase.txt'],
+                                    dest_schema='public')
+    p.prepare()
     p.process()
 
 if __name__ == '__main__':

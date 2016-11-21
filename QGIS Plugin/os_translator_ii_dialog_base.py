@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'os_translator_ii_dialog_base.ui'
 #
-# Created: Wed May 20 16:27:21 2015
+# Created: Sat May 28 12:13:35 2016
 #      by: PyQt4 UI code generator 4.10.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -133,10 +133,10 @@ class Ui_Dialog(object):
         self.line_4.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_4.setObjectName(_fromUtf8("line_4"))
         self.gridLayout_2.addWidget(self.line_4, 10, 0, 1, 3)
-        self.createSpatialIndexCheckBox = QtGui.QCheckBox(Dialog)
-        self.createSpatialIndexCheckBox.setChecked(True)
-        self.createSpatialIndexCheckBox.setObjectName(_fromUtf8("createSpatialIndexCheckBox"))
-        self.gridLayout_2.addWidget(self.createSpatialIndexCheckBox, 6, 0, 1, 3)
+        self.createIndicesCheckBox = QtGui.QCheckBox(Dialog)
+        self.createIndicesCheckBox.setChecked(True)
+        self.createIndicesCheckBox.setObjectName(_fromUtf8("createIndicesCheckBox"))
+        self.gridLayout_2.addWidget(self.createIndicesCheckBox, 6, 0, 1, 3)
         self.removeDuplicatesCheckBox = QtGui.QCheckBox(Dialog)
         self.removeDuplicatesCheckBox.setToolTip(_fromUtf8(""))
         self.removeDuplicatesCheckBox.setStatusTip(_fromUtf8(""))
@@ -205,11 +205,11 @@ class Ui_Dialog(object):
         QtCore.QObject.connect(self.datasetComboBox, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), Dialog.updateFieldsList)
         QtCore.QObject.connect(self.helpPushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), Dialog.helpPressed)
         QtCore.QObject.connect(self.aboutPushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), Dialog.aboutPressed)
-        QtCore.QObject.connect(self.createSpatialIndexCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeSettings)
+        QtCore.QObject.connect(self.createIndicesCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeSettings)
         QtCore.QObject.connect(self.removeDuplicatesCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeSettings)
-        QtCore.QObject.connect(self.datasetComboBox, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), Dialog.updateStyleOptions)
-        QtCore.QObject.connect(self.addOsStylingFieldsCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeStyleSettings)
-        QtCore.QObject.connect(self.applyDefaultOsStyleCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeStyleSettings)
+        QtCore.QObject.connect(self.datasetComboBox, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(QString)")), Dialog.updateImportOptions)
+        QtCore.QObject.connect(self.applyDefaultOsStyleCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.applyDefaultOsStyleCheckBoxChanged)
+        QtCore.QObject.connect(self.addOsStylingFieldsCheckBox, QtCore.SIGNAL(_fromUtf8("stateChanged(int)")), Dialog.storeSettings)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.tasksListWidget, self.deleteTaskPushButton)
         Dialog.setTabOrder(self.deleteTaskPushButton, self.newTaskPushButton)
@@ -243,7 +243,7 @@ class Ui_Dialog(object):
         self.label_6.setText(_translate("Dialog", "Schema", None))
         self.batchModeCheckBox.setText(_translate("Dialog", "Recursively process a directory", None))
         self.browsePushButton.setText(_translate("Dialog", "...", None))
-        self.createSpatialIndexCheckBox.setText(_translate("Dialog", "Create spatial index", None))
+        self.createIndicesCheckBox.setText(_translate("Dialog", "Create indices", None))
         self.removeDuplicatesCheckBox.setText(_translate("Dialog", "Remove duplicates (chunk artefacts)", None))
         self.addOsStylingFieldsCheckBox.setText(_translate("Dialog", "Add OS styling fields", None))
         self.applyDefaultOsStyleCheckBox.setText(_translate("Dialog", "Apply default OS style", None))

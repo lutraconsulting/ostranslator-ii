@@ -100,17 +100,21 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         destSchema = self.destSchema.text()
         s.setValue("OsTranslatorII/destSchema", destSchema)
         
-        createSpatialIndex = self.createSpatialIndexCheckBox.checkState()
-        s.setValue("OsTranslatorII/createSpatialIndex", createSpatialIndex)
+        if self.createIndicesCheckBox.isEnabled():
+            createIndices = self.createIndicesCheckBox.checkState()
+            s.setValue("OsTranslatorII/createIndices", createIndices)
         
-        removeDuplicates = self.removeDuplicatesCheckBox.checkState()
-        s.setValue("OsTranslatorII/removeDuplicates", removeDuplicates)
+        if self.removeDuplicatesCheckBox.isEnabled():
+            removeDuplicates = self.removeDuplicatesCheckBox.checkState()
+            s.setValue("OsTranslatorII/removeDuplicates", removeDuplicates)
         
-        addStyleFields = self.addOsStylingFieldsCheckBox.checkState()
-        s.setValue("OsTranslatorII/addStyleFields", addStyleFields)
+        if self.addOsStylingFieldsCheckBox.isEnabled():
+            addStyleFields = self.addOsStylingFieldsCheckBox.checkState()
+            s.setValue("OsTranslatorII/addStyleFields", addStyleFields)
         
-        applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
-        s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
+        if self.applyDefaultOsStyleCheckBox.isEnabled():
+            applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
+            s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
         
     def populateDatasets(self):
         """ Read the content of the gfs folder """
@@ -120,7 +124,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             entryPath = os.path.join(gfsPath, entry)
             head, tail = os.path.splitext(entry)
             if tail == ('.gfs') and os.path.isfile(entryPath):
-                self.supDatasets[head] = entryPath
+                self.supDatasets[head] = { 'type': 'gml', 'gfs_path': entryPath }
+        # Now add any supported CSV types
+        self.supDatasets['AddressBase Premium'] = { 'type': 'csv', 'name': 'AddressBase Premium' }
     
     def updateImportTaskName(self, newName):
         self.tasksListWidget.currentItem().setText(newName)
@@ -165,8 +171,8 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         cfg = { 'name' : defaultName }
         self.configs.append(cfg)
         
-        for name in self.supDatasets.keys():
-            self.datasetComboBox.addItem(name)
+        for dataset in self.supDatasets.keys():
+            self.datasetComboBox.addItem(dataset)
         
         s = QtCore.QSettings()
         
@@ -196,7 +202,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '', type=str)) )
         
-        self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked, type=int) )
+        self.createIndicesCheckBox.setCheckState( s.value("OsTranslatorII/createIndices", QtCore.Qt.Checked, type=int) )
                 
         self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
         
@@ -213,7 +219,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
 
     def getDatasetStructure(self, dsName):
         try:
-            gfsFileName = self.supDatasets[ str(dsName) ]
+            gfsFileName = self.supDatasets[ str(dsName) ]['gfs_path']
         except KeyError:
             return {}
         
@@ -280,7 +286,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         gfs file and make a customised GFS for the import. """
         
         dsName = str(self.datasetComboBox.currentText())
-        gfsFileName = self.supDatasets[dsName]
+        gfsFileName = self.supDatasets[dsName]['gfs_path']
         root = ET.parse(gfsFileName)
         newRoot = ET.Element('GMLFeatureClassList')
         
@@ -353,6 +359,8 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
     
     def accept(self):
         
+        import pydevd; pydevd.settrace()
+
         # Check the user entered a folder path
         inputFolder = self.inputLineEdit.text()
         if len(inputFolder) == 0:
@@ -445,7 +453,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         self.im.reset()
 
-        if self.importType() == 'GML':
+        if self.importType() == 'gml':
             self.prepareGmlJobs(inputFiles)
         else:
             self.prepareCsvJobs(inputFiles)
@@ -461,7 +469,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.statusLabel.setText('Loading - grab a snack..')
 
     def importType(self):
-        return 'CSV'
+        return self.supDatasets[self.datasetComboBox.currentText()]['type']
 
     def prepareCsvJobs(self, inputFiles):
 
@@ -528,7 +536,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                                              self.getUri(),
                                              self.schema_name, 
                                              self.destTables, 
-                                             self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
+                                             self.createIndicesCheckBox.checkState() == QtCore.Qt.Checked,
                                              self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked,
                                              self.addOsStylingFieldsCheckBox.checkState() == QtCore.Qt.Checked,
                                              self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked)
@@ -604,7 +612,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                       self.browsePushButton,
                       self.fieldsTreeWidget,
                       self.buttonBox,
-                      self.createSpatialIndexCheckBox,
+                      self.createIndicesCheckBox,
                       self.removeDuplicatesCheckBox,
                       self.addOsStylingFieldsCheckBox,
                       self.applyDefaultOsStyleCheckBox]
@@ -629,14 +637,14 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                       self.browsePushButton,
                       self.fieldsTreeWidget,
                       self.buttonBox,
-                      self.createSpatialIndexCheckBox,
+                      self.createIndicesCheckBox,
                       self.removeDuplicatesCheckBox]
 
         for ie in uiElements:
             ie.setEnabled(True)
         
         # Style-related options are dataset-dependant
-        self.updateStyleOptions(self.datasetComboBox.currentText())
+        self.updateImportOptions(self.datasetComboBox.currentText())
 
     def getInputFiles(self):
         inputFiles = []
@@ -645,13 +653,17 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             raise Exception('%s is not a valid folder.' % inputDir)
         for path, dirs, files in os.walk(inputDir):
             for f in files:
-                if f.lower().endswith('.gml') or f.lower().endswith('.gz'):
-                    inputFiles.append(os.path.join(path, f))
+                if self.importType() == 'gml':
+                    if f.lower().endswith('.gml') or f.lower().endswith('.gz'):
+                        inputFiles.append(os.path.join(path, f))
+                elif self.importType() == 'csv':
+                    if f.lower().endswith('.csv'):
+                        inputFiles.append(os.path.join(path, f))
         return inputFiles
     
     def getPioneerFile(self):
         dsName = str(self.datasetComboBox.currentText())
-        gfsFileName = self.supDatasets[dsName]
+        gfsFileName = self.supDatasets[dsName]['gfs_path']
         head, tail = os.path.splitext(gfsFileName)
         pioneerFilePath = head + ' Pioneer.gz'
         return pioneerFilePath
@@ -685,23 +697,46 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.addOsStylingFieldsCheckBox.blockSignals(False)
         self.storeSettings()
             
-    def updateStyleOptions(self, datasetName):
-        
+    def updateImportOptions(self, datasetName):
+
         # We disconnect from storeSettings here to ensure deactivating these options is not saved as a user preference
+        self.createIndicesCheckBox.blockSignals(True)
+        self.removeDuplicatesCheckBox.blockSignals(True)
         self.addOsStylingFieldsCheckBox.blockSignals(True)
         self.applyDefaultOsStyleCheckBox.blockSignals(True)
+
+        s = QtCore.QSettings()
+
+        if self.supDatasets[datasetName]['type'] == 'gml':
+
+            self.removeDuplicatesCheckBox.setEnabled(True)
+            self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
             
-        if 'Topography' in datasetName:
-            s = QtCore.QSettings()
-            self.addOsStylingFieldsCheckBox.setEnabled(True)
-            self.addOsStylingFieldsCheckBox.setCheckState( s.value("OsTranslatorII/addStyleFields", QtCore.Qt.Checked, type=int) )
-            self.applyDefaultOsStyleCheckBox.setEnabled(True)
-            self.applyDefaultOsStyleCheckBox.setCheckState( s.value("OsTranslatorII/applyDefaultOsStyle", QtCore.Qt.Checked, type=int) )
+            if 'Topography' in datasetName:
+                self.addOsStylingFieldsCheckBox.setEnabled(True)
+                self.addOsStylingFieldsCheckBox.setCheckState( s.value("OsTranslatorII/addStyleFields", QtCore.Qt.Checked, type=int) )
+                self.applyDefaultOsStyleCheckBox.setEnabled(True)
+                self.applyDefaultOsStyleCheckBox.setCheckState( s.value("OsTranslatorII/applyDefaultOsStyle", QtCore.Qt.Checked, type=int) )
+            else:
+                self.addOsStylingFieldsCheckBox.setEnabled(False)
+                self.addOsStylingFieldsCheckBox.setChecked(False)
+                self.applyDefaultOsStyleCheckBox.setEnabled(False)
+                self.applyDefaultOsStyleCheckBox.setChecked(False)
+
         else:
+
+            # We're dealing with CSV so many of these options are not applicable
+            #self.createIndicesCheckBox.setEnabled(True)
+            #self.createIndicesCheckBox.setCheckState( s.value("OsTranslatorII/createIndices", QtCore.Qt.Checked, type=int) )
+            self.removeDuplicatesCheckBox.setEnabled(False)
+            self.removeDuplicatesCheckBox.setChecked(False)
             self.addOsStylingFieldsCheckBox.setEnabled(False)
             self.addOsStylingFieldsCheckBox.setChecked(False)
             self.applyDefaultOsStyleCheckBox.setEnabled(False)
             self.applyDefaultOsStyleCheckBox.setChecked(False)
+
         
+        self.createIndicesCheckBox.blockSignals(False)
+        self.removeDuplicatesCheckBox.blockSignals(False)
         self.addOsStylingFieldsCheckBox.blockSignals(False)
         self.applyDefaultOsStyleCheckBox.blockSignals(False)

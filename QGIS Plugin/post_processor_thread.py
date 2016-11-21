@@ -42,7 +42,7 @@ class PostProcessorThread(QThread):
     """
     
     def __init__(self, cur, uri, schema, tables, 
-                 createSpatialIndex=True, dedup=True, 
+                 createIndices=True, dedup=True,
                  addTopoStyleColumns=True, applyDefaultStyle=True):
         QThread.__init__(self)
         self.debug = False
@@ -50,7 +50,7 @@ class PostProcessorThread(QThread):
         self.uri = uri
         self.schema = schema
         self.tables = tables
-        self.createSpatialIndex = createSpatialIndex
+        self.createIndices = createIndices
         self.dedup = dedup
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
@@ -94,7 +94,7 @@ class PostProcessorThread(QThread):
                     except:
                         self.error.emit( 'Post-processor error: ' + str(sys.exc_info()[1]) )
                 
-                if self.createSpatialIndex:
+                if self.createIndices:
                     try:
                         self.cur.execute("""CREATE INDEX """ + table + """_wkb_geometry_gist ON """ + self.schema + """_tmp.""" + table + """ USING gist (wkb_geometry)""", qDic)
                     except psycopg2.ProgrammingError, e:

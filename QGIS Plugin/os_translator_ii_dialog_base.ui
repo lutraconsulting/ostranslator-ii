@@ -242,9 +242,9 @@
       </widget>
      </item>
      <item row="6" column="0" colspan="3">
-      <widget class="QCheckBox" name="createSpatialIndexCheckBox">
+      <widget class="QCheckBox" name="createIndicesCheckBox">
        <property name="text">
-        <string>Create spatial index</string>
+        <string>Create indices</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -587,7 +587,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>createSpatialIndexCheckBox</sender>
+   <sender>createIndicesCheckBox</sender>
    <signal>stateChanged(int)</signal>
    <receiver>Dialog</receiver>
    <slot>storeSettings()</slot>
@@ -622,7 +622,7 @@
    <sender>datasetComboBox</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>Dialog</receiver>
-   <slot>updateStyleOptions()</slot>
+   <slot>updateImportOptions()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>343</x>
@@ -673,7 +673,7 @@
   <slot>updateFieldsList()</slot>
   <slot>helpPressed()</slot>
   <slot>aboutPressed()</slot>
-  <slot>updateStyleOptions()</slot>
+  <slot>updateImportOptions()</slot>
   <slot>applyDefaultOsStyleCheckBoxChanged(int)</slot>
  </slots>
 </ui>
