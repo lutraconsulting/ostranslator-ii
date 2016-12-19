@@ -27,6 +27,7 @@ import argparse
 import os
 from PyQt4 import QtCore
 from import_manager import ImportManager
+from post_processor_thread import PostProcessorThread
 from utils import build_args, get_input_files, get_pioneer_file, get_supported_datasets, create_schema, get_db_cur
 
 
@@ -56,6 +57,9 @@ class OSTranslatorCli(QtCore.QObject):
         self.con_details['port'] = port
         self.con_details['user'] = user
         self.con_details['password'] = None  # Retrieve it from PGPASSFILE instead
+
+        self.pp_thread = None
+        self.pp_errors = []
 
         self.app = QtCore.QCoreApplication.instance()
         self.im = ImportManager()
@@ -92,6 +96,7 @@ class OSTranslatorCli(QtCore.QObject):
 
             for arg in build_args(input_files, gfs_file_path, pg_source):
                 self.im.add(arg)
+            print 'Importing...'
             self.im.start(num_processes)
         except:
             print
@@ -106,15 +111,45 @@ class OSTranslatorCli(QtCore.QObject):
         self.finished.emit(ret_code)
 
     def post_process(self):
-        self.on_post_process_complete()
+        print 'Post-processing...'
+        cur = get_db_cur(self.con_details)
+        self.pp_thread = PostProcessorThread(cur,
+                                            None,  # Uri
+                                            self.schema,
+                                            ['boundaryline', 'cartographicsymbol', 'cartographictext',
+                                             'topographicarea', 'topographicline', 'topographicpoint'],
+                                            True,  # createSpatialIndex
+                                            True,  # removeDuplicates
+                                            True,  # addOsStylingFields
+                                            False)  # applyDefaultOsStyle
+        self.pp_thread.finished.connect(self.on_post_process_complete)
+        self.pp_thread.error.connect(self.on_post_processor_error)
+        self.pp_thread.progressChanged.connect(self.on_progress_changed)
+        self.pp_thread.start()
+
+    def on_post_processor_error(self, error):
+        self.pp_errors.append(error)
 
     def on_post_process_complete(self):
         ret_val = 0
-        if len(self.im.crashedJobs) > 0 or len(self.im.failedJobs) > 0:
+        if len(self.im.crashedJobs) > 0 or \
+           len(self.im.failedJobs) > 0 or \
+           len(self.pp_errors) > 0:
             ret_val = 1
+
         # Write out summary information
+        print
         print self.im.getImportReport()
-        self.quit(ret_val)  # Everything went well, return 0
+
+        if len(self.pp_errors) > 0:
+            print
+            print 'Failed to complete one or more post-processing tasks:'
+            print
+            for pp_fail in self.pp_errors:
+                print pp_fail
+                print
+
+        self.quit(ret_val)
 
     def on_progress_changed(self, progress):
         if progress != self.progress:
