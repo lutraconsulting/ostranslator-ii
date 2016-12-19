@@ -28,6 +28,7 @@ from PyQt4 import QtGui, QtCore, uic
 from import_manager import *
 from result_dialog import *
 from post_processor_thread import *
+from utils import *
 # from about_dialog import *
 import resources_rc
 
@@ -49,6 +50,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # self.<objectname>, and you can use autoconnect slots - see
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
+        self.dbDetails = dict()
         self.helpUrl = 'http://www.lutraconsulting.co.uk/products/ostranslator-ii/'
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(':/plugins/OsTranslatorII/icon.png')))
@@ -59,9 +61,8 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.gfsFolder = os.path.join(os.path.dirname(__file__), 'gfs')
         self.emptyGmlFile = os.path.join(self.gfsFolder, 'empty.gml')
         
-        self.supDatasets = {}
-        self.populateDatasets()
-        
+        self.supDatasets = get_supported_datasets()
+
         self.configs = []
         self.initialise_ui()
         self.fieldsTreeWidget.itemChanged.connect(self.treeItemChanged)
@@ -112,16 +113,6 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
         s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
         
-    def populateDatasets(self):
-        """ Read the content of the gfs folder """
-        thisDir = os.path.dirname(__file__)
-        gfsPath = os.path.join(thisDir, 'gfs')
-        for entry in os.listdir(gfsPath):
-            entryPath = os.path.join(gfsPath, entry)
-            head, tail = os.path.splitext(entry)
-            if tail == ('.gfs') and os.path.isfile(entryPath):
-                self.supDatasets[head] = entryPath
-    
     def updateImportTaskName(self, newName):
         self.tasksListWidget.currentItem().setText(newName)
         i = self.tasksListWidget.currentRow()
@@ -314,41 +305,29 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         selectedConnection = self.postgisConnectionComboBox.currentText()
 
         if selectedConnection == 'DEBUG':
-            self.host = 'localhost'
-            self.database = 'ostranslator'
-            self.user = 'postgres'
-            self.password = 'postgres'
-            self.port = 5432
+            self.dbDetails['host'] = 'localhost'
+            self.dbDetails['database'] = 'ostranslator'
+            self.dbDetails['user'] = 'postgres'
+            self.dbDetails['password'] = 'postgres'
+            self.dbDetails['port'] = 5432
             return
         
         s = QtCore.QSettings()
-        self.database = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, '', type=str))
-        if len(self.database) == 0:
+        self.dbDetails['database'] = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, '', type=str))
+        if len(self.dbDetails['database']) == 0:
             # Looks like the preferred connection could not be found
             raise Exception('Details of the selected PostGIS connection could not be found, please check your settings')
-        self.host = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, '', type=str))
-        self.user = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, '', type=str))
-        self.password = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, '', type=str))
+        self.dbDetails['host'] = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, '', type=str))
+        self.dbDetails['user'] = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, '', type=str))
+        self.dbDetails['password'] = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, '', type=str))
         try:
-            self.port, dummy = s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432).toInt()
+            self.dbDetails['port'], dummy = s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432).toInt()
         except:
-            self.port = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432, type=int))
-        
-    def getDbCur(self):
-        if len(self.user) == 0:
-            dbConn = psycopg2.connect( database = self.database)
-        else:
-            dbConn = psycopg2.connect( database = self.database,
-                                       user = self.user,
-                                       password = self.password,
-                                       host = self.host,
-                                       port = self.port)
-        dbConn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-        return dbConn.cursor()
+            self.dbDetails['port'] = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432, type=int))
         
     def getUri(self):
         uri = QgsDataSourceURI()
-        uri.setConnection(self.host, str(self.port), self.database, self.user, self.password)
+        uri.setConnection(self.dbDetails['host'], str(self.dbDetails['port']), self.dbDetails['database'], self.dbDetails['user'], self.dbDetails['password'])
         return uri
     
     def accept(self):
@@ -389,7 +368,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             self.schema_name = 'public'
             
         try:
-            cur = self.getDbCur()
+            cur = get_db_cur(self.dbDetails)
         except:
             QtGui.QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
             return
@@ -404,8 +383,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             if cur.rowcount < 1:
                 # The schema does not already exist - create it
                 try:
-                    cur.execute("""CREATE SCHEMA """ + schemaName, qDic)
-                    if cur.statusmessage != 'CREATE SCHEMA':
+                    if not create_schema(cur, schemaName):
                         raise Exception()
                 except:
                     QtGui.QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema, detailed error was:\n\n%s' % traceback.format_exc())
@@ -438,9 +416,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 if reply == QtGui.QMessageBox.No:
                     return
         
-        inputFiles = self.getInputFiles()
+        inputFiles = get_input_files(str(self.inputLineEdit.text()))
         # Insert a 'pioneer' file which contains a feature of each table type
-        inputFiles.insert(0, self.getPioneerFile())
+        inputFiles.insert(0, get_pioneer_file(str(self.datasetComboBox.currentText())))
         
         # Ensure the user has selected some files
         if len(inputFiles) == 0:
@@ -449,41 +427,18 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         """ Add the jobs to the import manager """
         
-        if len(self.user) == 0:
+        if len(self.dbDetails['user']) == 0:
             pgSource = 'PG:dbname=\'%s\' active_schema=%s' % \
-                (self.database, self.schema_name + '_tmp')
+                (self.dbDetails['database'], self.schema_name + '_tmp')
         else:
             pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
-                (self.database, self.host, self.port, self.schema_name + '_tmp', self.user, self.password)
+                (self.dbDetails['database'], self.dbDetails['host'], self.dbDetails['port'], self.schema_name + '_tmp', self.dbDetails['user'], self.dbDetails['password'])
                 # Note we are loading into a temporary schema
 
         self.im.reset()
 
-        i = 0
-        for inputFile in inputFiles:
-            if inputFile.lower().endswith('.gz'):
-                inputFile = '/vsigzip/' + inputFile
-            args = ['-f', 'PostgreSQL',
-                    '--config', 'PG_USE_COPY', 'YES',
-                    '--config', 'GML_GFS_TEMPLATE', gfsFilePath,
-                    pgSource, inputFile]
-            if str(gdal.VersionInfo()).startswith('2'):
-                # -lyr_transaction added to negate
-                # ERROR 1: ERROR: current transaction is aborted, commands ignored until end of transaction block
-                #
-                # ERROR 1: no COPY in progress
-                args.insert(0, '-lyr_transaction')
-            if i == 0:
-                args.insert(0, '-overwrite')
-                args.extend(['-lco', 'OVERWRITE=YES',
-                             '-lco', 'SPATIAL_INDEX=OFF',
-                             '-lco', 'PRECISION=NO'])
-            else:
-                args.insert(0, '-append')
-
-            i += 1
-
-            self.im.add(args)
+        for arg in build_args(inputFiles, gfsFilePath, pgSource):
+            self.im.add(arg)
 
         try:
             self.im.start(self.simultaneousJobsSpinBox.value())
@@ -502,7 +457,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # TODO parallelise this function
         self.statusLabel.setText('Post-processing - grab a sleeping bag..')
         self.ppErrors = []
-        cur = self.getDbCur()
+        cur = get_db_cur(self.dbDetails)
         self.ppThread = PostProcessorThread( cur, 
                                              self.getUri(),
                                              self.schema_name, 
@@ -524,26 +479,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         # Populate the dialog with the log
         self.log = ''
-        if len(self.im.crashedJobs) > 0:
-            self.log += 'Warning: %d import jobs crashed:\n' % len(self.im.crashedJobs)
-            for crashedJob in self.im.crashedJobs:
-                self.log += '\n  Args: %s' % crashedJob.args
-                self.log += '\n  Stdout: %s' % crashedJob.process.readAllStandardOutput()
-                self.log += '\n  Stderr: %s' % crashedJob.process.readAllStandardError()
-            self.log += '\n\n'
 
-        if len(self.im.failedJobs) > 0:
-            self.log += 'Warning: %d import jobs failed:\n' % len(self.im.failedJobs)
-            for failedJob in self.im.failedJobs:
-                self.log += '\n  Args: %s' % failedJob.args
-                self.log += '\n  Stdout: %s' % failedJob.process.readAllStandardOutput()
-                self.log += '\n  Stderr: %s' % failedJob.process.readAllStandardError()
-            self.log += '\n\n'
+        self.log += self.im.getImportReport()
 
-        if len(self.im.crashedJobs) > 0 or len(self.im.failedJobs) > 0:
-            self.log += 'Warning - some import jobs did not complete successfully.\n'
-        else:
-            self.log += 'All jobs completed successfully.\n\n'
         if len(self.ppErrors) > 0:
             self.log += 'Failed to complete one or more post-processing tasks:\n\n'
             for ppFail in self.ppErrors:
@@ -617,24 +555,6 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # Style-related options are dataset-dependant
         self.updateStyleOptions(self.datasetComboBox.currentText())
 
-    def getInputFiles(self):
-        inputFiles = []
-        inputDir = str(self.inputLineEdit.text())
-        if not os.path.isdir(inputDir):
-            raise Exception('%s is not a valid folder.' % inputDir)
-        for path, dirs, files in os.walk(inputDir):
-            for f in files:
-                if f.lower().endswith('.gml') or f.lower().endswith('.gz'):
-                    inputFiles.append(os.path.join(path, f))
-        return inputFiles
-    
-    def getPioneerFile(self):
-        dsName = str(self.datasetComboBox.currentText())
-        gfsFileName = self.supDatasets[dsName]
-        head, tail = os.path.splitext(gfsFileName)
-        pioneerFilePath = head + ' Pioneer.gz'
-        return pioneerFilePath
-
     def browseForInput(self):
         """ Open a browse for files dialog - for the moment set to 
         browse directory mode """
@@ -649,9 +569,10 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         QtGui.QDesktopServices.openUrl(QUrl(self.helpUrl))
 
     def aboutPressed(self):
-        aboutDlg = AboutDialog(self)
-        aboutDlg.show()
-        aboutDlg.exec_()
+        # aboutDlg = AboutDialog(self)
+        # aboutDlg.show()
+        # aboutDlg.exec_()
+        pass
     
     def applyDefaultOsStyleCheckBoxChanged(self, newCheckState):
         """ The user has either checked or uncheck this checkbox.
