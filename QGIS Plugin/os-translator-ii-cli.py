@@ -162,7 +162,9 @@ def main():
 
     supported_data_types = ['OS Mastermap Topography (v7)']
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Import OS products into PostGIS from the command-line.\n\n' +
+                                     'Please note that this script needs a PGPASSFILE to function - see \n' +
+                                     'https://www.postgresql.org/docs/9.5/static/libpq-pgpass.html')
     parser.add_argument('--osmm-data-type', required=True,
                         help='OS MasterMap data type, e.g. "OS Mastermap Topography (v7)"')
     parser.add_argument('--input-path', required=True, help='Path under which to search of .gml.gz or .gml files')
