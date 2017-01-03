@@ -22,7 +22,10 @@
 """
 
 import os, urllib2, traceback, psycopg2
-from qgis.core import QgsVectorLayer
+try:
+    from qgis.core import QgsVectorLayer
+except ImportError:
+    pass  # We may be calling the script from the console in which case this import is not used
 from PyQt4.QtCore import QSettings
 from PyQt4.Qt import QDomDocument
 

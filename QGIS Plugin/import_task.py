@@ -22,9 +22,6 @@
 """
 
 from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-
-import gzip
 
 class ImportTask(QObject):
     
@@ -47,7 +44,7 @@ class ImportTask(QObject):
         # print 'Starting %s' % cmd
         self.process.start('ogr2ogr', self.args)
         if not self.process.waitForStarted():
-            raise Exception('Failed to start process.')
+            raise Exception('Failed to start process. Please ensure you have gdal/ogr2ogr installed')
 
     def onProcessFinished(self, exitCode, exitStatus):
         #print 'Stdout was %s' % self.process.readAllStandardOutput()

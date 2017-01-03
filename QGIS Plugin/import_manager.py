@@ -100,3 +100,30 @@ class ImportManager(QObject):
         # Determine if we have finished
         if len(self.pendingJobs) == 0 and len(self.runningJobs) == 0:
             self.finished.emit()
+
+    def getImportReport(self):
+
+        report = ''
+
+        if len(self.crashedJobs) > 0:
+            report += 'Warning: %d import jobs crashed:\n' % len(self.crashedJobs)
+            for crashedJob in self.crashedJobs:
+                report += '\n  Args: %s' % crashedJob.args
+                report += '\n  Stdout: %s' % crashedJob.process.readAllStandardOutput()
+                report += '\n  Stderr: %s' % crashedJob.process.readAllStandardError()
+            report += '\n\n'
+
+        if len(self.failedJobs) > 0:
+            report += 'Warning: %d import jobs failed:\n' % len(self.failedJobs)
+            for failedJob in self.failedJobs:
+                report += '\n  Args: %s' % failedJob.args
+                report += '\n  Stdout: %s' % failedJob.process.readAllStandardOutput()
+                report += '\n  Stderr: %s' % failedJob.process.readAllStandardError()
+            report += '\n\n'
+
+        if len(self.crashedJobs) > 0 or len(self.failedJobs) > 0:
+            report += 'Warning - some import jobs did not complete successfully.\n'
+        else:
+            report += 'All jobs completed successfully.\n\n'
+
+        return report
