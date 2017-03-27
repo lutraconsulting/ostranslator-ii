@@ -9,6 +9,7 @@
 [general]
 name=OS Translator II
 qgisMinimumVersion=2.0
+qgismaximumversion=2.99
 description=A plugin for loading Ordnance Survey Products.
 about=OS Translator II makes loading GML-based datasets into PostGIS easy. It also performs a number of post-processing tasks on the data such as adding additional fields for styling and downloading 3rd-party stylesheets.
 version=1.4.0
