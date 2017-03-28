@@ -10,11 +10,77 @@
 # (at your option) any later version.
 
 import gdal
-import os
+import re
+import os, urllib2
 import psycopg2
+from PyQt4.QtCore import QSettings
+
 
 def OSII_icon_path():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "images", "icon.png")
+
+
+def download(url, destName):
+    # Much of this is stolen from Crayfish - consider turning into
+    # something more reuseable.
+    destFolder = os.path.join(os.path.dirname(__file__), "downloads")
+    s = QSettings()
+    try:
+        useProxy = s.value("proxy/proxyEnabled", False).toBool()
+    except:
+        useProxy = s.value("proxy/proxyEnabled", False, type=bool)
+    if useProxy:
+        proxyHost = s.value("proxy/proxyHost", unicode())
+        proxyPassword = s.value("proxy/proxyPassword", unicode())
+        proxyPort = s.value("proxy/proxyPort", unicode())
+        proxyType = s.value("proxy/proxyType", unicode())
+        proxyTypes = {'DefaultProxy': 'http', 'HttpProxy': 'http', 'Socks5Proxy': 'socks', 'HttpCachingProxy': 'http',
+                      'FtpCachingProxy': 'ftp'}
+        if proxyType in proxyTypes: proxyType = proxyTypes[proxyType]
+        proxyUser = s.value("proxy/proxyUser", unicode())
+        proxyString = 'http://' + proxyUser + ':' + proxyPassword + '@' + proxyHost + ':' + proxyPort
+        proxy = urllib2.ProxyHandler({proxyType: proxyString})
+        auth = urllib2.HTTPBasicAuthHandler()
+        opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+        urllib2.install_opener(opener)
+
+    generalDownloadFailureMessage = '\n\nPlease check your network settings. Styles may need to be added manually. This does not affect the loaded data.'
+    try:
+        conn = urllib2.urlopen(url, timeout=30)  # Allow 30 seconds for completion
+        if conn.getcode() != 200:
+            # It looks like the request was unsuccessful
+            raise Exception('Failed to download %s\n\nThe HTTP status code was %d.' % (
+            url, conn.getcode()) + generalDownloadFailureMessage)
+    except urllib2.URLError as e:
+        raise Exception('Failed to download %s\n\nThe reason was %s.' % (
+        url, e.reason) + generalDownloadFailureMessage)
+
+    destinationFileName = os.path.join(destFolder, destName)
+    if os.path.isfile(destinationFileName):
+        os.unlink(destinationFileName)
+    destinationFile = open(destinationFileName, 'wb')
+    destinationFile.write(conn.read())
+    destinationFile.close()
+    return destinationFileName
+
+
+def get_OSMM_schema_ver(s):
+    """ Guess the OSMM schema version from the path or string"""
+    match = re.search(pattern=r'''.*\(v(\d)\).*''', string=s)
+    if match:
+        try:
+            sch = int(match.group(1)) #0 is whole string
+        except Exception:
+            raise Exception("Unable to parse OSMM schema version from {}".format(s))
+
+        if not sch in [7, 8, 9]:
+            raise Exception("Unsupported OSMM schema {}".format(sch))
+
+        return sch
+    else:
+        raise Exception("Unable to parse OSMM schema version from {}".format(s))
+
+
 
 def get_supported_datasets():
     """ Read the content of the gfs folder """

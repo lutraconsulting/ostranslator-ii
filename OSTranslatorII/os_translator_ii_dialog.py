@@ -440,17 +440,23 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
 
     def postProcess(self):
         # TODO parallelise this function
+
+        dsName = str(self.datasetComboBox.currentText())
         self.statusLabel.setText('Post-processing - grab a sleeping bag..')
         self.ppErrors = []
         cur = get_db_cur(self.dbDetails)
-        self.ppThread = PostProcessorThread( cur, 
-                                             self.getUri(),
-                                             self.schema_name, 
-                                             self.destTables, 
-                                             self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
-                                             self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked,
-                                             self.addOsStylingFieldsCheckBox.checkState() == QtCore.Qt.Checked,
-                                             self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked)
+        self.ppThread = PostProcessorThread(
+            cur=cur,
+            uri=self.getUri(),
+            schema=self.schema_name,
+            tables=self.destTables,
+            osmm_schema=utils.get_OSMM_schema_ver(dsName),
+            createSpatialIndex=self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
+            dedup=self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked,
+            addTopoStyleColumns=self.addOsStylingFieldsCheckBox.checkState() == QtCore.Qt.Checked,
+            applyDefaultStyle=self.applyDefaultOsStyleCheckBox.checkState() == QtCore.Qt.Checked
+        )
+
         self.ppThread.finished.connect(self.importFinished)
         self.ppThread.error.connect(self.onPostProcessorError)
         self.ppThread.progressChanged.connect(self.onProgressChanged)

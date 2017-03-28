@@ -28,9 +28,16 @@ class PostProcessorThread(QThread):
         (without the _tmp suffix).
     """
     
-    def __init__(self, cur, uri, schema, tables, 
-                 createSpatialIndex=True, dedup=True, 
-                 addTopoStyleColumns=True, applyDefaultStyle=True):
+    def __init__(self,
+                 cur,
+                 uri,
+                 schema,
+                 tables,
+                 osmm_schema,
+                 createSpatialIndex=True,
+                 dedup=True,
+                 addTopoStyleColumns=True,
+                 applyDefaultStyle=True):
         QThread.__init__(self)
         self.debug = False
         self.cur = cur
@@ -41,10 +48,16 @@ class PostProcessorThread(QThread):
         self.dedup = dedup
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
+        self.osmm_schema = osmm_schema # 7-9
+
+
         # Number of post-processing steps. Used to calculate the 
         # progress
         self.post_processing_steps = 4
-        self.styler = Styler(cur, self.uri, schema)
+        self.styler = Styler(cur=cur,
+                             uri=self.uri,
+                             schema=schema,
+                             osmm_schema=osmm_schema)
 
     def run(self):
         # import pydevd; pydevd.settrace()

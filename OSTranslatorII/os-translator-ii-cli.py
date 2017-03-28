@@ -9,6 +9,12 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+# Fix ValueError: API 'QDate' has already been set to version 1
+try:
+    import qgis.PyQt
+except ImportError:
+    pass
+
 import traceback
 import sys
 import argparse
@@ -16,7 +22,15 @@ import os
 from PyQt4 import QtCore
 from import_manager import ImportManager
 from post_processor_thread import PostProcessorThread
-from utils import build_args, get_input_files, get_pioneer_file, get_supported_datasets, create_schema, get_db_cur
+from utils import (
+    build_args,
+    get_input_files,
+    get_pioneer_file,
+    get_supported_datasets,
+    create_schema,
+    get_db_cur,
+    get_OSMM_schema_ver
+)
 
 
 class OSTranslatorCli(QtCore.QObject):
@@ -101,15 +115,16 @@ class OSTranslatorCli(QtCore.QObject):
     def post_process(self):
         print 'Post-processing...'
         cur = get_db_cur(self.con_details)
-        self.pp_thread = PostProcessorThread(cur,
-                                            None,  # Uri
-                                            self.schema,
-                                            ['boundaryline', 'cartographicsymbol', 'cartographictext',
-                                             'topographicarea', 'topographicline', 'topographicpoint'],
-                                            True,  # createSpatialIndex
-                                            True,  # removeDuplicates
-                                            True,  # addOsStylingFields
-                                            False)  # applyDefaultOsStyle
+        self.pp_thread = PostProcessorThread(
+            cur=cur,
+            uri=None,  # Uri
+            schema=self.schema,
+            tables=['boundaryline', 'cartographicsymbol', 'cartographictext', 'topographicarea', 'topographicline', 'topographicpoint'],
+            osmm_schema=get_OSMM_schema_ver(self.osmm_data_type),
+            createSpatialIndex=True,  # createSpatialIndex
+            dedup=True,  # removeDuplicates
+            addTopoStyleColumns=True,  # addOsStylingFields
+            applyDefaultStyle=False)  # applyDefaultOsStyle
         self.pp_thread.finished.connect(self.on_post_process_complete)
         self.pp_thread.error.connect(self.on_post_processor_error)
         self.pp_thread.progressChanged.connect(self.on_progress_changed)
@@ -148,7 +163,7 @@ class OSTranslatorCli(QtCore.QObject):
 
 def main():
 
-    supported_data_types = ['OS Mastermap Topography (v7)']
+    supported_data_types = ['OS Mastermap Topography (v7)', 'OS Mastermap Topography (v9)']
 
     parser = argparse.ArgumentParser(description='Import OS products into PostGIS from the command-line.\n\n' +
                                      'Please note that this script needs a PGPASSFILE to function - see \n' +

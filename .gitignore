@@ -4,3 +4,5 @@ OSTranslatorII/.idea/
 .idea/
 *.zip
 *.qml
+OSTranslatorII/downloads/*
+!OSTranslatorII/downloads/.gitkeep
