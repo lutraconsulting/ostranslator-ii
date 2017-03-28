@@ -1,42 +1,27 @@
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
- OsTranslatorIIDialog
-                                 A QGIS plugin
- A plugin for loading Ordnance Survey MasterMap and other GML-based datasets.
-                             -------------------
-        begin                : 2014-10-03
-        git sha              : $Format:%H$
-        copyright            : (C) 2014 by Peter Wells for Lutra Consulting
-        email                : info@lutraconsulting.co.uk
- ***************************************************************************/
+# OsTranslatorII QGIS Plugin
+#
+# Copyright (C) 2017 Lutra Consulting
+# info@lutraconsulting.co.uk
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
+from PyQt4 import QtCore, QtGui
 
-import os, sys, time, psycopg2, string, multiprocessing, gdal
+import string, multiprocessing
 import xml.etree.ElementTree as ET
 
-from PyQt4 import QtGui, QtCore, uic
 from import_manager import *
 from result_dialog import *
 from post_processor_thread import *
 from utils import *
-# from about_dialog import *
-import resources_rc
 
-# QGIS Imports
 from qgis.core import QgsDataSourceURI
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'os_translator_ii_dialog_base.ui'))
+FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'ui', 'os_translator_ii_dialog_base.ui'))
 
 
 class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
@@ -53,7 +38,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.dbDetails = dict()
         self.helpUrl = 'http://www.lutraconsulting.co.uk/products/ostranslator-ii/'
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(':/plugins/OsTranslatorII/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(OSII_icon_path())))
         
         self.iface = iface
         self.parent = parent

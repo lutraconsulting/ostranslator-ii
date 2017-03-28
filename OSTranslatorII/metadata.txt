@@ -1,10 +1,4 @@
-# This file contains metadata for your plugin. Since 
-# version 2.0 of QGIS this is the proper way to supply 
-# information about a plugin. The old method of 
-# embedding metadata in __init__.py will 
-# is no longer supported since version 2.0.
-
-# This file should be included when you package your plugin.# Mandatory items:
+# Mandatory items:
 
 [general]
 name=OS Translator II
@@ -75,7 +69,7 @@ homepage=http://www.lutraconsulting.co.uk/products/ostranslator-ii/
 tracker=https://github.com/lutraconsulting/ostranslator-ii/issues
 repository=https://github.com/lutraconsulting/ostranslator-ii
 
-icon=osTrans_128px.png
+icon=images/osTrans_128px.png
 
 # experimental flag
 experimental=False

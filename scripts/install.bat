@@ -18,11 +18,14 @@ rem  *   (at your option) any later version.                                   *
 rem  *                                                                         *
 rem  ***************************************************************************/
 
+cd ..\OSTranslatorII
 SET DEST=%HOMEPATH%\.qgis2\python\plugins\OSTranslatorII
 mkdir %DEST%
 mkdir %DEST%\gfs
+mkdir %DEST%\ui
+mkdir %DEST%\images
 xcopy /e /y *.py %DEST%
-xcopy /e /y osTrans_128px.png %DEST%
 xcopy /e /y metadata.txt %DEST%
-xcopy /e /y *.ui %DEST%
+xcopy /e /y ui\*.ui %DEST%\ui
 xcopy /e /y gfs\*.* %DEST%\gfs
+xcopy /e /y images\*.png %DEST%\images

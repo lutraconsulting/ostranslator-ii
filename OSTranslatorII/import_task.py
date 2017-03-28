@@ -1,27 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
- OsTranslatorII
-                                 A QGIS plugin
- A plugin for loading Ordnance Survey MasterMap and other GML-based datasets.
-                             -------------------
-        begin                : 2014-10-03
-        copyright            : (C) 2014 by Peter Wells for Lutra Consulting
-        email                : info@lutraconsulting.co.uk
-        git sha              : $Format:%H$
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
+# OsTranslatorII QGIS Plugin
+#
+# Copyright (C) 2017 Lutra Consulting
+# info@lutraconsulting.co.uk
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 
 from PyQt4.QtCore import *
+
 
 class ImportTask(QObject):
     

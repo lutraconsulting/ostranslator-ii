@@ -1,32 +1,18 @@
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
- OsTranslatorII
-                                 A QGIS plugin
- A plugin for loading Ordnance Survey MasterMap and other GML-based datasets.
-                              -------------------
-        begin                : 2014-10-03
-        git sha              : $Format:%H$
-        copyright            : (C) 2014 by Peter Wells for Lutra Consulting
-        email                : info@lutraconsulting.co.uk
- ***************************************************************************/
+# OsTranslatorII QGIS Plugin
+#
+# Copyright (C) 2017 Lutra Consulting
+# info@lutraconsulting.co.uk
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon
-# Initialize Qt resources from file resources.py
-import resources_rc
-# Import the code for the dialog
+
 from os_translator_ii_dialog import OsTranslatorIIDialog
-import os.path
+from utils import OSII_icon_path
 
 
 class OsTranslatorII:
@@ -42,47 +28,17 @@ class OsTranslatorII:
         """
         # Save reference to the QGIS interface
         self.iface = iface
-        # initialize plugin directory
-        self.plugin_dir = os.path.dirname(__file__)
-        # initialize locale
-        locale = QSettings().value('locale/userLocale')[0:2]
-        locale_path = os.path.join(
-            self.plugin_dir,
-            'i18n',
-            'OsTranslatorII_{}.qm'.format(locale))
 
-        if os.path.exists(locale_path):
-            self.translator = QTranslator()
-            self.translator.load(locale_path)
-
-            if qVersion() > '4.3.3':
-                QCoreApplication.installTranslator(self.translator)
-
-        # Create the dialog (after translation) and keep reference
+        # Create the dialog and keep reference
         self.dlg = OsTranslatorIIDialog(iface)
         self.dlgOpen = False
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&OS Translator II')
+        self.menu = 'OS Translator II'
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'OsTranslatorII')
         self.toolbar.setObjectName(u'OsTranslatorII')
-
-    # noinspection PyMethodMayBeStatic
-    def tr(self, message):
-        """Get the translation for a string using Qt translation API.
-
-        We implement this ourselves since we do not inherit QObject.
-
-        :param message: String for translation.
-        :type message: str, QString
-
-        :returns: Translated version of message.
-        :rtype: QString
-        """
-        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
-        return QCoreApplication.translate('OsTranslatorII', message)
 
 
     def add_action(
@@ -162,10 +118,9 @@ class OsTranslatorII:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/OsTranslatorII/icon.png'
         self.add_action(
-            icon_path,
-            text=self.tr(u'OS Translator II'),
+            OSII_icon_path(),
+            text='OS Translator II',
             callback=self.run,
             parent=self.iface.mainWindow())
         
@@ -173,9 +128,7 @@ class OsTranslatorII:
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(
-                self.tr(u'&OS Translator II'),
-                action)
+            self.iface.removePluginMenu('OS Translator II', action)
             self.iface.removeToolBarIcon(action)
 
 
@@ -188,10 +141,5 @@ class OsTranslatorII:
         # Run the dialog event loop
         if not self.dlgOpen:
             self.dlgOpen = True
-            result = self.dlg.exec_()
+            self.dlg.exec_()
             self.dlgOpen = False
-            # See if OK was pressed
-            if result:
-                # Do something useful here - delete the line containing pass and
-                # substitute with your code.
-                pass
