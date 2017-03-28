@@ -10,7 +10,7 @@
 # (at your option) any later version.
 
 from PyQt4 import QtCore, QtGui
-
+import traceback
 import string, multiprocessing
 import xml.etree.ElementTree as ET
 
@@ -333,7 +333,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             return
         self.extractPgConnectionDetails()
         
-        # Ensure destination schema exists - promt to create it
+        # Ensure destination schema exists - prompt to create it
         self.schema_name = str(self.destSchema.text())
         if len(self.schema_name) == 0:
             QtGui.QMessageBox.critical(None, 'No Schema Specified', 'Please specify a destination schema.')
