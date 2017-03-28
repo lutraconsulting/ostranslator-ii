@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osgb:FeatureCollection xmlns:osgb="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb http://www.ordnancesurvey.co.uk/xml/schema/v7/OSDNFFeatures.xsd" fid="GDS-5562113-1">
+<gml:description>Ordnance Survey, (c) Crown Copyright. All rights reserved, 2014-03-14</gml:description>
+<gml:boundedBy>
+<gml:null>unknown</gml:null>
+</gml:boundedBy>
+<osgb:queryTime>1970-01-01T00:00:00</osgb:queryTime>
+<osgb:queryExtent>
+<osgb:Rectangle srsName="osgb:BNG">
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</osgb:Rectangle>
+</osgb:queryExtent>
+
+<osgb:topographicMember>
+<osgb:TopographicArea fid="osgb----------------">
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Land</osgb:theme>
+<osgb:calculatedAreaValue>1.0</osgb:calculatedAreaValue>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>General Surface</osgb:descriptiveGroup>
+<osgb:make>Natural</osgb:make>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:polygon>
+<gml:Polygon srsName="osgb:BNG">
+<gml:outerBoundaryIs>
+<gml:LinearRing>
+<gml:coordinates>0.0,0.0 0.0,1.0 1.0,0.0 0.0,0.0</gml:coordinates>
+</gml:LinearRing>
+</gml:outerBoundaryIs>
+</gml:Polygon>
+</osgb:polygon>
+</osgb:TopographicArea>
+</osgb:topographicMember>
+
+<osgb:cartographicMember>
+<osgb:CartographicSymbol fid='osgb----------------'>
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Rail</osgb:theme>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Rail</osgb:descriptiveGroup>
+<osgb:descriptiveTerm>Switch</osgb:descriptiveTerm>
+<osgb:orientation>1</osgb:orientation>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.000,0.000</gml:coordinates>
+</gml:Point>
+</osgb:point>
+</osgb:CartographicSymbol>
+</osgb:cartographicMember>
+
+<osgb:cartographicMember>
+<osgb:CartographicText fid='osgb----------------'>
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Buildings</osgb:theme>
+<osgb:anchorPoint>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.000,0.000</gml:coordinates>
+</gml:Point>
+</osgb:anchorPoint>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Buildings Or Structure</osgb:descriptiveGroup>
+<osgb:make>Manmade</osgb:make>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:textRendering>
+<osgb:anchorPosition>1</osgb:anchorPosition>
+<osgb:font>1</osgb:font>
+<osgb:height>1.0</osgb:height>
+<osgb:orientation>1</osgb:orientation>
+</osgb:textRendering>
+<osgb:textString>1</osgb:textString>
+</osgb:CartographicText>
+</osgb:cartographicMember>
+
+<osgb:boundaryMember>
+<osgb:BoundaryLine fid='osgb----------------'>
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Administrative Boundaries</osgb:theme>
+<osgb:accuracyOfPosition>1.0m</osgb:accuracyOfPosition>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Political Or Administrative</osgb:descriptiveGroup>
+<osgb:descriptiveTerm>Electoral</osgb:descriptiveTerm>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:physicalPresence>Boundary</osgb:physicalPresence>
+<osgb:polyline>
+<gml:LineString srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0 0.0,1.0 1.0,0.0</gml:coordinates>
+</gml:LineString>
+</osgb:polyline>
+</osgb:BoundaryLine>
+</osgb:boundaryMember>
+
+<osgb:topographicMember>
+<osgb:TopographicLine fid='osgb----------------'>
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Land</osgb:theme>
+<osgb:accuracyOfPosition>1.0m</osgb:accuracyOfPosition>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>General Feature</osgb:descriptiveGroup>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:physicalPresence>Obstructing</osgb:physicalPresence>
+<osgb:polyline>
+<gml:LineString srsName='osgb:BNG'>
+<gml:coordinates>0.0,0.0 0.0,1.0 1.0,0.0</gml:coordinates>
+</gml:LineString>
+</osgb:polyline>
+</osgb:TopographicLine>
+</osgb:topographicMember>
+
+<osgb:topographicMember>
+<osgb:TopographicPoint fid='osgb----------------'>
+<osgb:featureCode>1</osgb:featureCode>
+<osgb:version>1</osgb:version>
+<osgb:versionDate>1970-01-01</osgb:versionDate>
+<osgb:theme>Terrain And Height</osgb:theme>
+<osgb:accuracyOfPosition>1.0m</osgb:accuracyOfPosition>
+<osgb:changeHistory>
+<osgb:changeDate>1970-01-01</osgb:changeDate>
+<osgb:reasonForChange>New</osgb:reasonForChange>
+</osgb:changeHistory>
+<osgb:descriptiveGroup>Terrain And Height</osgb:descriptiveGroup>
+<osgb:descriptiveTerm>Spot Height</osgb:descriptiveTerm>
+<osgb:heightAboveDatum>
+<osgb:heightAboveDatum>1.0</osgb:heightAboveDatum>
+<osgb:accuracyOfHeightAboveDatum>1.0m</osgb:accuracyOfHeightAboveDatum>
+</osgb:heightAboveDatum>
+<osgb:physicalLevel>1</osgb:physicalLevel>
+<osgb:point>
+<gml:Point srsName='osgb:BNG'>
+<gml:coordinates>0.000,0.000</gml:coordinates>
+</gml:Point>
+</osgb:point>
+</osgb:TopographicPoint>
+</osgb:topographicMember>
+
+<osgb:boundedBy>
+<gml:Box srsName="osgb:BNG">
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</gml:Box>
+</osgb:boundedBy>
+</osgb:FeatureCollection>
