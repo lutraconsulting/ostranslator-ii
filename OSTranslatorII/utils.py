@@ -14,16 +14,52 @@ import re
 import os, urllib2
 import psycopg2
 from PyQt4.QtCore import QSettings
+from PyQt4.QtNetwork import QNetworkRequest
+from PyQt4.QtCore import QUrl, QEventLoop
 
 
 def OSII_icon_path():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "images", "icon.png")
 
 
-def download(url, destName):
-    # Much of this is stolen from Crayfish - consider turning into
-    # something more reuseable.
+def download(packageUrl, destinationFileName):
     destFolder = os.path.join(os.path.dirname(__file__), "downloads")
+    dest = os.path.join(destFolder, destinationFileName)
+    try:
+        from qgis.core import QgsNetworkAccessManager
+        _download_qgis(packageUrl, dest)
+
+    except ImportError:
+        # in case we are using cli and qgis is not installed
+        _download_urllib2(packageUrl, dest)
+
+    return dest
+
+
+def _download_qgis(packageUrl, dest):
+    from qgis.core import QgsNetworkAccessManager
+
+    request = QNetworkRequest(QUrl(packageUrl))
+    reply = QgsNetworkAccessManager.instance().get(request)
+    evloop = QEventLoop()
+    reply.finished.connect(evloop.quit)
+    evloop.exec_(QEventLoop.ExcludeUserInputEvents)
+    content_type = reply.rawHeader('Content-Type')
+    if bytearray(content_type) == bytearray('text/plain; charset=utf-8'):
+        # remove the old file
+        if os.path.isfile(dest):
+            os.unlink(dest)
+
+        destinationFile = open(dest, 'wb')
+        destinationFile.write(bytearray(reply.readAll()))
+        destinationFile.close()
+    else:
+        ret_code = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+        raise Exception('Failed to download %s\n\nThe HTTP status code was %d.\n\nPlease check your network settings' % (packageUrl, ret_code))
+
+    return dest
+
+def _download_urllib2(url, destinationFileName):
     s = QSettings()
     try:
         useProxy = s.value("proxy/proxyEnabled", False).toBool()
@@ -55,7 +91,6 @@ def download(url, destName):
         raise Exception('Failed to download %s\n\nThe reason was %s.' % (
         url, e.reason) + generalDownloadFailureMessage)
 
-    destinationFileName = os.path.join(destFolder, destName)
     if os.path.isfile(destinationFileName):
         os.unlink(destinationFileName)
     destinationFile = open(destinationFileName, 'wb')
