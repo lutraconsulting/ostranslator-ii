@@ -1,2 +1,8 @@
-QGIS Plugin/.idea/
+OSTranslatorII/.idea/
+/.idea/
 *.pyc
+.idea/
+*.zip
+*.qml
+OSTranslatorII/downloads/*
+!OSTranslatorII/downloads/.gitkeep

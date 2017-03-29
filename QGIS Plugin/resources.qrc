@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins/OsTranslatorII" >
-        <file>icon.png</file>
-    </qresource>
-</RCC>
