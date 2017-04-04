@@ -16,27 +16,32 @@ import psycopg2
 from PyQt4.QtCore import QSettings
 from PyQt4.QtNetwork import QNetworkRequest
 from PyQt4.QtCore import QUrl, QEventLoop
-
+import tempfile
 
 def OSII_icon_path():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "images", "icon.png")
 
 
 def download(packageUrl, destinationFileName):
-    destFolder = os.path.join(os.path.dirname(__file__), "downloads")
-    dest = os.path.join(destFolder, destinationFileName)
+    handle = tempfile.NamedTemporaryFile(delete=False, suffix=destinationFileName)
+    name = handle.name
+
     try:
         from qgis.core import QgsNetworkAccessManager
-        _download_qgis(packageUrl, dest)
+        _download_qgis(packageUrl, handle)
 
     except ImportError:
         # in case we are using cli and qgis is not installed
-        _download_urllib2(packageUrl, dest)
+        _download_urllib2(packageUrl, handle)
 
-    return dest
+    handle.close()
+    return name
 
+def delete(fileName):
+    if os.path.isfile(fileName):
+        os.unlink(fileName)
 
-def _download_qgis(packageUrl, dest):
+def _download_qgis(packageUrl, handle):
     from qgis.core import QgsNetworkAccessManager
 
     request = QNetworkRequest(QUrl(packageUrl))
@@ -46,20 +51,12 @@ def _download_qgis(packageUrl, dest):
     evloop.exec_(QEventLoop.ExcludeUserInputEvents)
     content_type = reply.rawHeader('Content-Type')
     if bytearray(content_type) == bytearray('text/plain; charset=utf-8'):
-        # remove the old file
-        if os.path.isfile(dest):
-            os.unlink(dest)
-
-        destinationFile = open(dest, 'wb')
-        destinationFile.write(bytearray(reply.readAll()))
-        destinationFile.close()
+        handle.write(bytearray(reply.readAll()))
     else:
         ret_code = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
         raise Exception('Failed to download %s\n\nThe HTTP status code was %d.\n\nPlease check your network settings' % (packageUrl, ret_code))
 
-    return dest
-
-def _download_urllib2(url, destinationFileName):
+def _download_urllib2(url, handle):
     s = QSettings()
     try:
         useProxy = s.value("proxy/proxyEnabled", False).toBool()
@@ -91,12 +88,7 @@ def _download_urllib2(url, destinationFileName):
         raise Exception('Failed to download %s\n\nThe reason was %s.' % (
         url, e.reason) + generalDownloadFailureMessage)
 
-    if os.path.isfile(destinationFileName):
-        os.unlink(destinationFileName)
-    destinationFile = open(destinationFileName, 'wb')
-    destinationFile.write(conn.read())
-    destinationFile.close()
-    return destinationFileName
+    handle.write(conn.read())
 
 
 def get_OSMM_schema_ver(s):

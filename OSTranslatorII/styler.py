@@ -91,6 +91,7 @@ class Styler():
         self.cur.execute(sqlQuery, {})
 
         self.cleanUp(table)
+        utils.delete(sqlPath)
         
     def applyDefaultStyle(self, table):
         """
@@ -126,6 +127,8 @@ class Styler():
             raise Exception('Failed to load layer %s for applying default style.' % table)
         
         success, message = pgLayer.importNamedStyle(domDoc)
+        utils.delete(qmlPath)
+
         if not success:
             raise Exception('Failed to load layer style: %s\n\nThis can happen when using free wifi connections requiring registration.' % message)
         try:
@@ -163,7 +166,8 @@ class Styler():
                 raise Exception('Error: %s' % failedDbStyleSaveError)
         except psycopg2.ProgrammingError:
             raise Exception('Error: %s' % failedDbStyleSaveError)
-        
+
+
         return True
 
     def getLayerUri(self, table, schemaType='destination'):
