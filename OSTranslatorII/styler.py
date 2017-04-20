@@ -63,12 +63,17 @@ class Styler():
                 self.osmm_style_name = "standard"
 
             qml_base = base_url + '/master/Schema%20version%209/Stylesheets/QGIS%20stylesheets%20(QML)/'
-            qml_mode = "-" + self.osmm_style_name + '.qml'
 
             sql_base = base_url + '/master/Schema%20version%209/SQL/PostGIS/Array/'
             sql_mode = '_createtable_array.sql'
 
             for t in self.styleSupportedTopoTables:
+                if t == "boundaryline" and self.osmm_style_name == "outdoor":
+                    # boundaryLine does not have outdoor style at all
+                    qml_mode = "-standard.qml"
+                else:
+                    qml_mode = "-" + self.osmm_style_name + '.qml'
+
                 self.qmlLocations[t] = qml_base + t + qml_mode
                 self.sqlLocations[t] = sql_base + t + sql_mode
 
