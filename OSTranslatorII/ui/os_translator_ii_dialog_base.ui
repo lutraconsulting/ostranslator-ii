@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>849</width>
-    <height>354</height>
+    <width>909</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,15 +127,8 @@
      <item row="3" column="1" colspan="2">
       <widget class="QComboBox" name="postgisConnectionComboBox"/>
      </item>
-     <item row="14" column="1">
-      <widget class="QLineEdit" name="inputLineEdit">
-       <property name="minimumSize">
-        <size>
-         <width>120</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
+     <item row="1" column="1" colspan="2">
+      <widget class="QComboBox" name="datasetComboBox"/>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
@@ -161,20 +154,10 @@
        </item>
       </widget>
      </item>
-     <item row="1" column="1" colspan="2">
-      <widget class="QComboBox" name="datasetComboBox"/>
-     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Connection</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0">
-      <widget class="QLabel" name="inputLabel">
-       <property name="text">
-        <string>Input</string>
        </property>
       </widget>
      </item>
@@ -185,7 +168,10 @@
        </property>
       </widget>
      </item>
-     <item row="11" column="0" colspan="3">
+     <item row="5" column="1" colspan="2">
+      <widget class="QLineEdit" name="destSchema"/>
+     </item>
+     <item row="12" column="0" colspan="3">
       <widget class="QCheckBox" name="batchModeCheckBox">
        <property name="enabled">
         <bool>false</bool>
@@ -198,10 +184,21 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="1" colspan="2">
-      <widget class="QLineEdit" name="destSchema"/>
+     <item row="11" column="0" colspan="3">
+      <widget class="Line" name="line_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </item>
-     <item row="14" column="2">
+     <item row="2" column="0" colspan="3">
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="2">
       <widget class="QPushButton" name="browsePushButton">
        <property name="maximumSize">
         <size>
@@ -214,7 +211,7 @@
        </property>
       </widget>
      </item>
-     <item row="15" column="1">
+     <item row="16" column="1">
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -227,21 +224,7 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="0" colspan="3">
-      <widget class="Line" name="line_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0" colspan="3">
-      <widget class="Line" name="line_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0" colspan="3">
+     <item row="7" column="0" colspan="3">
       <widget class="QCheckBox" name="createSpatialIndexCheckBox">
        <property name="text">
         <string>Create spatial index</string>
@@ -251,7 +234,7 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="0" colspan="3">
+     <item row="8" column="0" colspan="3">
       <widget class="QCheckBox" name="removeDuplicatesCheckBox">
        <property name="toolTip">
         <string/>
@@ -267,7 +250,7 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0" colspan="3">
+     <item row="9" column="0" colspan="3">
       <widget class="QCheckBox" name="addOsStylingFieldsCheckBox">
        <property name="enabled">
         <bool>false</bool>
@@ -277,7 +260,7 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0" colspan="3">
+     <item row="10" column="0" colspan="3">
       <widget class="QCheckBox" name="applyDefaultOsStyleCheckBox">
        <property name="enabled">
         <bool>false</bool>
@@ -285,6 +268,62 @@
        <property name="text">
         <string>Apply default OS style</string>
        </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <widget class="QLabel" name="inputLabel">
+       <property name="text">
+        <string>Input</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <widget class="QLineEdit" name="inputLineEdit">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Style</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1" colspan="2">
+      <widget class="QComboBox" name="styleNameComboBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>backdrop</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>light</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>standard</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>outdoor</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

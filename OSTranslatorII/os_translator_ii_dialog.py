@@ -97,7 +97,10 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         applyDefaultOsStyle = self.applyDefaultOsStyleCheckBox.checkState()
         s.setValue("OsTranslatorII/applyDefaultOsStyle", applyDefaultOsStyle)
-        
+
+        styleName = self.styleNameComboBox.currentText()
+        s.setValue("OsTranslatorII/styleName", styleName)
+
     def updateImportTaskName(self, newName):
         self.tasksListWidget.currentItem().setText(newName)
         i = self.tasksListWidget.currentRow()
@@ -175,7 +178,12 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked, type=int) )
                 
         self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
-        
+
+        styleName = str(s.value("OsTranslatorII/styleName", '', type=str))
+        self.styleNameComboBox.setCurrentIndex(
+            self.styleNameComboBox.findText(styleName)
+        )
+
         try:
             val, status = s.value("OsTranslatorII/simultaneousJobs", -1).toInt()
         except:
@@ -451,6 +459,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             schema=self.schema_name,
             tables=self.destTables,
             osmm_schema=utils.get_OSMM_schema_ver(dsName),
+            osmm_style_name=self.styleNameComboBox.currentText(),
             createSpatialIndex=self.createSpatialIndexCheckBox.checkState() == QtCore.Qt.Checked,
             dedup=self.removeDuplicatesCheckBox.checkState() == QtCore.Qt.Checked,
             addTopoStyleColumns=self.addOsStylingFieldsCheckBox.checkState() == QtCore.Qt.Checked,
@@ -538,6 +547,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                       self.fieldsTreeWidget,
                       self.buttonBox,
                       self.createSpatialIndexCheckBox,
+
                       self.removeDuplicatesCheckBox]
 
         for ie in uiElements:

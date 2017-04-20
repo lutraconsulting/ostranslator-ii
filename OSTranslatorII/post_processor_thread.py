@@ -34,6 +34,7 @@ class PostProcessorThread(QThread):
                  schema,
                  tables,
                  osmm_schema,
+                 osmm_style_name,
                  createSpatialIndex=True,
                  dedup=True,
                  addTopoStyleColumns=True,
@@ -49,7 +50,7 @@ class PostProcessorThread(QThread):
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
         self.osmm_schema = osmm_schema # 7-9
-
+        self.osmm_style_name = osmm_style_name
 
         # Number of post-processing steps. Used to calculate the 
         # progress
@@ -57,7 +58,8 @@ class PostProcessorThread(QThread):
         self.styler = Styler(cur=cur,
                              uri=self.uri,
                              schema=schema,
-                             osmm_schema=osmm_schema)
+                             osmm_schema=osmm_schema,
+                             osmm_style_name=osmm_style_name)
 
     def run(self):
         # import pydevd; pydevd.settrace()
