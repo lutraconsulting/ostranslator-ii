@@ -20,11 +20,12 @@ import utils
 
 
 class Styler():
-    def __init__(self, cur, uri, schema, osmm_schema):
+    def __init__(self, cur, uri, schema, osmm_schema, osmm_style_name):
         self.cur = cur
         self.uri = uri
         self.schema = schema
         self.osmm_schema = osmm_schema #7-9
+        self.osmm_style_name = osmm_style_name
         self.tmpSchema = schema + '_tmp' # We work on the temporary version of the table
         self.styleSupportedTopoTables = ['topographicarea',
                                          'cartographicsymbol',
@@ -57,8 +58,12 @@ class Styler():
 
 
         elif self.osmm_schema == 9:
+            allowed_style_names = ["backdrop", "light", "standard", "outdoor"]
+            if (not self.osmm_style_name in allowed_style_names):
+                self.osmm_style_name = "standard"
+
             qml_base = base_url + '/master/Schema%20version%209/Stylesheets/QGIS%20stylesheets%20(QML)/'
-            qml_mode = '-standard.qml' #TODO allow user to choose between standard, light and outdoor
+            qml_mode = "-" + self.osmm_style_name + '.qml'
 
             sql_base = base_url + '/master/Schema%20version%209/SQL/PostGIS/Array/'
             sql_mode = '_createtable_array.sql'
