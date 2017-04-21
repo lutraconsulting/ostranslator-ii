@@ -1,0 +1,56 @@
+<!-- FIXME - ensure header here is sensible -->
+<?xml version="1.0" encoding="UTF-8"?>
+<osgb:FeatureCollection xmlns:osgb="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb http://www.ordnancesurvey.co.uk/xml/schema/v7/OSDNFFeatures.xsd" fid="GDS-5562113-1">
+<gml:description>Ordnance Survey, (c) Crown Copyright. All rights reserved, 2014-03-14</gml:description>
+<gml:boundedBy>
+<gml:null>unknown</gml:null>
+</gml:boundedBy>
+<osgb:queryTime>1970-01-01T00:00:00</osgb:queryTime>
+<osgb:queryExtent>
+<osgb:Rectangle srsName="osgb:BNG">
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</osgb:Rectangle>
+</osgb:queryExtent>
+
+<os:featureMember>
+  <oml:Building gml:id="">
+    <oml:geometry>
+      <gml:Surface gml:id="" srsName="urn:ogc:def:crs:EPSG::27700" srsDimension="2">
+        <gml:patches>
+          <gml:PolygonPatch>
+            <gml:exterior>
+              <gml:LinearRing>
+                <gml:posList>0.0,0.0 0.0,1.0 1.0,0.0 0.0,0.0</gml:posList>
+              </gml:LinearRing>
+            </gml:exterior>
+          </gml:PolygonPatch>
+        </gml:patches>
+      </gml:Surface>
+    </oml:geometry>
+    <oml:featureCode>1</oml:featureCode>
+  </oml:Building>
+</os:featureMember>
+
+<os:featureMember>
+  <oml:Road gml:id="">
+    <oml:distinctiveName>A</oml:distinctiveName>
+    <oml:roadNumber>A</oml:roadNumber>
+    <oml:classification codeSpace="http://www.os.uk/xml/codelists/map/RoadClassificationOML.xml">A</oml:classification>
+    <oml:drawLevel codeSpace="http://www.os.uk/xml/codelists/map/DrawLevelValueOML.xml">0</oml:drawLevel>
+    <oml:override codeSpace="http://www.os.uk/xml/codelists/map/OverrideValueOML.xml">F</oml:override>
+    <oml:geometry>
+      <gml:LineString gml:id="" srsName="urn:ogc:def:crs:EPSG::27700" srsDimension="2">
+        <gml:posList>0.0,0.0 0.0,1.0 1.0,0.0</gml:posList>
+      </gml:LineString>
+    </oml:geometry>
+    <oml:featureCode>1</oml:featureCode>
+  </oml:Road>
+</os:featureMember>
+
+<!-- FIXME - same here-->
+<osgb:boundedBy>
+<gml:Box srsName="osgb:BNG">
+<gml:coordinates>0.000,0.000 1.000,1.000</gml:coordinates>
+</gml:Box>
+</osgb:boundedBy>
+</osgb:FeatureCollection>

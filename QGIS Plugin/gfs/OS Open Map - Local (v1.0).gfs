@@ -1,0 +1,60 @@
+<GMLFeatureClassList>
+
+  <GMLFeatureClass>
+    <Name>Building</Name>
+    <ElementPath>Building</ElementPath>
+    <GeometryName>geometry</GeometryName>
+    <GeometryElementPath>geometry</GeometryElementPath>
+    <!--POLYGON-->
+    <GeometryType>3</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- -->
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+  <GMLFeatureClass>
+    <Name>Road</Name>
+    <ElementPath>Road</ElementPath>
+    <GeometryName>geometry</GeometryName>
+    <GeometryElementPath>geometry</GeometryElementPath>
+    <!--LINESTRING-->
+    <GeometryType>2</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- -->
+    <PropertyDefn>
+      <Name>classification</Name>
+      <ElementPath>classification</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>distinctiveName</Name>
+      <ElementPath>distinctiveName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>drawLevel</Name>
+      <ElementPath>drawLevel</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>featureCode</Name>
+      <ElementPath>featureCode</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>override</Name>
+      <ElementPath>override</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>roadNumber</Name>
+      <ElementPath>roadNumber</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+</GMLFeatureClassList>
