@@ -144,7 +144,7 @@
     <PropertyDefn>
       <Name>nonBoundingLine</Name>
       <ElementPath>nonBoundingLine</ElementPath>
-      <Type>Integer</Type>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>heightAboveDatum</Name>
