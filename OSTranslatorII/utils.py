@@ -135,7 +135,7 @@ def get_pioneer_file(ds_name):
     return pioneer_file_path
 
 
-def build_args(input_files, gfs_file_path, pg_source):
+def build_args(input_files, gfs_file_path, pg_source, ignore_fid):
     i = 0
     all_args = []
     for input_file in input_files:
@@ -158,6 +158,11 @@ def build_args(input_files, gfs_file_path, pg_source):
                          '-lco', 'PRECISION=NO'])
         else:
             args.insert(0, '-append')
+
+        if ignore_fid:
+            # fixes ERROR 1: COPY statement failed. ERROR: null value in column "fid" violates not-null
+            # https://github.com/lutraconsulting/ostranslator-ii/issues/18
+            args.extend(['--config', 'GML_EXPOSE_FID', 'NO'])
 
         i += 1
         all_args.append(args)

@@ -45,13 +45,16 @@ class OSTranslatorCli(QtCore.QObject):
                  port,
                  user,
                  schema,
-                 num_processes):
+                 num_processes,
+                 ignore_fid):
+
         super(OSTranslatorCli, self).__init__()
 
         self.input_path = input_path
         self.ds_name = osmm_data_type
         self.schema = schema
         self.num_processes = num_processes
+        self.ignore_fid = ignore_fid
 
         self.con_details = dict()
         self.con_details['database'] = database
@@ -96,7 +99,7 @@ class OSTranslatorCli(QtCore.QObject):
                         (self.con_details['database'], self.con_details['host'], self.con_details['port'],
                          self.schema + '_tmp', self.con_details['user'])
 
-            for arg in build_args(input_files, gfs_file_path, pg_source):
+            for arg in build_args(input_files, gfs_file_path, pg_source, self.ignore_fid):
                 self.im.add(arg)
             print 'Importing...'
             self.im.start(num_processes)
@@ -178,6 +181,7 @@ def main():
     parser.add_argument('--user', default='postgres', help='Username to connect as (default=postgres)')
     parser.add_argument('--schema', required=True, help='Destination schema for import')
     parser.add_argument('--num-processes', default=2, help='Number of concurrent import processes (default=2)')
+    parser.add_argument('--ignore-fid', default=False, action='store_true', help='allow to import features for boundary tiles (use GML_EXPOSE_FID NO in ogr2ogr command)')
 
     args = parser.parse_args()
     if args.osmm_data_type not in supported_data_types:
@@ -199,7 +203,8 @@ def main():
                         port=args.port,
                         user=args.user,
                         schema=args.schema,
-                        num_processes=args.num_processes)
+                        num_processes=args.num_processes,
+                        ignore_fid=args.ignore_fid)
 
     o.finished.connect(app.exit)
 

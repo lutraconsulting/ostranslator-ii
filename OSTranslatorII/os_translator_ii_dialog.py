@@ -101,6 +101,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         styleName = self.styleNameComboBox.currentText()
         s.setValue("OsTranslatorII/styleName", styleName)
 
+        ignoreFid = self.ignoreFidCheckBox.checkState()
+        s.setValue("OsTranslatorII/ignoreFid", ignoreFid)
+
     def updateImportTaskName(self, newName):
         self.tasksListWidget.currentItem().setText(newName)
         i = self.tasksListWidget.currentRow()
@@ -178,6 +181,8 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked, type=int) )
                 
         self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
+
+        self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Checked, type=int))
 
         styleName = str(s.value("OsTranslatorII/styleName", '', type=str))
         self.styleNameComboBox.setCurrentIndex(
@@ -430,7 +435,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
 
         self.im.reset()
 
-        for arg in build_args(inputFiles, gfsFilePath, pgSource):
+        for arg in build_args(inputFiles, gfsFilePath, pgSource, self.ignoreFidCheckBox.checkState()):
             self.im.add(arg)
 
         try:
