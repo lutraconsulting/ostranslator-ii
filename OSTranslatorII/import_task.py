@@ -27,10 +27,13 @@ class ImportTask(QObject):
     def start(self):
         self.process = QProcess()
         self.process.finished.connect(self.onProcessFinished)
-        cmd = ''
-        for arg in self.args:
-            cmd += arg + ' '
-        # print 'Starting %s' % cmd
+
+        if False:
+            cmd = ''
+            for arg in self.args:
+                cmd += arg + ' '
+            print 'Starting %s' % cmd
+
         self.process.start('ogr2ogr', self.args)
         if not self.process.waitForStarted():
             raise Exception('Failed to start process. Please ensure you have gdal/ogr2ogr installed')

@@ -33,6 +33,9 @@ def download(packageUrl, destinationFileName):
     except ImportError:
         # in case we are using cli and qgis is not installed
         _download_urllib2(packageUrl, handle)
+    except Exception as err:
+        # in case we are using cli and qgis is not installed
+        _download_urllib2(packageUrl, handle)
 
     handle.close()
     return name
@@ -53,8 +56,11 @@ def _download_qgis(packageUrl, handle):
     if bytearray(content_type) == bytearray('text/plain; charset=utf-8'):
         handle.write(bytearray(reply.readAll()))
     else:
+        msg = 'Failed to download %s\n\nPlease check your QGIS network settings and authentication db' % (packageUrl)
         ret_code = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
-        raise Exception('Failed to download %s\n\nThe HTTP status code was %d.\n\nPlease check your network settings' % (packageUrl, ret_code))
+        if ret_code:
+            msg += '\n\nThe HTTP status code was %d.' % (ret_code)
+        raise Exception(msg)
 
 def _download_urllib2(url, handle):
     s = QSettings()

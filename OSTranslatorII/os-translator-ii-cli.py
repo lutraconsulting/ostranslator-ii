@@ -120,7 +120,7 @@ class OSTranslatorCli(QtCore.QObject):
             uri=None,  # Uri
             schema=self.schema,
             tables=['boundaryline', 'cartographicsymbol', 'cartographictext', 'topographicarea', 'topographicline', 'topographicpoint'],
-            osmm_schema=get_OSMM_schema_ver(self.osmm_data_type),
+            osmm_schema=get_OSMM_schema_ver(self.ds_name),
             osmm_style_name=None,
             createSpatialIndex=True,  # createSpatialIndex
             dedup=True,  # removeDuplicates
