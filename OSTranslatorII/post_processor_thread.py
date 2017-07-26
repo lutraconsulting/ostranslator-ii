@@ -55,11 +55,15 @@ class PostProcessorThread(QThread):
         # Number of post-processing steps. Used to calculate the 
         # progress
         self.post_processing_steps = 4
-        self.styler = Styler(cur=cur,
-                             uri=self.uri,
-                             schema=schema,
-                             osmm_schema=osmm_schema,
-                             osmm_style_name=osmm_style_name)
+
+
+        # Styler is only compatible with v7 and v9, otherwise exception is thrown. 
+        if self.osmm_schema in (7, 9):
+            self.styler = Styler(cur=cur,
+                                 uri=self.uri,
+                                 schema=schema,
+                                 osmm_schema=osmm_schema,
+                                 osmm_style_name=osmm_style_name)
 
     def run(self):
         # import pydevd; pydevd.settrace()
