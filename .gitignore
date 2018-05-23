@@ -1,1 +1,3 @@
 QGIS Plugin/.idea/
+*.pyc
+.idea

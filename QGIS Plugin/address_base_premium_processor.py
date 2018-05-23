@@ -456,22 +456,68 @@ def main():
     class dummy():
 
         def __init__(self):
-            pass
+			
+            default_server = 'localhost'
+            default_port = '5432'
+            default_user = 'postgres'
+            default_passwd = 'postgres'
+            default_schema = 'os_ab_premium'
+            default_db = 'training'
+
+            print 'Specify destination server (press ENTER for default)'
+            self.server = raw_input('(%s) >' % default_server)
+            if self.server == '':
+                self.server = default_server
+
+            print 'Specify server port (press ENTER for default)'
+            self.port = raw_input('(%s) >' % default_port)
+            if self.port == '':
+                self.port = int(default_port)
+
+            print 'Specify destination database (press ENTER for default)'
+            self.db = raw_input('(%s) >' % default_db)
+            if self.db == '':
+                self.db = default_db
+
+            print 'Specify (existing) destination schema (press ENTER for default)'
+            self.schema = raw_input('(%s) >' % default_schema)
+            if self.schema == '':
+                self.schema = default_schema
+
+            print 'Specify username (press ENTER for default)'
+            self.user = raw_input('(%s) >' % default_user)
+            if self.user == '':
+                self.user = default_user
+
+            print 'Specify password (press ENTER for default)'
+            self.passwd = raw_input('(%s) >' % default_passwd)
+            if self.passwd == '':
+                self.passwd = default_passwd
+
+            self.source_folder = ''
+            while not os.path.isdir(self.source_folder):
+                print 'Specify folder containing source .CSV files (all CSV files in this folder [but not below it] will be processed)'
+                self.source_folder = raw_input('>').strip('"')
+
+            self.source_files = []
+            for f in os.listdir(self.source_folder):
+                if f.lower().endswith('.csv'):
+                    self.source_files.append(os.path.join(self.source_folder, f))
 
         def getDbCur(self):
             # TODO: Pull this from the main plugin
-            dbConn = psycopg2.connect( database = 'training',
-                                       user = 'postgres',
-                                       password = 'postgres',
-                                       host = 'localhost',
-                                       port = 5432)
+            dbConn = psycopg2.connect( database = self.db,
+                                       user = self.user,
+                                       password = self.passwd,
+                                       host = self.server,
+                                       port = self.port)
             dbConn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
             return dbConn.cursor()
 
     d = dummy()
     p = AddressBasePremiumProcessor(d,
-                                    input_files=[r'C:\Users\Pete\Documents\Projects\Cleveland Police\Incoming\addressbase.txt'],
-                                    dest_schema='public')
+                                    input_files=d.source_files,
+                                    dest_schema=d.schema)
     p.prepare()
     p.process()
 
