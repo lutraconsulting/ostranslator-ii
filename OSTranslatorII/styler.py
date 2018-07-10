@@ -9,17 +9,19 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+from __future__ import absolute_import
+from builtins import object
 import psycopg2
 try:
     from qgis.core import QgsVectorLayer
 except ImportError:
     pass  # We may be calling the script from the console in which case this import is not used
 
-from PyQt4.Qt import QDomDocument
-import utils
+from qgis.PyQt.Qt import QDomDocument
+from . import utils
 
 
-class Styler():
+class Styler(object):
     def __init__(self, cur, uri, schema, osmm_schema, osmm_style_name):
         self.cur = cur
         self.uri = uri
@@ -84,7 +86,7 @@ class Styler():
     def addFields(self, table):
         
         # Only style if it looks like a topo layer
-        if not table in self.sqlLocations.keys():
+        if not table in list(self.sqlLocations.keys()):
             return
         
         self.prepare(table)
@@ -119,7 +121,7 @@ class Styler():
             
         """
         
-        if not table in self.qmlLocations.keys():
+        if not table in list(self.qmlLocations.keys()):
             return False
         
         defaultStyleName = 'Default OS Style'

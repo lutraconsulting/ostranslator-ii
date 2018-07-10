@@ -10,14 +10,15 @@
 # (at your option) any later version.
 
 # Fix ValueError: API 'QDate' has already been set to version 1
+from __future__ import absolute_import
 try:
     import qgis.PyQt
 except ImportError:
     pass
 
 import sys
-from PyQt4 import QtGui
-from os_translator_ii_dialog import OsTranslatorIIDialog
+from qgis.PyQt import QtGui
+from .os_translator_ii_dialog import OsTranslatorIIDialog
 
 def main():
     app = QtGui.QApplication(sys.argv)

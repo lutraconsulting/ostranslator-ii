@@ -9,7 +9,9 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-from PyQt4.QtCore import *
+from __future__ import print_function
+from builtins import str
+from qgis.PyQt.QtCore import *
 
 
 class ImportTask(QObject):
@@ -32,7 +34,8 @@ class ImportTask(QObject):
             cmd = ''
             for arg in self.args:
                 cmd += arg + ' '
-            print 'Starting %s' % cmd
+            # fix_print_with_import
+            print('Starting %s' % cmd)
 
         self.process.start('ogr2ogr', self.args)
         if not self.process.waitForStarted():

@@ -9,22 +9,29 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-from PyQt4 import QtCore, QtGui
-import traceback
+from __future__ import absolute_import
 import string, multiprocessing
 import xml.etree.ElementTree as ET
 
-from import_manager import *
-from result_dialog import *
-from post_processor_thread import *
-from utils import *
+from .import_manager import *
+from .result_dialog import *
+from .post_processor_thread import *
+from .utils import *
 
-from qgis.core import QgsDataSourceURI
+try:
+    from qgis.core import QgsDataSourceURI
+except ImportError:
+    from qgis.core import QgsDataSourceUri
+
+try:
+    from qgis.PyQt.QtGui import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
+except ImportError:
+    from qgis.PyQt.QtWidgets import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'ui', 'os_translator_ii_dialog_base.ui'))
 
 
-class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
+class OsTranslatorIIDialog(QDialog, FORM_CLASS):
     
     def __init__(self, iface, parent=None):
         """Constructor."""
@@ -147,7 +154,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         cfg = { 'name' : defaultName }
         self.configs.append(cfg)
         
-        for name in self.supDatasets.keys():
+        for name in list(self.supDatasets.keys()):
             self.datasetComboBox.addItem(name)
         
         s = QtCore.QSettings()
@@ -160,23 +167,23 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         for connectionName in s.childGroups():
             self.postgisConnectionComboBox.addItem(connectionName)
         s.endGroup()
-        
-        dataset = str(s.value("OsTranslatorII/dataset", '', type=str))
+
+        dataset = str(s.value("OsTranslatorII/dataset", ""))
         self.datasetComboBox.setCurrentIndex(
             self.datasetComboBox.findText(dataset)
         )
         
-        connection = str(s.value("OsTranslatorII/connection", '', type=str))
+        connection = str(s.value("OsTranslatorII/connection", ''))
         self.postgisConnectionComboBox.setCurrentIndex(
             self.postgisConnectionComboBox.findText(connection)
         )
         
-        mode = str(s.value("OsTranslatorII/mode", '', type=str))
+        mode = str(s.value("OsTranslatorII/mode", ''))
         #self.modeComboBox.setCurrentIndex(
         #    self.modeComboBox.findText(mode)
         #)
         
-        self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '', type=str)) )
+        self.destSchema.setText( str(s.value("OsTranslatorII/destSchema", '')) )
         
         self.createSpatialIndexCheckBox.setCheckState( s.value("OsTranslatorII/createSpatialIndex", QtCore.Qt.Checked, type=int) )
                 
@@ -184,7 +191,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
 
         self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Checked, type=int))
 
-        styleName = str(s.value("OsTranslatorII/styleName", '', type=str))
+        styleName = str(s.value("OsTranslatorII/styleName", ''))
         self.styleNameComboBox.setCurrentIndex(
             self.styleNameComboBox.findText(styleName)
         )
@@ -228,13 +235,13 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # Get the fields
         structure = self.getDatasetStructure( self.datasetComboBox.currentText() )
         
-        for subset in structure.keys():
-            tli = QtGui.QTreeWidgetItem(self.fieldsTreeWidget)
+        for subset in list(structure.keys()):
+            tli = QTreeWidgetItem(self.fieldsTreeWidget)
             tli.setText(0, subset)
             tli.setCheckState(0, QtCore.Qt.Checked)
             self.fieldsTreeWidget.addTopLevelItem(tli)
             for fieldName in structure[subset]:
-                f = QtGui.QTreeWidgetItem(tli)
+                f = QTreeWidgetItem(tli)
                 f.setText(0, fieldName)
                 f.setCheckState(0, QtCore.Qt.Checked)
 
@@ -295,7 +302,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # write the gfs file out to a temp location
         fName = self.getTmpFileName()
         with open(fName, 'w') as f:
-            f.write( ET.tostring(newRoot) )
+            f.write( str(ET.tostring(newRoot)) )
         return fName
         
     def extractPgConnectionDetails(self):
@@ -311,20 +318,23 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
             return
         
         s = QtCore.QSettings()
-        self.dbDetails['database'] = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, '', type=str))
+        self.dbDetails['database'] = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, ''))
         if len(self.dbDetails['database']) == 0:
             # Looks like the preferred connection could not be found
             raise Exception('Details of the selected PostGIS connection could not be found, please check your settings')
-        self.dbDetails['host'] = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, '', type=str))
-        self.dbDetails['user'] = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, '', type=str))
-        self.dbDetails['password'] = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, '', type=str))
+        self.dbDetails['host'] = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, ''))
+        self.dbDetails['user'] = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, ''))
+        self.dbDetails['password'] = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, ''))
         try:
             self.dbDetails['port'], dummy = s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432).toInt()
         except:
             self.dbDetails['port'] = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432, type=int))
         
     def getUri(self):
-        uri = QgsDataSourceURI()
+        try:
+            uri = QgsDataSourceURI()
+        except:
+            uri = QgsDataSourceUri()
         uri.setConnection(self.dbDetails['host'], str(self.dbDetails['port']), self.dbDetails['database'], self.dbDetails['user'], self.dbDetails['password'])
         return uri
     
@@ -333,42 +343,42 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         # Check the user entered a folder path
         inputFolder = self.inputLineEdit.text()
         if len(inputFolder) == 0:
-            QtGui.QMessageBox.critical(None, 'No Input Folder Selected', 'Please select an input folder.')
+            QMessageBox.critical(None, 'No Input Folder Selected', 'Please select an input folder.')
             return
         if not os.path.isdir(inputFolder):
-            QtGui.QMessageBox.critical(None, 'Invalid Input Folder', '%s is not a valid folder path.' % inputFolder)
+            QMessageBox.critical(None, 'Invalid Input Folder', '%s is not a valid folder path.' % inputFolder)
             return
         
         
         # Check a connection is selected
         if self.postgisConnectionComboBox.count() == 0:
-            QtGui.QMessageBox.critical(None, 'No PostGIS Connection Selected', 'No PostGIS connection was selected. Please configure a connection through Layer > Add PostGIS Layers...')
+            QMessageBox.critical(None, 'No PostGIS Connection Selected', 'No PostGIS connection was selected. Please configure a connection through Layer > Add PostGIS Layers...')
             return
         self.extractPgConnectionDetails()
         
         # Ensure destination schema exists - prompt to create it
         self.schema_name = str(self.destSchema.text())
         if len(self.schema_name) == 0:
-            QtGui.QMessageBox.critical(None, 'No Schema Specified', 'Please specify a destination schema.')
+            QMessageBox.critical(None, 'No Schema Specified', 'Please specify a destination schema.')
             return
         if self.schema_name[0] in string.digits:
-            QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must not start with a number.')
+            QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must not start with a number.')
             return
         for ch in self.schema_name:
             if not ch in string.ascii_lowercase and not ch in string.digits and not ch == '_':
-                QtGui.QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must currently consist of lower case characters, numbers and underscores.')
+                QMessageBox.critical(None, 'Unsupported Schema Name', 'Schema names must currently consist of lower case characters, numbers and underscores.')
                 return
         if len(self.schema_name) == 0:
             errMsg = 'No destination schema was specified. Do you wish to import into the public schema?'
-            reply = QtGui.QMessageBox.question(self.parent, 'No Schema Specified', errMsg, QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-            if reply == QtGui.QMessageBox.No:
+            reply = QMessageBox.question(self.parent, 'No Schema Specified', errMsg, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No:
                 return
             self.schema_name = 'public'
             
         try:
             cur = get_db_cur(self.dbDetails)
         except:
-            QtGui.QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
+            QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
             return
 
         for schemaName in [self.schema_name, self.schema_name + '_tmp']:
@@ -376,7 +386,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 qDic = {'schema_name' : schemaName}
                 cur.execute("""SELECT schema_name FROM information_schema.schemata WHERE schema_name = %(schema_name)s;""", qDic)
             except:
-                QtGui.QMessageBox.critical(None, 'Failed to Query Schemas', 'Failed to determine whether destination already exists, detailed error was:\n\n%s' % traceback.format_exc())
+                QMessageBox.critical(None, 'Failed to Query Schemas', 'Failed to determine whether destination already exists, detailed error was:\n\n%s' % traceback.format_exc())
                 return
             if cur.rowcount < 1:
                 # The schema does not already exist - create it
@@ -384,7 +394,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                     if not create_schema(cur, schemaName):
                         raise Exception()
                 except:
-                    QtGui.QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema, detailed error was:\n\n%s' % traceback.format_exc())
+                    QMessageBox.critical(None, 'Failed to Create Schema', 'Failed to create schema, detailed error was:\n\n%s' % traceback.format_exc())
                     return
         
         gfsFilePath = self.buildGfs()
@@ -401,7 +411,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                                     WHERE table_schema = %(schema_name)s AND 
                                     table_name = %(table_name)s;""", qDic)
                 except:
-                    QtGui.QMessageBox.critical(None, 'Failed to Query Tables', 'Failed to determine whether destination table already exists, detailed error was:\n\n%s' % traceback.format_exc())
+                    QMessageBox.critical(None, 'Failed to Query Tables', 'Failed to determine whether destination table already exists, detailed error was:\n\n%s' % traceback.format_exc())
                     return
                 if cur.rowcount > 0:
                     existingTables.append(dTable)
@@ -410,8 +420,8 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 for exTab in existingTables:
                     errMsg += '%s.%s' % (self.schema_name,exTab) + '\n'
                 errMsg += "\nDo you wish to proceed?"
-                reply = QtGui.QMessageBox.question(self.parent, 'Overwriting Tables', errMsg, QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-                if reply == QtGui.QMessageBox.No:
+                reply = QMessageBox.question(self.parent, 'Overwriting Tables', errMsg, QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                if reply == QMessageBox.No:
                     return
         
         inputFiles = get_input_files(str(self.inputLineEdit.text()))
@@ -420,7 +430,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         
         # Ensure the user has selected some files
         if len(inputFiles) == 0:
-            QtGui.QMessageBox.critical(None, 'No Input Files Selected', 'Failed to find any GML files under the selected folder.')
+            QMessageBox.critical(None, 'No Input Files Selected', 'Failed to find any GML files under the selected folder.')
             return
         
         """ Add the jobs to the import manager """
@@ -441,7 +451,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         try:
             self.im.start(self.simultaneousJobsSpinBox.value())
         except:
-            QtGui.QMessageBox.critical(None, 'Failed to Start Process', 'Failed to start the import process - please ensure you have ogr2ogr installed.')
+            QMessageBox.critical(None, 'Failed to Start Process', 'Failed to start the import process - please ensure you have ogr2ogr installed.')
             return
         self.freezeUi()
         self.progressBar.setEnabled(True)
@@ -565,9 +575,9 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
         """ Open a browse for files dialog - for the moment set to 
         browse directory mode """
         settings = QtCore.QSettings()
-        startingDir = str(settings.value("OsTranslatorII/lastInputFolder", os.path.expanduser("~"), type=str))
-        d = str( QtGui.QFileDialog.getExistingDirectory(None, 'Browse For Input', startingDir) )
-        if d <> os.sep and d.lower() <> 'c:\\' and d <> '':
+        startingDir = str(settings.value("OsTranslatorII/lastInputFolder", os.path.expanduser("~")))
+        d = str( QFileDialog.getExistingDirectory(None, 'Browse For Input', startingDir) )
+        if d != os.sep and d.lower() != 'c:\\' and d != '':
             settings.setValue("OsTranslatorII/lastInputFolder", d)
             self.inputLineEdit.setText(d)
 

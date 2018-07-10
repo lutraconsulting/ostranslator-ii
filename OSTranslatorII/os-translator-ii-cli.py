@@ -10,6 +10,8 @@
 # (at your option) any later version.
 
 # Fix ValueError: API 'QDate' has already been set to version 1
+from __future__ import print_function
+from __future__ import absolute_import
 try:
     import qgis.PyQt
 except ImportError:
@@ -19,10 +21,10 @@ import traceback
 import sys
 import argparse
 import os
-from PyQt4 import QtCore
-from import_manager import ImportManager
-from post_processor_thread import PostProcessorThread
-from utils import (
+from qgis.PyQt import QtCore
+from .import_manager import ImportManager
+from .post_processor_thread import PostProcessorThread
+from .utils import (
     build_args,
     get_input_files,
     get_pioneer_file,
@@ -91,7 +93,8 @@ class OSTranslatorCli(QtCore.QObject):
 
             for schema in [self.schema, self.schema + '_tmp']:
                 if not create_schema(cur, schema):
-                    print 'Failed to create schema %s' % schema
+                    # fix_print_with_import
+                    print('Failed to create schema %s' % schema)
                     self.quit(1)
                     return
 
@@ -101,14 +104,17 @@ class OSTranslatorCli(QtCore.QObject):
 
             for arg in build_args(input_files, gfs_file_path, pg_source, self.ignore_fid):
                 self.im.add(arg)
-            print 'Importing...'
+            # fix_print_with_import
+            print('Importing...')
             self.im.start(num_processes)
         except:
-            print
-            print 'Translation failed:'
-            print
-            print '%s\n\n' % traceback.format_exc()
-            print
+            print()
+            # fix_print_with_import
+            print('Translation failed:')
+            print()
+            # fix_print_with_import
+            print('%s\n\n' % traceback.format_exc())
+            print()
             self.quit(1)
             return
 
@@ -116,7 +122,8 @@ class OSTranslatorCli(QtCore.QObject):
         self.finished.emit(ret_code)
 
     def post_process(self):
-        print 'Post-processing...'
+        # fix_print_with_import
+        print('Post-processing...')
         cur = get_db_cur(self.con_details)
         self.pp_thread = PostProcessorThread(
             cur=cur,
@@ -145,16 +152,19 @@ class OSTranslatorCli(QtCore.QObject):
             ret_val = 1
 
         # Write out summary information
-        print
-        print self.im.getImportReport()
+        print()
+        # fix_print_with_import
+        print(self.im.getImportReport())
 
         if len(self.pp_errors) > 0:
-            print
-            print 'Failed to complete one or more post-processing tasks:'
-            print
+            print()
+            # fix_print_with_import
+            print('Failed to complete one or more post-processing tasks:')
+            print()
             for pp_fail in self.pp_errors:
-                print pp_fail
-                print
+                # fix_print_with_import
+                print(pp_fail)
+                print()
 
         self.quit(ret_val)
 
@@ -162,7 +172,8 @@ class OSTranslatorCli(QtCore.QObject):
         if progress != self.progress:
             self.progress = progress
             if progress % 10 == 0:
-                print '%d %%' % progress
+                # fix_print_with_import
+                print('%d %%' % progress)
 
 
 def main():
@@ -185,14 +196,18 @@ def main():
 
     args = parser.parse_args()
     if args.osmm_data_type not in supported_data_types:
-        print '%s is not a supported data type.'
-        print 'Supported data types are:'
+        # fix_print_with_import
+        print('%s is not a supported data type.')
+        # fix_print_with_import
+        print('Supported data types are:')
         for sup in supported_data_types:
-            print '  %s' % sup
+            # fix_print_with_import
+            print('  %s' % sup)
         sys.exit(1)
 
     if not os.path.isdir(args.input_path):
-        print '%s doesn\'t appear to be a folder'
+        # fix_print_with_import
+        print('%s doesn\'t appear to be a folder')
         sys.exit(1)
 
     app = QtCore.QCoreApplication(sys.argv)

@@ -9,7 +9,9 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-from import_task import *
+from __future__ import absolute_import
+from builtins import str
+from .import_task import *
 import time
 
 class ImportManager(QObject):

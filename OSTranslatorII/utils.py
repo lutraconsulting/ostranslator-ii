@@ -9,13 +9,16 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 import gdal
 import re
-import os, urllib2
+import os, urllib.request, urllib.error, urllib.parse
 import psycopg2
-from PyQt4.QtCore import QSettings
-from PyQt4.QtNetwork import QNetworkRequest
-from PyQt4.QtCore import QUrl, QEventLoop
+from qgis.PyQt.QtCore import QSettings
+from qgis.PyQt.QtNetwork import QNetworkRequest
+from qgis.PyQt.QtCore import QUrl, QEventLoop
 import tempfile
 
 def OSII_icon_path():
@@ -69,28 +72,28 @@ def _download_urllib2(url, handle):
     except:
         useProxy = s.value("proxy/proxyEnabled", False, type=bool)
     if useProxy:
-        proxyHost = s.value("proxy/proxyHost", unicode())
-        proxyPassword = s.value("proxy/proxyPassword", unicode())
-        proxyPort = s.value("proxy/proxyPort", unicode())
-        proxyType = s.value("proxy/proxyType", unicode())
+        proxyHost = s.value("proxy/proxyHost", str())
+        proxyPassword = s.value("proxy/proxyPassword", str())
+        proxyPort = s.value("proxy/proxyPort", str())
+        proxyType = s.value("proxy/proxyType", str())
         proxyTypes = {'DefaultProxy': 'http', 'HttpProxy': 'http', 'Socks5Proxy': 'socks', 'HttpCachingProxy': 'http',
                       'FtpCachingProxy': 'ftp'}
         if proxyType in proxyTypes: proxyType = proxyTypes[proxyType]
-        proxyUser = s.value("proxy/proxyUser", unicode())
+        proxyUser = s.value("proxy/proxyUser", str())
         proxyString = 'http://' + proxyUser + ':' + proxyPassword + '@' + proxyHost + ':' + proxyPort
-        proxy = urllib2.ProxyHandler({proxyType: proxyString})
-        auth = urllib2.HTTPBasicAuthHandler()
-        opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
-        urllib2.install_opener(opener)
+        proxy = urllib.request.ProxyHandler({proxyType: proxyString})
+        auth = urllib.request.HTTPBasicAuthHandler()
+        opener = urllib.request.build_opener(proxy, auth, urllib.request.HTTPHandler)
+        urllib.request.install_opener(opener)
 
     generalDownloadFailureMessage = '\n\nPlease check your network settings. Styles may need to be added manually. This does not affect the loaded data.'
     try:
-        conn = urllib2.urlopen(url, timeout=30)  # Allow 30 seconds for completion
+        conn = urllib.request.urlopen(url, timeout=30)  # Allow 30 seconds for completion
         if conn.getcode() != 200:
             # It looks like the request was unsuccessful
             raise Exception('Failed to download %s\n\nThe HTTP status code was %d.' % (
             url, conn.getcode()) + generalDownloadFailureMessage)
-    except urllib2.URLError as e:
+    except urllib.error.URLError as e:
         raise Exception('Failed to download %s\n\nThe reason was %s.' % (
         url, e.reason) + generalDownloadFailureMessage)
 
