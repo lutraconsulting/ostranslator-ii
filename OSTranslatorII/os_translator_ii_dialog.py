@@ -20,12 +20,9 @@ from .utils import *
 
 try:
     from qgis.core import QgsDataSourceURI
-except ImportError:
-    from qgis.core import QgsDataSourceUri
-
-try:
     from qgis.PyQt.QtGui import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
 except ImportError:
+    from qgis.core import QgsDataSourceUri
     from qgis.PyQt.QtWidgets import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'ui', 'os_translator_ii_dialog_base.ui'))
