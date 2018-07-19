@@ -23,6 +23,12 @@ from qgis.PyQt.QtNetwork import QNetworkRequest
 from qgis.PyQt.QtCore import QUrl, QEventLoop
 import tempfile
 
+try:
+    from qgis._core import QgsAuthManager
+except:
+    # QgsAuthManager used from QgsApplication.authManager()
+    pass
+
 def OSII_icon_path():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "images", "icon.png")
 
@@ -201,12 +207,19 @@ def credentials_user_pass(selectedConnection):
     s.beginGroup('/PostgreSQL/connections/{0}'.format(selectedConnection))
     # first try to get the credentials from AuthManager, then from the basic settings
     authconf = s.value('authcfg', None)
-    auth_manager = QgsApplication.authManager()
-    conf = QgsAuthMethodConfig()
-    auth_manager.loadAuthenticationConfig(authconf, conf, True)
-    if conf.id():
-        user = conf.config('username', '')
-        password = conf.config('password', '')
+    user = None
+    password = None
+
+    if authconf:
+        conf = QgsAuthMethodConfig()
+        try:
+            QgsAuthManager.instance().loadAuthenticationConfig(authconf, conf, True)
+        except:
+            auth_manager = QgsApplication.authManager()
+            auth_manager.loadAuthenticationConfig(authconf, conf, True)
+        if conf.id():
+            user = conf.config('username', '')
+            password = conf.config('password', '')
     else:
         user = s.value('username')
         password = s.value('password')
