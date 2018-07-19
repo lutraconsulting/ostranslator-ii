@@ -10,6 +10,8 @@
 # (at your option) any later version.
 
 from future import standard_library
+from qgis._core import QgsApplication, QgsAuthMethodConfig
+
 standard_library.install_aliases()
 from builtins import str
 import gdal
@@ -194,9 +196,36 @@ def create_schema(cur, schema_name):
     return True
 
 
-def get_db_cur(con_details):
+def credentials_user_pass(selectedConnection):
+    s = QSettings()
+    s.beginGroup('/PostgreSQL/connections/{0}'.format(selectedConnection))
+    # first try to get the credentials from AuthManager, then from the basic settings
+    authconf = s.value('authcfg', None)
+    auth_manager = QgsApplication.authManager()
+    conf = QgsAuthMethodConfig()
+    auth_manager.loadAuthenticationConfig(authconf, conf, True)
+    if conf.id():
+        user = conf.config('username', '')
+        password = conf.config('password', '')
+    else:
+        user = s.value('username')
+        password = s.value('password')
+    return user, password
+
+
+def get_db_cur(con_details, conn_name=""):
     if len(con_details['user']) == 0:
-        db_conn = psycopg2.connect(database=con_details['database'])
+        # try to use credentials according conn_name
+        if conn_name:
+            user, password = credentials_user_pass(conn_name)
+
+            db_conn = psycopg2.connect(database=con_details['database'],
+                                       user=user,
+                                       password=password,
+                                       host=con_details['host'],
+                                       port=con_details['port'])
+        else:
+            db_conn = psycopg2.connect(database=con_details['database'])
     else:
         db_conn = psycopg2.connect(database=con_details['database'],
                                    user=con_details['user'],

@@ -373,7 +373,7 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
             self.schema_name = 'public'
             
         try:
-            cur = get_db_cur(self.dbDetails)
+            cur = get_db_cur(self.dbDetails, self.postgisConnectionComboBox.currentText())
         except:
             QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
             return
@@ -433,11 +433,11 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         """ Add the jobs to the import manager """
         
         if len(self.dbDetails['user']) == 0:
-            pgSource = 'PG:dbname=\'%s\' active_schema=%s' % \
-                (self.dbDetails['database'], self.schema_name + '_tmp')
+            user, password = credentials_user_pass(self.postgisConnectionComboBox.currentText())
         else:
-            pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
-                (self.dbDetails['database'], self.dbDetails['host'], self.dbDetails['port'], self.schema_name + '_tmp', self.dbDetails['user'], self.dbDetails['password'])
+            user, password = self.dbDetails['user'], self.dbDetails['password']
+        pgSource = 'PG:dbname=\'%s\' host=\'%s\' port=\'%d\' active_schema=%s user=\'%s\' password=\'%s\'' % \
+            (self.dbDetails['database'], self.dbDetails['host'], self.dbDetails['port'], self.schema_name + '_tmp', user, password)
                 # Note we are loading into a temporary schema
 
         self.im.reset()
@@ -464,7 +464,7 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         dsName = str(self.datasetComboBox.currentText())
         self.statusLabel.setText('Post-processing - grab a sleeping bag..')
         self.ppErrors = []
-        cur = get_db_cur(self.dbDetails)
+        cur = get_db_cur(self.dbDetails, self.postgisConnectionComboBox.currentText())
         self.ppThread = PostProcessorThread(
             cur=cur,
             uri=self.getUri(),
