@@ -299,7 +299,7 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         # write the gfs file out to a temp location
         fName = self.getTmpFileName()
         with open(fName, 'w') as f:
-            f.write( str(ET.tostring(newRoot)) )
+            f.write( str(ET.tostring(newRoot), encoding='utf-8'))
         return fName
         
     def extractPgConnectionDetails(self):
