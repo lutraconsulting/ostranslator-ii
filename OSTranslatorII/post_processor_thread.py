@@ -49,19 +49,17 @@ class PostProcessorThread(QThread):
         self.dedup = dedup
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
-        self.osmm_schema = osmm_schema  # 7-9
+        self.osmm_schema = osmm_schema # 7-9
         self.osmm_style_name = osmm_style_name
 
         # Number of post-processing steps. Used to calculate the 
         # progress
         self.post_processing_steps = 4
-        self.styler = None
-        if self.addTopoStyleColumns:
-            self.styler = Styler(cur=cur,
-                                 uri=self.uri,
-                                 schema=schema,
-                                 osmm_schema=osmm_schema,
-                                 osmm_style_name=osmm_style_name)
+        self.styler = Styler(cur=cur,
+                             uri=self.uri,
+                             schema=schema,
+                             osmm_schema=osmm_schema,
+                             osmm_style_name=osmm_style_name)
 
     def run(self):
         # import pydevd; pydevd.settrace()
@@ -88,13 +86,10 @@ class PostProcessorThread(QThread):
             qDic = {}
             i = 0
             for table in self.tables:
-                # Determine whether unique identifiers are in 'fid' or 'gml_id' column
-
-
                 # Optionally add additional style columns for OS MasterMap Topo Layer
                 if self.addTopoStyleColumns:
                     self.styler.addFields(table)
-                if self.addTopoStyleColumns and self.applyDefaultStyle:
+                if self.applyDefaultStyle:
                     # We don't want this to kill-off this thread:
                     try:
                         self.styler.applyDefaultStyle(table)
