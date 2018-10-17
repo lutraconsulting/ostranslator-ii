@@ -26,17 +26,17 @@
     xmlns:os="http://namespaces.os.uk/product/1.0"
     xmlns:ram="http://namespaces.os.uk/mastermap/routingAndAssetManagement/2.1"
     xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-    xsi:schemaLocation="http://namespaces.os.uk/mastermap/highwaysWaterTransportNetwork/1.0 
-    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/1.0/HighwaysWaterTransportNetwork.xsd 
-    http://namespaces.os.uk/mastermap/highwayNetwork/2.0 
-    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.0/LinearHighwayNetwork.xsd 
-    http://namespaces.os.uk/product/1.0 
-    https://www.ordnancesurvey.co.uk/xml/schema/product/1.0/OSProduct.xsd 
-    http://namespaces.os.uk/mastermap/generalNetwork/2.0 
-    https://www.ordnancesurvey.co.uk/xml/schema/network/2.0/generalNetwork.xsd 
-    http://namespaces.os.uk/mastermap/routingAndAssetManagement/2.1 
-    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.1/RoutingAndAssetManagement.xsd 
-    http://namespaces.os.uk/mastermap/highwayDedication/1.0 
+    xsi:schemaLocation="http://namespaces.os.uk/mastermap/highwaysWaterTransportNetwork/1.0
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/1.0/HighwaysWaterTransportNetwork.xsd
+    http://namespaces.os.uk/mastermap/highwayNetwork/2.0
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.0/LinearHighwayNetwork.xsd
+    http://namespaces.os.uk/product/1.0
+    https://www.ordnancesurvey.co.uk/xml/schema/product/1.0/OSProduct.xsd
+    http://namespaces.os.uk/mastermap/generalNetwork/2.0
+    https://www.ordnancesurvey.co.uk/xml/schema/network/2.0/generalNetwork.xsd
+    http://namespaces.os.uk/mastermap/routingAndAssetManagement/2.1
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.1/RoutingAndAssetManagement.xsd
+    http://namespaces.os.uk/mastermap/highwayDedication/1.0
     https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/1.0/HighwayDedication.xsd"
     xmlns:stat="urn:x-inspire:specification:gmlas:StatisticalUnits:0.0"
     xmlns:su-core="http://inspire.ec.europa.eu/schemas/su-core/4.0"
