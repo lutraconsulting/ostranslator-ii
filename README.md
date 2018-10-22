@@ -18,6 +18,13 @@ Planned formats include:
 	* Sites Layer
 	* Building height attribute
 	
+	
+## Limitations
+
+There are currently the following limitations:
+
+* No support for `nilReason` attribute of elements indicated as being *voidable* - this appears to be a limitation of the OGR library and will most likely be resolved in future OGR releases.
+
 ## Installation and Help
 
 see [Official Help](http://www.lutraconsulting.co.uk/products/ostranslator-ii/)

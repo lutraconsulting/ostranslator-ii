@@ -115,16 +115,23 @@ class PostProcessorThread(QThread):
                 i += 1
                 progress = int( float(i) / (len(self.tables)*self.post_processing_steps) * 100.0 )
                 self.progressChanged.emit(progress)
-                
+
                 try:
                     # Drop any 'pioneer' rows
                     self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE fid = 'osgb----------------' AND ogc_fid < 100""", qDic)
                     # This limits the sequential search for fids to only the first 100 rows (where the pioneers will be).
                     # It means we do no longer need to build an index for the fid column
                 except psycopg2.ProgrammingError, e:
-                    if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                    if e.message.splitlines()[0].strip().startswith('relation') and e.message.splitlines()[0].strip().endswith('does not exist'):
                         # There were no matching features imported so the table was not created, do not index
                         pass
+                    elif e.message.splitlines()[0].strip().startswith('column') and e.message.splitlines()[0].strip().endswith('does not exist'):
+                        # Looks like we're using gml_id, not fid
+                        self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
+                        if not self.cur.statusmessage.startswith('DELETE'):
+                            self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                    else:
+                        raise sys.exc_info()
                 else:
                     if not self.cur.statusmessage.startswith('DELETE'):
                         self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))

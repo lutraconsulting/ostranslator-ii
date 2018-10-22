@@ -1,9 +1,9 @@
 <GMLFeatureClassList>
-  <!-- feature types with actual/or implied geometry -->
   <GMLFeatureClass>
     <Name>RoadLink</Name>
     <ElementPath>RoadLink</ElementPath>
-    <GeometryType>2</GeometryType>
+    <!--LINESTRINGZ-->
+    <GeometryType>-2147483646</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
@@ -43,14 +43,15 @@
       <ElementPath>fictitious</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -163,6 +164,7 @@
       <ElementPath>cycleFacility|CycleFacilityType|cycleFacility</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>cycleFacilityWholeLink</Name>
       <ElementPath>cycleFacility|CycleFacilityType|wholeLink</ElementPath>
@@ -183,16 +185,19 @@
       <ElementPath>roadWidth|RoadWidthType|confidenceLevel</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>numberOfLanesNumberOfLanes</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|numberOfLanes</ElementPath>
       <Type>IntegerList</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>numberOfLanesDirection</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|direction</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>numberOfLanesMinMaxNumberOfLanes</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|minMaxNumberOfLanes</ElementPath>
@@ -239,7 +244,8 @@
   <GMLFeatureClass>
     <Name>RoadNode</Name>
     <ElementPath>RoadNode</ElementPath>
-    <GeometryType>1</GeometryType>
+    <!--POINTZ-->
+    <GeometryType>-2147483647</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
@@ -274,14 +280,15 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -299,6 +306,7 @@
       <ElementPath>classification</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>access</Name>
       <ElementPath>access</ElementPath>
@@ -335,8 +343,7 @@
   <GMLFeatureClass>
     <Name>Road</Name>
     <ElementPath>Road</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
     <!-- <PropertyDefn>
@@ -370,16 +377,18 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>localRoadCode</Name>
       <ElementPath>localRoadCode</ElementPath>
@@ -441,7 +450,8 @@
   <GMLFeatureClass>
     <Name>Street</Name>
     <ElementPath>Street</ElementPath>
-    <GeometryType>5</GeometryType><!-- MultiLinestring -->
+    <!--MULTILINESTRING-->
+    <GeometryType>5</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
@@ -478,12 +488,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -576,11 +586,13 @@
       <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|beginPosition</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>operationalStateValidTimeEndPosition</Name>
       <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|endPosition</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>operationalStateReason</Name>
       <ElementPath>operationalState|OperationalStateType|reason</ElementPath>
@@ -652,8 +664,7 @@
   <GMLFeatureClass>
     <Name>RoadJunction</Name>
     <ElementPath>RoadJunction</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
     <!-- <PropertyDefn>
@@ -725,14 +736,11 @@
   </GMLFeatureClass>
 
 
-  <!-- FIXME: no sample data was available for ferry stuff so this is
-  not tested and no pioneer files have been created as yet. -->
-
-
   <GMLFeatureClass>
     <Name>FerryLink</Name>
     <ElementPath>FerryLink</ElementPath>
-    <GeometryType>2</GeometryType>
+    <!--LINESTRINGZ-->
+    <GeometryType>-2147483646</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
@@ -772,14 +780,15 @@
       <ElementPath>fictitious</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -813,7 +822,8 @@
   <GMLFeatureClass>
     <Name>FerryNode</Name>
     <ElementPath>FerryNode</ElementPath>
-    <GeometryType>1</GeometryType>
+    <!--POINTZ-->
+    <GeometryType>-2147483647</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
@@ -843,14 +853,10 @@
       <ElementPath>beginLifespanVersion</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -869,8 +875,7 @@
   <GMLFeatureClass>
     <Name>FerryTerminal</Name>
     <ElementPath>FerryTerminal</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <!-- The id attribute is found automatically and we do not need to
     define it as such -->
     <!-- <PropertyDefn>
@@ -901,7 +906,7 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>type</Name>
-      <ElementPath>type</ElementPath>
+      <ElementPath>type@title</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -926,7 +931,7 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>refToFunctionalSite</Name>
-      <ElementPath>refToFunctionalSite</ElementPath>
+      <ElementPath>refToFunctionalSite@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -936,7 +941,7 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>elementType</Name>
-      <ElementPath>element@title</ElementPath>
+      <ElementPath>element@role</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
   </GMLFeatureClass>
