@@ -58,12 +58,12 @@
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -175,6 +175,7 @@
   <GMLFeatureClass>
       <Name>HighwayDedication</Name>
       <ElementPath>HighwayDedication</ElementPath>
+      <!--LINESTRING-->
       <GeometryType>2</GeometryType>
       <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
       <PropertyDefn>
@@ -202,16 +203,7 @@
         <ElementPath>beginLifespanVersion@nilReason</ElementPath>
         <Type>String</Type>
       </PropertyDefn>
-      <PropertyDefn>
-        <Name>validFrom</Name>
-        <ElementPath>tn:validFrom</ElementPath>
-        <Type>String</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>validFromNilReason</Name>
-        <ElementPath>tn:validFrom@nilReason</ElementPath>
-        <Type>String</Type>
-      </PropertyDefn>
+      
       <!-- networkRef datatype -->
       <PropertyDefn>
         <Name>networkRefNilReason</Name>
@@ -219,51 +211,40 @@
         <Type>String</Type>
       </PropertyDefn>
       <PropertyDefn>
-        <Name>networkRefNetworkReferenceElement</Name>
+        <Name>networkRefNetworkReferenceHref</Name>
         <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-        <Type>String</Type>
+        <Type>StringList</Type>
       </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>networkRefNetworkReferenceLocationElement</Name>
         <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-        <Type>String</Type>
+        <Type>StringList</Type>
       </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>networkRefNetworkReferenceLocationDescription</Name>
         <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- FIXME - import the geometry (locationStart, locationEnd, locationLine and locationArea) as seperate columns -->
+      <!-- end networkRef -->
+      
+      <PropertyDefn>
+        <Name>validFrom</Name>
+        <ElementPath>validFrom</ElementPath>
         <Type>String</Type>
       </PropertyDefn>
       <PropertyDefn>
-        <Name>networkRefNodeReferenceElement</Name>
-        <ElementPath>networkRef|NodeReference|element@href</ElementPath>
-        <Type>StringList</Type>
+        <Name>validFromNilReason</Name>
+        <ElementPath>validFrom@nilReason</ElementPath>
+        <Type>String</Type>
       </PropertyDefn>
-      <PropertyDefn>
-        <Name>networkRefLinkReferenceElement</Name>
-        <ElementPath>networkRef|LinkReference|element@href</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>networkRefLinkReferenceApplicableDirection</Name>
-        <ElementPath>networkRef|LinkReference|applicableDirection@title</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>networkRefPointReference</Name>
-        <ElementPath>networkRef|PointReference|element@href</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>networkRefPointReferenceApplicableDirection</Name>
-        <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>networkRefPointReferenceAtPosition</Name>
-        <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-        <Type>RealList</Type>
-      </PropertyDefn>
-      <!-- end networkRef -->
       <PropertyDefn>
         <Name>reasonForChange</Name>
         <ElementPath>reasonForChange</ElementPath>
@@ -274,10 +255,25 @@
         <ElementPath>dedication</ElementPath>
         <Type>String</Type>
       </PropertyDefn>
+      
       <!-- TemporalPropertyType datatype -->
+      <!-- FIXME: some cnvention on column naming in pg -->
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
-        <Name>timeIntervalTemporalPropertyTypeNamedDate</Name>
+        <Name>timeIntervalNamedDate</Name>
         <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
       <PropertyDefn>
@@ -290,42 +286,38 @@
         <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
-      <PropertyDefn>
-        <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
-        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
-      <PropertyDefn>
-        <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
-        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
-        <Type>StringList</Type>
-      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedDay</Name>
         <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedPeriod</Name>
         <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodNamedTime</Name>
         <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodStartTime</Name>
         <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
       <PropertyDefn>
         <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodEndTime</Name>
         <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
         <Type>StringList</Type>
       </PropertyDefn>
-      <!-- end temporalType -->
+      <!-- end TemporalPropertyType -->
+    
       <PropertyDefn>
         <Name>publicRightOfWay</Name>
         <ElementPath>publicRightOfWay</ElementPath>
@@ -356,7 +348,10 @@
         <ElementPath>worksProhibited</ElementPath>
         <Type>String</Type>
       </PropertyDefn>
-    </GMLFeatureClass>
+  </GMLFeatureClass>
+  
+  
+  
   <GMLFeatureClass>
     <Name>TurnRestriction</Name>
     <ElementPath>TurnRestriction</ElementPath>
@@ -389,12 +384,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -554,12 +549,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -702,12 +697,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -810,12 +805,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -918,12 +913,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -1046,12 +1041,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- networkRef datatype -->
@@ -1154,12 +1149,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFrom</Name>
-      <ElementPath>tn:validFrom</ElementPath>
+      <ElementPath>validFrom</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validFromNilReason</Name>
-      <ElementPath>tn:validFrom@nilReason</ElementPath>
+      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>

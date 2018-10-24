@@ -80,4 +80,50 @@
         <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
       </ram:AccessRestriction>
 </os:featureMember>
+<os:featureMember>
+<dedication:HighwayDedication gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/esu6825_2731240227793_8</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#osgb4000000017289163" xlink:title="RoadLink"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#osgb4000000017313244" xlink:title="RoadLink"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn47201024" xlink:title="Street"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn47206971" xlink:title="Street"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>esu6825_2731240227793_8</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2018-07-21T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom>2008-03-06T00:00:00.000</tn:validFrom>
+        <dedication:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</dedication:reasonForChange>
+        <dedication:dedication codeSpace="http://www.os.uk/xml/codelists/highways/DedicationValue.xml">All Vehicles</dedication:dedication>
+        <dedication:publicRightOfWay>false</dedication:publicRightOfWay>
+        <dedication:nationalCycleRoute>false</dedication:nationalCycleRoute>
+        <dedication:quietRoute>false</dedication:quietRoute>
+        <dedication:obstruction>false</dedication:obstruction>
+        <dedication:planningOrder>false</dedication:planningOrder>
+        <dedication:worksProhibited>false</dedication:worksProhibited>
+        <dedication:geometry>
+          <gml:LineString gml:id="LOCAL_ID_1_7190E9A906D95FC4E0530B8EA00A3E14" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:posList srsDimension="2" count="45">272829.000 227931.000 272845.000 227919.000 272861.000 227909.000 272878.000 227899.000 272889.000 227896.000 272893.000 227896.000 272906.000 227897.000 272934.110 227904.940 272950.170 227905.480 272963.150 227905.610 272984.690 227900.660 273020.830 227888.750 273044.260 227879.250 273064.600 227868.270 273070.760 227863.050 273075.170 227856.900 273078.250 227849.800 273088.020 227830.920 273096.180 227820.760 273110.510 227807.110 273127.900 227791.440 273140.350 227779.400 273155.080 227761.600 273168.060 227740.590 273177.430 227723.050 273184.920 227707.530 273193.900 227694.270 273221.000 227640.000 273232.000 227622.000 273244.000 227609.000 273251.000 227603.000 273267.510 227594.160 273278.210 227588.010 273299.890 227566.460 273311.000 227555.000 273344.000 227519.000 273357.990 227508.510 273371.370 227496.460 273378.870 227488.020 273389.440 227470.100 273417.400 227411.730 273429.720 227387.650 273438.290 227371.310 273450.600 227343.470 273458.000 227323.000</gml:posList>
+          </gml:LineString>
+        </dedication:geometry>
+      </dedication:HighwayDedication>
+</os:featureMember>
 </os:FeatureCollection>
