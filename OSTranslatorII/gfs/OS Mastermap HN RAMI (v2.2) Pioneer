@@ -126,4 +126,25 @@
         </dedication:geometry>
       </dedication:HighwayDedication>
 </os:featureMember>
+<os:featureMember>
+<ram:TurnRestriction gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/5000005209579773</gml:identifier>
+        <net:networkRef>
+          <net:LinkReference>
+            <net:element xlink:href="#osgb5000005209568639"/>
+            <net:applicableDirection xlink:href="http://inspire.ec.europa.eu/codelist/LinkDirectionValue/inOppositeDirection" xlink:title="in opposite direction"/>
+          </net:LinkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>5000005209579773</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-09-16T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom xsi:nil="true" nilReason="unknown"/>
+        <ram:restriction codeSpace="http://www.os.uk/xml/codelists/highways/TurnRestrictionValue.xml">One Way</ram:restriction>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
+      </ram:TurnRestriction>
+</os:featureMember>
 </os:FeatureCollection>

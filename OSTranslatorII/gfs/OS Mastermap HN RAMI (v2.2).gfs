@@ -5,7 +5,6 @@
     <Name>AccessRestriction</Name>
     <ElementPath>AccessRestriction</ElementPath>
     <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -355,8 +354,7 @@
   <GMLFeatureClass>
     <Name>TurnRestriction</Name>
     <ElementPath>TurnRestriction</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -382,41 +380,12 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFrom</Name>
-      <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
+    
     <!-- networkRef datatype -->
     <PropertyDefn>
       <Name>networkRefNilReason</Name>
       <ElementPath>networkRef@nilReason</ElementPath>
       <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNodeReferenceElement</Name>
-      <ElementPath>networkRef|NodeReference|element@href</ElementPath>
-      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>networkRefLinkReferenceElement</Name>
@@ -429,94 +398,129 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>networkRefPointReference</Name>
-      <ElementPath>networkRef|PointReference|element@href</ElementPath>
+      <Name>networkRefLinkReferenceApplicableDirectionNilReason</Name>
+      <ElementPath>networkRef|LinkReference|applicableDirection@nilReason</ElementPath>
       <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceAtPosition</Name>
-      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-      <Type>RealList</Type>
     </PropertyDefn>
     <!-- end networkRef -->
+
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>validFromNilReason</Name>
+      <ElementPath>validFrom@nilReason</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
     <PropertyDefn>
       <Name>restriction</Name>
       <ElementPath>restriction</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inclusion</Name>
+      <Name>inclusionVehicle</Name>
       <ElementPath>inclusion|VehicleQualifier|vehicle</ElementPath>
-      <Type>String</Type>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
+    <PropertyDefn>
+      <Name>inclusionUse</Name>
+      <ElementPath>inclusion|VehicleQualifier|use</ElementPath>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>exemption</Name>
+      <Name>inclusionLoad</Name>
+      <ElementPath>inclusion|VehicleQualifier|load</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>exemptionVehicle</Name>
       <ElementPath>exemption|VehicleQualifier|vehicle</ElementPath>
-      <Type>String</Type>
+      <Type>StringList</Type>
     </PropertyDefn>
+    <PropertyDefn>
+      <Name>exemptionUse</Name>
+      <ElementPath>exemption|VehicleQualifier|use</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
+    <PropertyDefn>
+      <Name>exemptionLoad</Name>
+      <ElementPath>exemption|VehicleQualifier|load</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    
     <!-- TemporalPropertyType datatype -->
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeNamedDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeStartMonthDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeEndMonthDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedPeriod</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodNamedTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodStartTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodEndTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <!-- end temporalType -->
+      <!-- FIXME: some cnvention on column naming in pg -->
+      <PropertyDefn>
+        <Name>timeIntervalNamedDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeStartMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeEndMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedPeriod</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodNamedTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodStartTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodEndTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end TemporalPropertyType -->
+    
     <PropertyDefn>
       <Name>reasonForChange</Name>
       <ElementPath>reasonForChange</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
   </GMLFeatureClass>
+  
+  
+  
   <GMLFeatureClass>
     <Name>RestrictionForVehicles</Name>
     <ElementPath>RestrictionForVehicles</ElementPath>
