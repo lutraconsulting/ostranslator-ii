@@ -783,8 +783,7 @@
   <GMLFeatureClass>
     <Name>Structure</Name>
     <ElementPath>Structure</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -810,16 +809,7 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFrom</Name>
-      <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
+    
     <!-- networkRef datatype -->
     <PropertyDefn>
       <Name>networkRefNilReason</Name>
@@ -827,24 +817,25 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>networkRefNodeReferenceElement</Name>
       <ElementPath>networkRef|NodeReference|element@href</ElementPath>
       <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>networkRefPointReferenceElement</Name>
+      <ElementPath>networkRef|PointReference|element@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- FIXME: this element is voidable - search through all and add nilReason attributes -->
+    <PropertyDefn>
+      <Name>networkRefPointReferenceApplicableDirection</Name>
+      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>networkRefPointReferenceAtPosition</Name>
+      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
+      <Type>RealList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>networkRefLinkReferenceElement</Name>
@@ -857,26 +848,28 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>networkRefPointReference</Name>
-      <ElementPath>networkRef|PointReference|element@href</ElementPath>
+      <Name>networkRefLinkReferenceApplicableDirectionNilReason</Name>
+      <ElementPath>networkRef|LinkReference|applicableDirection@nilReason</ElementPath>
       <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceAtPosition</Name>
-      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-      <Type>RealList</Type>
     </PropertyDefn>
     <!-- end networkRef -->
+    
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>validFromNilReason</Name>
+      <ElementPath>validFrom@nilReason</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
     <PropertyDefn>
       <Name>structure</Name>
       <ElementPath>structure</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>description</Name>
       <ElementPath>description</ElementPath>
@@ -888,11 +881,13 @@
       <Type>String</Type>
     </PropertyDefn>
   </GMLFeatureClass>
+  
+  
+  
   <GMLFeatureClass>
-    <Name>Maintanance</Name>
-    <ElementPath>Maintanance</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <Name>Maintenance</Name>
+    <ElementPath>Maintenance</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -918,6 +913,39 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>networkRefNilReason</Name>
+        <ElementPath>networkRef@nilReason</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationElement</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- FIXME - import the geometry (locationStart, locationEnd, locationLine and locationArea) as seperate columns -->
+      <!-- end networkRef -->
+    
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
@@ -928,58 +956,6 @@
       <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <!-- networkRef datatype -->
-    <PropertyDefn>
-      <Name>networkRefNilReason</Name>
-      <ElementPath>networkRef@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNodeReferenceElement</Name>
-      <ElementPath>networkRef|NodeReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceElement</Name>
-      <ElementPath>networkRef|LinkReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|LinkReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReference</Name>
-      <ElementPath>networkRef|PointReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceAtPosition</Name>
-      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-      <Type>RealList</Type>
-    </PropertyDefn>
-    <!-- end networkRef -->
     <PropertyDefn>
       <Name>maintenanceResponsibility</Name>
       <ElementPath>maintenanceResponsibility</ElementPath>
@@ -1002,12 +978,12 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>highwayAuthorityIdentifier</Name>
-      <ElementPath>maintenanceAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <ElementPath>highwayAuthority|ResponsibleAuthority|identifier</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>highwayAuthorityName</Name>
-      <ElementPath>maintenanceAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <ElementPath>highwayAuthority|ResponsibleAuthority|authorityName</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -1016,6 +992,11 @@
       <Type>String</Type>
     </PropertyDefn>
   </GMLFeatureClass>
+  
+  
+  
+  
+  
   <GMLFeatureClass>
     <Name>Reinstatement</Name>
     <ElementPath>Reinstatement</ElementPath>

@@ -205,4 +205,52 @@
         <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
       </ram:Hazard>
 </os:featureMember>
+<os:featureMember>
+<ram:Structure gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000022077069</gml:identifier>
+        <net:networkRef>
+          <net:LinkReference>
+            <net:element xlink:href="#osgb4000000021639574"/>
+            <net:applicableDirection xlink:title="both directions" xlink:href="http://inspire.ec.europa.eu/codelist/LinkDirectionValue/bothDirections"/>
+          </net:LinkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000022077069</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2016-06-17T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom xsi:nil="true" nilReason="unknown"/>
+        <ram:structure codeSpace="http://www.os.uk/xml/codelists/highways/StructureTypeValue.xml">Traffic Calming</ram:structure>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
+      </ram:Structure>
+</os:featureMember>
+<os:featureMember>
+<ram:Maintenance gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4230MA05502504</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn33432673"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4230MA05502504</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2018-07-21T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom>1998-11-01T00:00:00.000</tn:validFrom>
+        <ram:maintenanceResponsibility>Not Maintained At Public Expense</ram:maintenanceResponsibility>
+        <ram:partialReference>false</ram:partialReference>
+        <ram:highwayAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>4230</highway:identifier>
+            <highway:authorityName>Salford</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </ram:highwayAuthority>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
+      </ram:Maintenance>
+</os:featureMember>
 </os:FeatureCollection>
