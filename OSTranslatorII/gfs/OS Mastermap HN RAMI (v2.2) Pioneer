@@ -178,4 +178,31 @@
         <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
       </ram:RestrictionForVehicles>
 </os:featureMember>
+<os:featureMember>
+<ram:Hazard gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000003222742</gml:identifier>
+        <net:networkRef>
+          <network:PointReference>
+            <net:element xlink:href="#osgb5000005111016618"/>
+            <net:applicableDirection xlink:title="both directions" xlink:href="http://inspire.ec.europa.eu/codelist/LinkDirectionValue/bothDirections"/>
+            <net:atPosition uom="m">522.14</net:atPosition>
+            <network:atPositionGeometry>
+              <gml:Point gml:id="LOCAL_ID_1_4D3BE7410D711F47E0530B8EA00A737F" srsName="urn:ogc:def:crs:EPSG::27700">
+                <gml:pos>443297.858 1137220.078</gml:pos>
+              </gml:Point>
+            </network:atPositionGeometry>
+          </network:PointReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000003222742</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2016-06-17T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom xsi:nil="true" nilReason="unknown"/>
+        <ram:hazard codeSpace="http://www.os.uk/xml/codelists/highways/HazardTypeValue.xml">Ford</ram:hazard>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
+      </ram:Hazard>
+</os:featureMember>
 </os:FeatureCollection>
