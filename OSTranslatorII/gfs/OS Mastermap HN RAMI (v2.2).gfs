@@ -520,12 +520,10 @@
   </GMLFeatureClass>
   
   
-  
   <GMLFeatureClass>
     <Name>RestrictionForVehicles</Name>
     <ElementPath>RestrictionForVehicles</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -551,16 +549,7 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFrom</Name>
-      <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
+    
     <!-- networkRef datatype -->
     <PropertyDefn>
       <Name>networkRefNilReason</Name>
@@ -568,40 +557,17 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>networkRefNodeReferenceElement</Name>
       <ElementPath>networkRef|NodeReference|element@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
+    
     <PropertyDefn>
-      <Name>networkRefLinkReferenceElement</Name>
-      <ElementPath>networkRef|LinkReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|LinkReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReference</Name>
+      <Name>networkRefPointReferenceElement</Name>
       <ElementPath>networkRef|PointReference|element@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
+    <!-- FIXME: this element is voidable - search through all and add nilReason attributes -->
     <PropertyDefn>
       <Name>networkRefPointReferenceApplicableDirection</Name>
       <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
@@ -613,6 +579,18 @@
       <Type>RealList</Type>
     </PropertyDefn>
     <!-- end networkRef -->
+    
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>validFromNilReason</Name>
+      <ElementPath>validFrom@nilReason</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
     <PropertyDefn>
       <Name>measure</Name>
       <ElementPath>measure</ElementPath>
@@ -620,7 +598,7 @@
     </PropertyDefn>
     <PropertyDefn>
       <Name>restrictionType</Name>
-      <ElementPath>restrictionType</ElementPath>
+      <ElementPath>restrictionType@title</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -634,14 +612,34 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inclusion</Name>
+      <Name>inclusionVehicle</Name>
       <ElementPath>inclusion|VehicleQualifier|vehicle</ElementPath>
-      <Type>String</Type>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>exemption</Name>
+      <Name>inclusionUse</Name>
+      <ElementPath>inclusion|VehicleQualifier|use</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>inclusionLoad</Name>
+      <ElementPath>inclusion|VehicleQualifier|load</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>exemptionVehicle</Name>
       <ElementPath>exemption|VehicleQualifier|vehicle</ElementPath>
-      <Type>String</Type>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>exemptionUse</Name>
+      <ElementPath>exemption|VehicleQualifier|use</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>exemptionLoad</Name>
+      <ElementPath>exemption|VehicleQualifier|load</ElementPath>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>structure</Name>
@@ -653,11 +651,13 @@
       <ElementPath>trafficSign</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>trafficRegulationOrder</Name>
       <ElementPath>trafficRegulationOrder|TrafficRegulationOrderType|trafficRegulationOrder</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>trafficRegulationOrderDesciption</Name>
       <ElementPath>trafficRegulationOrder|TrafficRegulationOrderType|troDescription</ElementPath>
@@ -669,6 +669,11 @@
       <Type>String</Type>
     </PropertyDefn>
   </GMLFeatureClass>
+  
+  
+  
+  
+  
   <GMLFeatureClass>
     <Name>Hazard</Name>
     <ElementPath>Hazard</ElementPath>

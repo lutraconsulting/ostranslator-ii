@@ -147,4 +147,35 @@
         <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
       </ram:TurnRestriction>
 </os:featureMember>
+<os:featureMember>
+<ram:RestrictionForVehicles gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000000000006</gml:identifier>
+        <net:networkRef>
+          <network:PointReference>
+            <net:element xlink:href="#osgb4000000026232819"/>
+            <net:applicableDirection xlink:href="http://inspire.ec.europa.eu/codelist/LinkDirectionValue/bothDirections" xlink:title="both directions"/>
+            <net:atPosition uom="m">7.26</net:atPosition>
+            <network:atPositionGeometry>
+              <gml:Point gml:id="LOCAL_ID_1_4D3BE74216331F4FE0530B8EA00A4F07" srsName="urn:ogc:def:crs:EPSG::27700">
+                <gml:pos>408535.493 90738.126</gml:pos>
+              </gml:Point>
+            </network:atPositionGeometry>
+          </network:PointReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000000000006</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-04-15T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <tn:measure uom="m">2.1</tn:measure>
+        <tn:restrictionType xlink:title="maximum height" xlink:href="http://inspire.ec.europa.eu/codelist/RestrictionTypeValue/maximumHeight"/>
+        <ram:sourceOfMeasure>Signed</ram:sourceOfMeasure>
+        <ram:structure codeSpace="http://www.os.uk/xml/codelists/highways/StructureTypeValue.xml">Barrier</ram:structure>
+        <ram:trafficSign>Vehicles Exceeding Height 2.1m Prohibited</ram:trafficSign>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
+      </ram:RestrictionForVehicles>
+</os:featureMember>
 </os:FeatureCollection>
