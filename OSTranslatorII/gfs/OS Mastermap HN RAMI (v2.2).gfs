@@ -1000,8 +1000,7 @@
   <GMLFeatureClass>
     <Name>Reinstatement</Name>
     <ElementPath>Reinstatement</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -1027,6 +1026,37 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>networkRefNilReason</Name>
+        <ElementPath>networkRef@nilReason</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationElement</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- FIXME - import the geometry (locationStart, locationEnd, locationLine and locationArea) as seperate columns -->
+      <!-- end networkRef -->
+    
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
@@ -1037,58 +1067,6 @@
       <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <!-- networkRef datatype -->
-    <PropertyDefn>
-      <Name>networkRefNilReason</Name>
-      <ElementPath>networkRef@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNodeReferenceElement</Name>
-      <ElementPath>networkRef|NodeReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceElement</Name>
-      <ElementPath>networkRef|LinkReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|LinkReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReference</Name>
-      <ElementPath>networkRef|PointReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceAtPosition</Name>
-      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-      <Type>RealList</Type>
-    </PropertyDefn>
-    <!-- end networkRef -->
     <PropertyDefn>
       <Name>reinstatementType</Name>
       <ElementPath>reinstatementType</ElementPath>
@@ -1105,11 +1083,12 @@
       <Type>String</Type>
     </PropertyDefn>
   </GMLFeatureClass>
+  
+  
   <GMLFeatureClass>
     <Name>SpecialDesignation</Name>
     <ElementPath>SpecialDesignation</ElementPath>
-    <GeometryType>1</GeometryType><!-- Actually this feature type does not have geometry -->
-    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
     <PropertyDefn>
       <Name>identifier</Name>
       <ElementPath>identifier</ElementPath>
@@ -1135,6 +1114,40 @@
       <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>networkRefNilReason</Name>
+        <ElementPath>networkRef@nilReason</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationElement</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>networkRefNetworkReferenceLocationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- FIXME - import the geometry (locationStart, locationEnd, locationLine and locationArea) as seperate columns -->
+      <!-- end networkRef -->
+      
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
@@ -1145,68 +1158,17 @@
       <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validTo</Name>
-      <ElementPath>tn:validTo</ElementPath>
+      <ElementPath>validTo</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>validToNilReason</Name>
-      <ElementPath>tn:validTo@nilReason</ElementPath>
+      <ElementPath>validTo@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <!-- networkRef datatype -->
-    <PropertyDefn>
-      <Name>networkRefNilReason</Name>
-      <ElementPath>networkRef@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceElement</Name>
-      <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationElement</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNetworkReferenceLocationDescription</Name>
-      <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefNodeReferenceElement</Name>
-      <ElementPath>networkRef|NodeReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceElement</Name>
-      <ElementPath>networkRef|LinkReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefLinkReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|LinkReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReference</Name>
-      <ElementPath>networkRef|PointReference|element@href</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceApplicableDirection</Name>
-      <ElementPath>networkRef|PointReference|applicableDirection@title</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>networkRefPointReferenceAtPosition</Name>
-      <ElementPath>networkRef|PointReference|atPosition</ElementPath>
-      <Type>RealList</Type>
-    </PropertyDefn>
-    <!-- end networkRef -->
     <PropertyDefn>
       <Name>designation</Name>
       <ElementPath>designation</ElementPath>
@@ -1217,58 +1179,64 @@
       <ElementPath>description</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
+    
     <!-- TemporalPropertyType datatype -->
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeNamedDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeStartMonthDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeEndMonthDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedDay</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedPeriod</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodNamedTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodStartTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodEndTime</Name>
-      <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
-      <Type>StringList</Type>
-    </PropertyDefn>
-    <!-- end temporalType -->
+      <!-- FIXME: some cnvention on column naming in pg -->
+      <PropertyDefn>
+        <Name>timeIntervalNamedDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeStartDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeEndDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeStartMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDateRangeEndMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodNamedPeriod</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- next element doesn't appear to have any non-null elements in national dataset -->
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodNamedTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodStartTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>timeIntervalTemporalPropertyTypeDayPeriodTimePeriodEndTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end TemporalPropertyType -->
+      
     <PropertyDefn>
       <Name>contactAuthorityIdentifier</Name>
       <ElementPath>contactAuthority|ResponsibleAuthority|identifier</ElementPath>

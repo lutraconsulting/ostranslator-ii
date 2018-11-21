@@ -253,4 +253,88 @@
         <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</ram:reasonForChange>
       </ram:Maintenance>
 </os:featureMember>
+<os:featureMember>
+<ram:Reinstatement gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/0016RI02531178</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn4108899"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>0016RI02531178</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-09-16T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <ram:reinstatementType codeSpace="http://www.os.uk/xml/codelists/highways/ReinstatementTypeValue.xml">Carriageway Type 2</ram:reinstatementType>
+        <ram:partialReference>false</ram:partialReference>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</ram:reasonForChange>
+      </ram:Reinstatement>
+</os:featureMember>
+<os:featureMember>
+<ram:SpecialDesignation gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/0016SD01242763</gml:identifier>
+        <net:networkRef>
+          <ram:NetworkReferenceLocation>
+            <net:element xlink:href="#usrn4100948"/>
+            <ram:locationDescription>FROM JCT WITH CASTLE STREET TO OPPOSITE 1 HAY ROAD</ram:locationDescription>
+            <ram:locationLine>
+              <gml:MultiCurve gml:id="LOCAL_ID_1_65AD147F64AB7C1EE0530B8EA00AFFCF" srsName="urn:ogc:def:crs:EPSG::27700">
+                <gml:curveMember>
+                  <gml:LineString gml:id="LOCAL_ID_12658_6E51B2DE4FCF43FCB07CC0FA1D3B4930">
+                    <gml:posList srsDimension="2" count="2">304421.000 251141.000 304496.000 251147.000</gml:posList>
+                  </gml:LineString>
+                </gml:curveMember>
+              </gml:MultiCurve>
+            </ram:locationLine>
+          </ram:NetworkReferenceLocation>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>0016SD01242763</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2018-02-20T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <ram:designation codeSpace="http://www.os.uk/xml/codelists/highways/SpecialDesignationTypeValue.xml">Traffic Sensitive Street</ram:designation>
+        <ram:description>SPECIAL EVENT - ROYAL WELSH SHOW (JULY - TRUNK AND DIVERSION ROADS FOR 4 DAYS) NB: ASSUME URBAN FOOTWAYS ARE INCLUDED</ram:description>
+        <ram:timeInterval>
+          <ram:TemporalPropertyType>
+            <ram:dateRange>
+              <ram:DateRangeType>
+                <ram:startDate>1995-03-31</ram:startDate>
+                <ram:endDate>9998-01-01</ram:endDate>
+              </ram:DateRangeType>
+            </ram:dateRange>
+            <ram:dayPeriod>
+              <ram:DayPropertyType>
+                <ram:namedPeriod codeSpace="http://www.os.uk/xml/codelists/highways/NamedPeriod.xml">Special Arrangements</ram:namedPeriod>
+                <ram:timePeriod>
+                  <ram:TimePropertyType>
+                    <ram:timeRange>
+                      <ram:TimeRangeType>
+                        <ram:startTime>00:01:00</ram:startTime>
+                        <ram:endTime>23:59:00</ram:endTime>
+                      </ram:TimeRangeType>
+                    </ram:timeRange>
+                  </ram:TimePropertyType>
+                </ram:timePeriod>
+              </ram:DayPropertyType>
+            </ram:dayPeriod>
+          </ram:TemporalPropertyType>
+        </ram:timeInterval>
+        <ram:contactAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>0016</highway:identifier>
+            <highway:authorityName>Welsh Government</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </ram:contactAuthority>
+        <ram:partialReference>true</ram:partialReference>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Attributes</ram:reasonForChange>
+      </ram:SpecialDesignation>
+</os:featureMember>
 </os:FeatureCollection>
