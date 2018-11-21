@@ -19,23 +19,18 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>beginLifespanVersion</Name>
       <ElementPath>beginLifespanVersion</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -47,11 +42,6 @@
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -120,7 +110,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>directionality</Name>
+      <Name>directionalityTitle</Name>
       <ElementPath>directionality@title</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -160,56 +150,56 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>cycleFacilityCycleFacility</Name>
+      <Name>cycleFacility</Name>
       <ElementPath>cycleFacility|CycleFacilityType|cycleFacility</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>cycleFacilityWholeLink</Name>
+      <Name>wholeLink</Name>
       <ElementPath>cycleFacility|CycleFacilityType|wholeLink</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>roadWidthAverageWidth</Name>
+      <Name>averageWidth</Name>
       <ElementPath>roadWidth|RoadWidthType|averageWidth</ElementPath>
       <Type>Real</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>roadWidthMinimumWidth</Name>
+      <Name>minimumWidth</Name>
       <ElementPath>roadWidth|RoadWidthType|minimumWidth</ElementPath>
       <Type>Real</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>roadWidthConfidenceLevel</Name>
+      <Name>confidenceLevel</Name>
       <ElementPath>roadWidth|RoadWidthType|confidenceLevel</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>numberOfLanesNumberOfLanes</Name>
+      <Name>numberOfLanes</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|numberOfLanes</ElementPath>
       <Type>IntegerList</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>numberOfLanesDirection</Name>
+      <Name>direction</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|direction</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>numberOfLanesMinMaxNumberOfLanes</Name>
+      <Name>minMaxNumberOfLanes</Name>
       <ElementPath>numberOfLanes|NumberOfLanesType|minMaxNumberOfLanes</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>elevationGainInDirection</Name>
+      <Name>inDirection</Name>
       <ElementPath>elevationGain|ElevationGainType|inDirection</ElementPath>
       <Type>Real</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>elevationGainInOppositeDirection</Name>
+      <Name>inOppositeDirection</Name>
       <ElementPath>elevationGain|ElevationGainType|inOppositeDirection</ElementPath>
       <Type>Real</Type>
     </PropertyDefn>
@@ -224,17 +214,17 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>startNode</Name>
+      <Name>startNodeHref</Name>
       <ElementPath>startNode@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>endNode</Name>
+      <Name>endNodeHref</Name>
       <ElementPath>endNode@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>relatedRoadArea</Name>
+      <Name>relatedRoadAreaHref</Name>
       <ElementPath>relatedRoadArea@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -261,23 +251,18 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>beginLifespanVersion</Name>
       <ElementPath>beginLifespanVersion</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
@@ -287,18 +272,8 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>formOfRoadNode</Name>
+      <Name>formOfRoadNodeTitle</Name>
       <ElementPath>formOfRoadNode@title</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>formOfRoadNodeNilReason</Name>
-      <ElementPath>formOfRoadNode@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -333,7 +308,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>relatedRoadArea</Name>
+      <Name>relatedRoadAreaHref</Name>
       <ElementPath>relatedRoadArea@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -358,12 +333,12 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -372,20 +347,10 @@
       <ElementPath>beginLifespanVersion</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
-    <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
@@ -395,18 +360,8 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>localRoadCodeNilReason</Name>
-      <ElementPath>localRoadCode@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>nationalRoadCode</Name>
       <ElementPath>nationalRoadCode</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>nationalRoadCodeNilReason</Name>
-      <ElementPath>nationalRoadCode@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -415,22 +370,22 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameName</Name>
+      <Name>name</Name>
       <ElementPath>designatedName|DesignatedNameType|name</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameNameLang</Name>
+      <Name>nameLang</Name>
       <ElementPath>designatedName|DesignatedNameType|name@lang</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameAuthorityName</Name>
+      <Name>authorityName</Name>
       <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|authorityName</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameIdentifier</Name>
+      <Name>responsibleAuthorityIdentifier</Name>
       <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|identifier</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -440,7 +395,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>link</Name>
+      <Name>linkHref</Name>
       <ElementPath>link@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -467,12 +422,12 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -482,18 +437,8 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -502,37 +447,27 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>localRoadCodeNilReason</Name>
-      <ElementPath>localRoadCode@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
       <Name>nationalRoadCode</Name>
       <ElementPath>nationalRoadCode</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>nationalRoadCodeNilReason</Name>
-      <ElementPath>nationalRoadCode@nilReason</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>designatedNameName</Name>
+      <Name>name</Name>
       <ElementPath>designatedName|DesignatedNameType|name</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameNameLang</Name>
+      <Name>nameLang</Name>
       <ElementPath>designatedName|DesignatedNameType|name@lang</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameAuthorityName</Name>
+      <Name>namingAuthorityAuthorityName</Name>
       <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|authorityName</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>designatedNameIdentifier</Name>
+      <Name>namingAuthorityIdentifier</Name>
       <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|identifier</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -572,29 +507,29 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>operationalStateState</Name>
+      <Name>state</Name>
       <ElementPath>operationalState|OperationalStateType|state</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>operationalStateValidTimeId</Name>
+      <Name>timePeriodId</Name>
       <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod@id</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>operationalStateValidTimeBeginPosition</Name>
+      <Name>beginPosition</Name>
       <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|beginPosition</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>operationalStateValidTimeEndPosition</Name>
+      <Name>endPosition</Name>
       <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|endPosition</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <!-- next element doesn't appear to have any non-null elements in national dataset -->
     <PropertyDefn>
-      <Name>operationalStateReason</Name>
+      <Name>reason</Name>
       <ElementPath>operationalState|OperationalStateType|reason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -634,7 +569,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>responsibleAuthorityName</Name>
+      <Name>responsibleAuthorityAuthorityName</Name>
       <ElementPath>responsibleAuthority|ResponsibleAuthority|authorityName</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -654,7 +589,7 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>link</Name>
+      <Name>linkHref</Name>
       <ElementPath>link@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -679,23 +614,18 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>beginLifespanVersion</Name>
       <ElementPath>beginLifespanVersion</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -729,7 +659,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>node</Name>
+      <Name>nodeHref</Name>
       <ElementPath>node@href</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
@@ -756,23 +686,18 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>beginLifespanVersion</Name>
       <ElementPath>beginLifespanVersion</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>beginLifespanVersionNilReason</Name>
-      <ElementPath>beginLifespanVersion@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -784,11 +709,6 @@
     <PropertyDefn>
       <Name>validFrom</Name>
       <ElementPath>validFrom</ElementPath>
-      <Type>String</Type>
-    </PropertyDefn>
-    <PropertyDefn>
-      <Name>validFromNilReason</Name>
-      <ElementPath>validFrom@nilReason</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
@@ -807,12 +727,12 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>startNode</Name>
+      <Name>startNodeHref</Name>
       <ElementPath>startNode@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>endNode</Name>
+      <Name>endNodeHref</Name>
       <ElementPath>endNode@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -839,12 +759,12 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -860,7 +780,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>formOfWaterwayNode</Name>
+      <Name>formOfWaterwayNodeTitle</Name>
       <ElementPath>formOfWaterwayNode@title</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -890,12 +810,12 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdLocalId</Name>
+      <Name>localId</Name>
       <ElementPath>inspireId|Identifier|localId</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>inspireIdNamespace</Name>
+      <Name>namespace</Name>
       <ElementPath>inspireId|Identifier|namespace</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -905,7 +825,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>type</Name>
+      <Name>typeTitle</Name>
       <ElementPath>type@title</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -930,7 +850,7 @@
       <Type>String</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>refToFunctionalSite</Name>
+      <Name>refToFunctionalSiteHref</Name>
       <ElementPath>refToFunctionalSite@href</ElementPath>
       <Type>String</Type>
     </PropertyDefn>
@@ -940,7 +860,7 @@
       <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
-      <Name>elementType</Name>
+      <Name>elementRole</Name>
       <ElementPath>element@role</ElementPath>
       <Type>StringList</Type>
     </PropertyDefn>
