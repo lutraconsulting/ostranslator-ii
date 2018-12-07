@@ -49,17 +49,19 @@ class PostProcessorThread(QThread):
         self.dedup = dedup
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
-        self.osmm_schema = osmm_schema # 7-9
+        self.osmm_schema = osmm_schema  # 7-9
         self.osmm_style_name = osmm_style_name
 
         # Number of post-processing steps. Used to calculate the 
         # progress
         self.post_processing_steps = 4
-        self.styler = Styler(cur=cur,
-                             uri=self.uri,
-                             schema=schema,
-                             osmm_schema=osmm_schema,
-                             osmm_style_name=osmm_style_name)
+        self.styler = None
+        if self.addTopoStyleColumns:
+            self.styler = Styler(cur=cur,
+                                 uri=self.uri,
+                                 schema=schema,
+                                 osmm_schema=osmm_schema,
+                                 osmm_style_name=osmm_style_name)
 
     def run(self):
         # import pydevd; pydevd.settrace()
@@ -86,10 +88,13 @@ class PostProcessorThread(QThread):
             qDic = {}
             i = 0
             for table in self.tables:
+                # Determine whether unique identifiers are in 'fid' or 'gml_id' column
+
+
                 # Optionally add additional style columns for OS MasterMap Topo Layer
                 if self.addTopoStyleColumns:
                     self.styler.addFields(table)
-                if self.applyDefaultStyle:
+                if self.addTopoStyleColumns and self.applyDefaultStyle:
                     # We don't want this to kill-off this thread:
                     try:
                         self.styler.applyDefaultStyle(table)
@@ -110,16 +115,23 @@ class PostProcessorThread(QThread):
                 i += 1
                 progress = int( float(i) / (len(self.tables)*self.post_processing_steps) * 100.0 )
                 self.progressChanged.emit(progress)
-                
+
                 try:
                     # Drop any 'pioneer' rows
                     self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE fid = 'osgb----------------' AND ogc_fid < 100""", qDic)
                     # This limits the sequential search for fids to only the first 100 rows (where the pioneers will be).
                     # It means we do no longer need to build an index for the fid column
                 except psycopg2.ProgrammingError, e:
-                    if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                    if e.message.splitlines()[0].strip().startswith('relation') and e.message.splitlines()[0].strip().endswith('does not exist'):
                         # There were no matching features imported so the table was not created, do not index
                         pass
+                    elif e.message.splitlines()[0].strip().startswith('column') and e.message.splitlines()[0].strip().endswith('does not exist'):
+                        # Looks like we're using gml_id, not fid
+                        self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
+                        if not self.cur.statusmessage.startswith('DELETE'):
+                            self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                    else:
+                        raise sys.exc_info()
                 else:
                     if not self.cur.statusmessage.startswith('DELETE'):
                         self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
