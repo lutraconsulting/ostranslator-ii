@@ -1,0 +1,1270 @@
+<GMLFeatureClassList>
+
+  <GMLFeatureClass>
+    <Name>PathLink</Name>
+    <ElementPath>PathLink</ElementPath>
+    <!--LINESTRINGZ-->
+    <GeometryType>-2147483646</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>fictitious</Name>
+      <ElementPath>fictitious</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>formOfWay</Name>
+      <ElementPath>formOfWay</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathName</Name>
+      <ElementPath>pathName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathNameLang</Name>
+      <ElementPath>pathName@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>alternateName</Name>
+      <ElementPath>alternateName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>alternateNameLang</Name>
+      <ElementPath>alternateName@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>provenance</Name>
+      <ElementPath>provenance</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>surfaceType</Name>
+      <ElementPath>surfaceType</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>cycleFacility</Name>
+      <ElementPath>cycleFacility|CycleFacilityType|cycleFacility</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>matchStatus</Name>
+      <ElementPath>matchStatus</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>length</Name>
+      <ElementPath>length</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>alternateIdentifierIdentifier</Name>
+      <ElementPath>alternateIdentifier|ThematicIdentifier|identifier</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>alternateIdentifierIdentifierScheme</Name>
+      <ElementPath>alternateIdentifier|ThematicIdentifier|identifierScheme</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>startGradeSeparation</Name>
+      <ElementPath>startGradeSeparation</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>endGradeSeparation</Name>
+      <ElementPath>endGradeSeparation</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>inDirection</Name>
+      <ElementPath>elevationGain|ElevationGainType|inDirection</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>inOppositeDirection</Name>
+      <ElementPath>elevationGain|ElevationGainType|inOppositeDirection</ElementPath>
+      <Type>Real</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>formsPartOfRole</Name>
+      <ElementPath>formsPartOf@role</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>formsPartOfHref</Name>
+      <ElementPath>formsPartOf@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>startNodeHref</Name>
+      <ElementPath>startNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>endNodeHref</Name>
+      <ElementPath>endNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>relatedRoadAreaHref</Name>
+      <ElementPath>relatedRoadArea@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+  <GMLFeatureClass>
+    <Name>PathNode</Name>
+    <ElementPath>PathNode</ElementPath>
+    <!--POINTZ-->
+    <GeometryType>-2147483647</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>formOfRoadNodeTitle</Name>
+      <ElementPath>formOfRoadNode@title</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>classification</Name>
+      <ElementPath>classification</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  
+  
+  
+  
+  <GMLFeatureClass>
+    <Name>ConnectingLink</Name>
+    <ElementPath>ConnectingLink</ElementPath>
+    <!--LINESTRINGZ-->
+    <GeometryType>-2147483646</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>fictitious</Name>
+      <ElementPath>fictitious</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>connectingNodeHref</Name>
+      <ElementPath>connectingNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathNodeHref</Name>
+      <ElementPath>pathNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+  <GMLFeatureClass>
+    <Name>ConnectingNode</Name>
+    <ElementPath>ConnectingNode</ElementPath>
+    <!--POINTZ-->
+    <GeometryType>-2147483647</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>roadLinkHref</Name>
+      <ElementPath>roadLink@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+  <GMLFeatureClass>
+    <Name>Path</Name>
+    <ElementPath>Path</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathName</Name>
+      <ElementPath>pathName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>pathNameLang</Name>
+      <ElementPath>pathName@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>linkHref</Name>
+      <ElementPath>link@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+
+
+
+
+
+  <GMLFeatureClass>
+    <Name>Street</Name>
+    <ElementPath>Street</ElementPath>
+    <!--MULTILINESTRING-->
+    <GeometryType>5</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptor</Name>
+      <ElementPath>descriptor</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>descriptorLang</Name>
+      <ElementPath>descriptor@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>name</Name>
+      <ElementPath>designatedName|DesignatedNameType|name</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>nameLang</Name>
+      <ElementPath>designatedName|DesignatedNameType|name@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namingAuthorityAuthorityName</Name>
+      <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namingAuthorityIdentifier</Name>
+      <ElementPath>designatedName|DesignatedNameType|namingAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localName</Name>
+      <ElementPath>localName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>localNameLang</Name>
+      <ElementPath>localName@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>streetType</Name>
+      <ElementPath>streetType</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>state</Name>
+      <ElementPath>operationalState|OperationalStateType|state</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>timePeriodId</Name>
+      <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod@id</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginPosition</Name>
+      <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|beginPosition</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>endPosition</Name>
+      <ElementPath>operationalState|OperationalStateType|validTime|TimePeriod|endPosition</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>reason</Name>
+      <ElementPath>operationalState|OperationalStateType|reason</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>locality</Name>
+      <ElementPath>locality</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localityLang</Name>
+      <ElementPath>locality@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>town</Name>
+      <ElementPath>town</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>townLang</Name>
+      <ElementPath>town@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>administrativeArea</Name>
+      <ElementPath>administrativeArea</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>administrativeAreaLang</Name>
+      <ElementPath>administrativeArea@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>responsibleAuthorityIdentifier</Name>
+      <ElementPath>responsibleAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>responsibleAuthorityAuthorityName</Name>
+      <ElementPath>responsibleAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>geometryProvenance</Name>
+      <ElementPath>geometryProvenance</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gssCodeHref</Name>
+      <ElementPath>gssCode@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>gssCodeRole</Name>
+      <ElementPath>gssCode@role</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>linkHref</Name>
+      <ElementPath>link@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+
+
+
+
+  <GMLFeatureClass>
+    <Name>FerryLink</Name>
+    <ElementPath>FerryLink</ElementPath>
+    <!--LINESTRINGZ-->
+    <GeometryType>-2147483646</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>fictitious</Name>
+      <ElementPath>fictitious</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>vehicularFerry</Name>
+      <ElementPath>vehicularFerry</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>routeOperator</Name>
+      <ElementPath>routeOperator</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>startNodeHref</Name>
+      <ElementPath>startNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>endNodeHref</Name>
+      <ElementPath>endNode@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+  <GMLFeatureClass>
+    <Name>FerryNode</Name>
+    <ElementPath>FerryNode</ElementPath>
+    <!--POINTZ-->
+    <GeometryType>-2147483647</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>formOfWaterwayNodeTitle</Name>
+      <ElementPath>formOfWaterwayNode@title</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+
+
+  <GMLFeatureClass>
+    <Name>FerryTerminal</Name>
+    <ElementPath>FerryTerminal</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
+    <!-- The id attribute is found automatically and we do not need to
+    define it as such -->
+    <!-- <PropertyDefn>
+      <Name>id</Name>
+      <ElementPath>@id</ElementPath>
+      <Type>String</Type>
+      <Length>20</Length>
+    </PropertyDefn> -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>typeTitle</Name>
+      <ElementPath>type@title</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>ferryTerminalName</Name>
+      <ElementPath>ferryTerminalName</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>ferryTerminalNameLang</Name>
+      <ElementPath>ferryTerminalName@lang</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>ferryTerminalCode</Name>
+      <ElementPath>ferryTerminalCode</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>refToFunctionalSiteHref</Name>
+      <ElementPath>refToFunctionalSite@href</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>elementHref</Name>
+      <ElementPath>element@href</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>elementRole</Name>
+      <ElementPath>element@role</ElementPath>
+      <Type>StringList</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  
+  
+  
+  <GMLFeatureClass>
+    <Name>Maintenance</Name>
+    <ElementPath>Maintenance</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>NetworkReferenceElementHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>elementTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>NetworkReferenceLocationElementHref</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>locationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end networkRef -->
+    
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>maintenanceResponsibility</Name>
+      <ElementPath>maintenanceResponsibility</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>maintenanceAuthorityIdentifier</Name>
+      <ElementPath>maintenanceAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>maintenanceAuthorityAuthorityName</Name>
+      <ElementPath>maintenanceAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>partialReference</Name>
+      <ElementPath>partialReference</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>highwayAuthorityIdentifier</Name>
+      <ElementPath>highwayAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>highwayAuthorityAuthorityName</Name>
+      <ElementPath>highwayAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  
+  
+  <GMLFeatureClass>
+    <Name>Reinstatement</Name>
+    <ElementPath>Reinstatement</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>NetworkReferenceElementHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>elementTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>NetworkReferenceLocationElementHref</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>locationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end networkRef -->
+    
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reinstatementType</Name>
+      <ElementPath>reinstatementType</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>partialReference</Name>
+      <ElementPath>partialReference</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  
+  
+  
+  <GMLFeatureClass>
+    <Name>SpecialDesignation</Name>
+    <ElementPath>SpecialDesignation</ElementPath>
+    <GeometryType>100</GeometryType><!-- Actually this feature type does not have geometry -->
+    <PropertyDefn>
+      <Name>identifier</Name>
+      <ElementPath>identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>beginLifespanVersion</Name>
+      <ElementPath>beginLifespanVersion</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    
+    <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>NetworkReferenceElementHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>elementTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>NetworkReferenceLocationElementHref</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>locationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end networkRef -->
+      
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validFrom</Name>
+      <ElementPath>validFrom</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <!-- no test data -->
+    <PropertyDefn>
+      <Name>validTo</Name>
+      <ElementPath>validTo</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>designation</Name>
+      <ElementPath>designation</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>description</Name>
+      <ElementPath>description</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    
+    <!-- TemporalPropertyType datatype -->
+      <PropertyDefn>
+        <Name>namedDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>startDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>endDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>startMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>endMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>namedDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>namedPeriod</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>namedTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>startTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>endTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end TemporalPropertyType -->
+      
+    <PropertyDefn>
+      <Name>ResponsibleAuthorityIdentifier</Name>
+      <ElementPath>contactAuthority|ResponsibleAuthority|identifier</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>authorityName</Name>
+      <ElementPath>contactAuthority|ResponsibleAuthority|authorityName</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>partialReference</Name>
+      <ElementPath>partialReference</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>reasonForChange</Name>
+      <ElementPath>reasonForChange</ElementPath>
+      <Type>String</Type>
+    </PropertyDefn>
+  </GMLFeatureClass>
+  
+  
+  
+  
+  
+  
+  <GMLFeatureClass>
+      <Name>HighwayDedication</Name>
+      <ElementPath>HighwayDedication</ElementPath>
+      <!--LINESTRING-->
+      <GeometryType>2</GeometryType>
+      <SRSName>urn:ogc:def:crs:EPSG::27700</SRSName>
+      <PropertyDefn>
+        <Name>identifier</Name>
+        <ElementPath>identifier</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>localId</Name>
+        <ElementPath>inspireId|Identifier|localId</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>namespace</Name>
+        <ElementPath>inspireId|Identifier|namespace</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>beginLifespanVersion</Name>
+        <ElementPath>beginLifespanVersion</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      
+      <!-- networkRef datatype -->
+      <PropertyDefn>
+        <Name>NetworkReferenceElementHref</Name>
+        <ElementPath>networkRef|NetworkReference|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>elementTitle</Name>
+        <ElementPath>networkRef|NetworkReference|element@title</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>NetworkReferenceLocationElementHref</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|element@href</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>locationDescription</Name>
+        <ElementPath>networkRef|NetworkReferenceLocation|locationDescription</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end networkRef -->
+      
+      <PropertyDefn>
+        <Name>validFrom</Name>
+        <ElementPath>validFrom</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>reasonForChange</Name>
+        <ElementPath>reasonForChange</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>dedication</Name>
+        <ElementPath>dedication</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      
+      <!-- TemporalPropertyType datatype -->
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>namedDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|namedDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>startDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>endDate</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endDate</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>startMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|startMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>endMonthDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dateRange|DateRangeType|endMonthDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>namedDay</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedDay</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>namedPeriod</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|namedPeriod</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>namedTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|namedTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>startTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|startTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- no test data -->
+      <PropertyDefn>
+        <Name>endTime</Name>
+        <ElementPath>timeInterval|TemporalPropertyType|dayPeriod|DayPropertyType|timePeriod|TimePropertyType|timeRange|TimeRangeType|endTime</ElementPath>
+        <Type>StringList</Type>
+      </PropertyDefn>
+      <!-- end TemporalPropertyType -->
+    
+      <PropertyDefn>
+        <Name>publicRightOfWay</Name>
+        <ElementPath>publicRightOfWay</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>nationalCycleRoute</Name>
+        <ElementPath>nationalCycleRoute</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>quietRoute</Name>
+        <ElementPath>quietRoute</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>obstruction</Name>
+        <ElementPath>obstruction</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>planningOrder</Name>
+        <ElementPath>planningOrder</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+      <PropertyDefn>
+        <Name>worksProhibited</Name>
+        <ElementPath>worksProhibited</ElementPath>
+        <Type>String</Type>
+      </PropertyDefn>
+  </GMLFeatureClass>
+
+</GMLFeatureClassList>
