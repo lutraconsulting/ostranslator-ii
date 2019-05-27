@@ -182,7 +182,7 @@ class OsTranslatorIIDialog(QtGui.QDialog, FORM_CLASS):
                 
         self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
 
-        self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Checked, type=int))
+        self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Unchecked, type=int))
 
         styleName = str(s.value("OsTranslatorII/styleName", '', type=str))
         self.styleNameComboBox.setCurrentIndex(
