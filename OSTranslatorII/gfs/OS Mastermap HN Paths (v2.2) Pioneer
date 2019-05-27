@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--PUBLICATION_DATE_2018-10-01-->
+<os:FeatureCollection
+    xmlns:ad="http://inspire.ec.europa.eu/schemas/ad/4.0"
+    xmlns:am="http://inspire.ec.europa.eu/schemas/am/4.0"
+    xmlns:au="http://inspire.ec.europa.eu/schemas/au/4.0"
+    xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3"
+    xmlns:base2="http://inspire.ec.europa.eu/schemas/base2/2.0"
+    xmlns:bu-base="http://inspire.ec.europa.eu/schemas/bu-base/4.0"
+    xmlns:cp="http://inspire.ec.europa.eu/schemas/cp/4.0"
+    xmlns:dedication="http://namespaces.os.uk/mastermap/highwayDedication/1.0"
+    xmlns:gco="http://www.isotc211.org/2005/gco"
+    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr"
+    xmlns:gmlxbt="http://www.opengis.net/gml/3.3/xbt"
+    xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0"
+    xmlns:gsr="http://www.isotc211.org/2005/gsr"
+    xmlns:gss="http://www.isotc211.org/2005/gss"
+    xmlns:gts="http://www.isotc211.org/2005/gts"
+    xmlns:highway="http://namespaces.os.uk/mastermap/highwayNetwork/2.0"
+    xmlns:hwtn="http://namespaces.os.uk/mastermap/highwaysWaterTransportNetwork/1.0"
+    gml:id="OS_HIGHWAYS"
+    xmlns:net="http://inspire.ec.europa.eu/schemas/net/4.0"
+    xmlns:network="http://namespaces.os.uk/mastermap/generalNetwork/2.0"
+    xmlns:os="http://namespaces.os.uk/product/1.0"
+    xmlns:ram="http://namespaces.os.uk/mastermap/routingAndAssetManagement/2.1"
+    xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+    xsi:schemaLocation="http://namespaces.os.uk/mastermap/highwaysWaterTransportNetwork/1.0
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/1.0/HighwaysWaterTransportNetwork.xsd
+    http://namespaces.os.uk/mastermap/highwayNetwork/2.0
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.0/LinearHighwayNetwork.xsd
+    http://namespaces.os.uk/product/1.0
+    https://www.ordnancesurvey.co.uk/xml/schema/product/1.0/OSProduct.xsd
+    http://namespaces.os.uk/mastermap/generalNetwork/2.0
+    https://www.ordnancesurvey.co.uk/xml/schema/network/2.0/generalNetwork.xsd
+    http://namespaces.os.uk/mastermap/routingAndAssetManagement/2.1
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/2.1/RoutingAndAssetManagement.xsd
+    http://namespaces.os.uk/mastermap/highwayDedication/1.0
+    https://www.ordnancesurvey.co.uk/xml/schema/highwaysnetwork/1.0/HighwayDedication.xsd"
+    xmlns:stat="urn:x-inspire:specification:gmlas:StatisticalUnits:0.0"
+    xmlns:su-core="http://inspire.ec.europa.eu/schemas/su-core/4.0"
+    xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0"
+    xmlns:tn-ro="http://inspire.ec.europa.eu/schemas/tn-ro/4.0"
+    xmlns:tn-w="http://inspire.ec.europa.eu/schemas/tn-w/4.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<os:metadata xlink:href="http://www.os.uk/xml/products/Highways.xml"/>
+
+<os:featureMember>
+<highway:PathLink gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000065590906</gml:identifier>
+        <net:beginLifespanVersion>2017-04-15T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000065590906</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:centrelineGeometry>
+          <gml:LineString gml:id="LOCAL_ID_1_4D3BECDDF69D1F32E0530B8EA00AB8F3" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:posList srsDimension="3" count="6">330732.905 215889.628 103.200 330727.905 215874.325 103.100 330720.645 215859.175 103.100 330717.605 215845.280 102.700 330713.300 215837.065 102.600 330705.125 215801.422 101.800</gml:posList>
+          </gml:LineString>
+        </net:centrelineGeometry>
+        <net:fictitious>false</net:fictitious>
+        <net:endNode xlink:href="#osgb4000000065406840"/>
+        <net:startNode xlink:href="#osgb4000000065479402"/>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry And Attributes</highway:reasonForChange>
+        <highway:formOfWay codeSpace="http://www.os.uk/xml/codelists/FormOfWayTypeValue.xml">Path</highway:formOfWay>
+        <highway:pathName>FRANCOMBE WAY</highway:pathName>
+        <highway:provenance codeSpace="http://www.os.uk/xml/codelists/highways/ProvenanceSourceValue.xml">OS Urban And OS Height</highway:provenance>
+        <highway:surfaceType codeSpace="http://www.os.uk/xml/codelists/highways/SurfaceTypeValue.xml">Made Sealed</highway:surfaceType>
+        <highway:matchStatus codeSpace="http://www.os.uk/xml/codelists/highways/MatchStatusValue.xml">Matched</highway:matchStatus>
+        <highway:length uom="m">92.97</highway:length>
+        <highway:alternateIdentifier>
+          <base2:ThematicIdentifier>
+            <base2:identifier>6840_3307240215869</base2:identifier>
+            <base2:identifierScheme>NSG Elementary Street Unit ID (ESU ID)</base2:identifierScheme>
+          </base2:ThematicIdentifier>
+        </highway:alternateIdentifier>
+        <highway:startGradeSeparation>0</highway:startGradeSeparation>
+        <highway:endGradeSeparation>0</highway:endGradeSeparation>
+        <highway:elevationGain>
+          <highway:ElevationGainType>
+            <highway:inDirection uom="m">0</highway:inDirection>
+            <highway:inOppositeDirection uom="m">1.4</highway:inOppositeDirection>
+          </highway:ElevationGainType>
+        </highway:elevationGain>
+        <highway:formsPartOf xlink:role="Street" xlink:href="#usrn47303418"/>
+      </highway:PathLink>
+</os:featureMember>
+
+<os:featureMember>
+<highway:PathNode gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000063210044</gml:identifier>
+        <net:beginLifespanVersion>2017-04-15T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000063210044</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:geometry>
+          <gml:Point gml:id="LOCAL_ID_1_4D3BE758D37F1F4FE0530B8EA00A4F07" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:pos>394063.110 811588.989 47.700</gml:pos>
+          </gml:Point>
+        </net:geometry>
+        <tn:validFrom xsi:nil="true" nilReason="unknown"/>
+        <tn-ro:formOfRoadNode xlink:href="http://inspire.ec.europa.eu/codelist/FormOfRoadNodeValue/roadEnd" xlink:title="road end"/>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</highway:reasonForChange>
+      </highway:PathNode>
+</os:featureMember>
+
+<os:featureMember>
+<highway:ConnectingLink gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000065587847</gml:identifier>
+        <net:beginLifespanVersion>2018-02-20T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000065587847</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Attributes</highway:reasonForChange>
+        <highway:geometry>
+          <gml:LineString gml:id="LOCAL_ID_1_65AD1688B6C97C2DE0530B8EA00A5AEB" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:posList srsDimension="3" count="2">388786.818 812231.590 51.500 388789.000 812225.000 51.600</gml:posList>
+          </gml:LineString>
+        </highway:geometry>
+        <highway:fictitious>true</highway:fictitious>
+        <highway:pathNode xlink:href="#osgb4000000063210237"/>
+        <highway:connectingNode xlink:href="#osgb4000000063215368"/>
+      </highway:ConnectingLink>
+</os:featureMember>
+
+<os:featureMember>
+<highway:ConnectingNode gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000063210005</gml:identifier>
+        <net:beginLifespanVersion>2017-04-15T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000063210005</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</highway:reasonForChange>
+        <highway:geometry>
+          <gml:Point gml:id="LOCAL_ID_1_4D3CDB16EA4F46EDE0530B8EA00A63C9" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:pos>394539.141 806849.149 8.200</gml:pos>
+          </gml:Point>
+        </highway:geometry>
+        <highway:roadLink xlink:href="#osgb4000000003785192"/>
+      </highway:ConnectingNode>
+</os:featureMember>
+
+<os:featureMember>
+<highway:Path gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000067703514</gml:identifier>
+        <net:beginLifespanVersion>2017-03-24T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000067703514</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:link xlink:href="#osgb4000000065676969"/>
+        <net:link xlink:href="#osgb4000000065698749"/>
+        <net:link xlink:href="#osgb4000000065706653"/>
+        <net:link xlink:href="#osgb4000000065707223"/>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Attributes</highway:reasonForChange>
+        <highway:pathName>PINEWOOD WALK</highway:pathName>
+      </highway:Path>
+</os:featureMember>
+
+<os:featureMember>
+<highway:Street gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/10301016</gml:identifier>
+        <net:beginLifespanVersion>2017-11-18T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>10301016</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:link xlink:href="#osgb4000000068292716"/>
+        <tn:validFrom>2000-11-30T00:00:00.000</tn:validFrom>
+        <highway:designatedName>
+          <highway:DesignatedNameType>
+            <highway:name>BANK COURT</highway:name>
+            <highway:namingAuthority>
+              <highway:ResponsibleAuthority>
+                <highway:identifier>1910</highway:identifier>
+                <highway:authorityName>Dacorum</highway:authorityName>
+              </highway:ResponsibleAuthority>
+            </highway:namingAuthority>
+          </highway:DesignatedNameType>
+        </highway:designatedName>
+        <highway:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</highway:reasonForChange>
+        <highway:streetType codeSpace="http://www.os.uk/xml/codelists/highways/StreetTypeValue.xml">Designated Street Name</highway:streetType>
+        <highway:operationalState>
+          <highway:OperationalStateType>
+            <highway:state codeSpace="http://www.os.uk/xml/codelists/highways/OperationalStateValue.xml">Open</highway:state>
+            <highway:validTime>
+              <gml:TimePeriod gml:id="LOCAL_ID_3_5E47D9D557114C8BE0530B8EA00A72E4">
+                <gml:beginPosition>2000-11-30T00:00:00.000</gml:beginPosition>
+                <gml:endPosition indeterminatePosition="unknown"/>
+              </gml:TimePeriod>
+            </highway:validTime>
+          </highway:OperationalStateType>
+        </highway:operationalState>
+        <highway:town>HEMEL HEMPSTEAD</highway:town>
+        <highway:administrativeArea>HERTFORDSHIRE</highway:administrativeArea>
+        <highway:responsibleAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>1900</highway:identifier>
+            <highway:authorityName>Hertfordshire</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </highway:responsibleAuthority>
+        <highway:geometryProvenance codeSpace="http://www.os.uk/xml/codelists/highways/ProvenanceSourceValue.xml">Ordnance Survey</highway:geometryProvenance>
+        <highway:geometry>
+          <gml:MultiCurve gml:id="LOCAL_ID_1_5E47D9D557124C8BE0530B8EA00A72E4" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:curveMember>
+              <gml:LineString gml:id="LOCAL_ID_105971_FED77751BBC64CB7A4F7818D03D4A1DF">
+                <gml:posList srsDimension="2" count="2">505450.476 206744.173 505526.468 206745.955</gml:posList>
+              </gml:LineString>
+            </gml:curveMember>
+          </gml:MultiCurve>
+        </highway:geometry>
+        <highway:gssCode xlink:href="#E07000096" xlink:role="Lower Tier Local Authority"/>
+        <highway:gssCode xlink:href="#E10000015" xlink:role="Upper Tier Local Authority"/>
+      </highway:Street>
+</os:featureMember>
+
+<os:featureMember>
+<hwtn:FerryLink gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000066962277</gml:identifier>
+        <net:beginLifespanVersion>2017-07-22T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000066962277</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:centrelineGeometry>
+          <gml:LineString gml:id="LOCAL_ID_1_54ED41699F143379E0530B8EA00A6EBC" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:posList srsDimension="3" count="2">462396.480 99835.717 -1.400 462867.406 100096.776 -1.400</gml:posList>
+          </gml:LineString>
+        </net:centrelineGeometry>
+        <net:fictitious>true</net:fictitious>
+        <net:endNode xlink:href="#osgb4000000070249501"/>
+        <net:startNode xlink:href="#osgb4000000070249502"/>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <hwtn:vehicularFerry>false</hwtn:vehicularFerry>
+        <hwtn:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</hwtn:reasonForChange>
+      </hwtn:FerryLink>
+</os:featureMember>
+
+<os:featureMember>
+<hwtn:FerryNode gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000067828687</gml:identifier>
+        <net:beginLifespanVersion>2017-04-15T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000067828687</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:geometry>
+          <gml:Point gml:id="LOCAL_ID_1_4D3BE3FEC3BE1F34E0530B8EA00AB2F9" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:pos>368275.208 78824.566 0.800</gml:pos>
+          </gml:Point>
+        </net:geometry>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <tn-w:formOfWaterwayNode xlink:title="water terminal" xlink:href="http://inspire.ec.europa.eu/codelist/FormOfWaterwayNodeValue/waterTerminal"/>
+        <hwtn:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</hwtn:reasonForChange>
+      </hwtn:FerryNode>
+</os:featureMember>
+
+<os:featureMember>
+<hwtn:FerryTerminal gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/4000000067828689</gml:identifier>
+        <net:beginLifespanVersion>2016-11-15T00:00:00.000</net:beginLifespanVersion>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>4000000067828689</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:inNetwork xlink:href="#OSHighwayNetwork"/>
+        <net:type xlink:href="http://inspire.ec.europa.eu/codelist/ConnectionTypeValue/intermodal" xlink:title="intermodal"/>
+        <net:element xlink:href="#osgb4000000067828687" xlink:role="FerryNode"/>
+        <net:element xlink:href="#osgb4000000067828683" xlink:role="PathNode"/>
+        <hwtn:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</hwtn:reasonForChange>
+      </hwtn:FerryTerminal>
+</os:featureMember>
+
+<os:featureMember>
+<ram:Maintenance gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/0020MA03027107</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn20101474"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>0020MA03027107</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-09-16T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom>1999-06-01T00:00:00.000</tn:validFrom>
+        <ram:maintenanceResponsibility>Maintainable At Public Expense</ram:maintenanceResponsibility>
+        <ram:maintenanceAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>0020</highway:identifier>
+            <highway:authorityName>Transport for London</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </ram:maintenanceAuthority>
+        <ram:partialReference>false</ram:partialReference>
+        <ram:highwayAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>5120</highway:identifier>
+            <highway:authorityName>Bexley</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </ram:highwayAuthority>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</ram:reasonForChange>
+      </ram:Maintenance>
+</os:featureMember>
+
+<os:featureMember>
+<ram:Reinstatement gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/0020RI02142829</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn20101474"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>0020RI02142829</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-09-16T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <ram:reinstatementType codeSpace="http://www.os.uk/xml/codelists/highways/ReinstatementTypeValue.xml">Carriageway Type 4</ram:reinstatementType>
+        <ram:partialReference>false</ram:partialReference>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Geometry</ram:reasonForChange>
+      </ram:Reinstatement>
+</os:featureMember>
+
+<os:featureMember>
+<ram:SpecialDesignation gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/0020SD01303740</gml:identifier>
+        <net:networkRef>
+          <ram:NetworkReferenceLocation>
+            <net:element xlink:href="#usrn8100117"/>
+            <ram:locationDescription>CAVENDISH COURT</ram:locationDescription>
+            <ram:locationStart>
+              <gml:Point gml:id="LOCAL_ID_1_65AD147F88247C1EE0530B8EA00AFFCF" srsName="urn:ogc:def:crs:EPSG::27700">
+                <gml:pos>533292.000 180673.000</gml:pos>
+              </gml:Point>
+            </ram:locationStart>
+            <ram:locationEnd>
+              <gml:Point gml:id="LOCAL_ID_1_65AD147F88257C1EE0530B8EA00AFFCF" srsName="urn:ogc:def:crs:EPSG::27700">
+                <gml:pos>533434.000 180710.000</gml:pos>
+              </gml:Point>
+            </ram:locationEnd>
+          </ram:NetworkReferenceLocation>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>0020SD01303740</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2018-02-20T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom nilReason="unknown" xsi:nil="true"/>
+        <ram:designation codeSpace="http://www.os.uk/xml/codelists/highways/SpecialDesignationTypeValue.xml">Special Engineering Difficulty</ram:designation>
+        <ram:description>LUL - TL77 RAILWAY TUNNEL 6 RING BRICK ARCH</ram:description>
+        <ram:timeInterval>
+          <ram:TemporalPropertyType>
+            <ram:namedDate codeSpace="http://www.os.uk/xml/codelists/highways/NamedDate.xml">All Year</ram:namedDate>
+            <ram:dayPeriod>
+              <ram:DayPropertyType>
+                <ram:namedDay codeSpace="http://www.os.uk/xml/codelists/highways/NamedDay.xml">All Days</ram:namedDay>
+              </ram:DayPropertyType>
+            </ram:dayPeriod>
+          </ram:TemporalPropertyType>
+        </ram:timeInterval>
+        <ram:contactAuthority>
+          <highway:ResponsibleAuthority>
+            <highway:identifier>0020</highway:identifier>
+            <highway:authorityName>Transport for London</highway:authorityName>
+          </highway:ResponsibleAuthority>
+        </ram:contactAuthority>
+        <ram:partialReference>true</ram:partialReference>
+        <ram:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">Modified Attributes</ram:reasonForChange>
+      </ram:SpecialDesignation>
+</os:featureMember>
+
+<os:featureMember>
+<dedication:HighwayDedication gml:id="osgb----------------">
+        <gml:identifier codeSpace="http://inspire.jrc.ec.europa.eu/ids">http://data.os.uk/id/esu0114_361166167690_4</gml:identifier>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#osgb4000000070132256" xlink:title="PathLink"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:networkRef>
+          <net:NetworkReference>
+            <net:element xlink:href="#usrn47930034" xlink:title="Street"/>
+          </net:NetworkReference>
+        </net:networkRef>
+        <net:inspireId>
+          <base:Identifier>
+            <base:localId>esu0114_361166167690_4</base:localId>
+            <base:namespace>http://data.os.uk/</base:namespace>
+          </base:Identifier>
+        </net:inspireId>
+        <net:beginLifespanVersion>2017-09-16T00:00:00.000</net:beginLifespanVersion>
+        <tn:validFrom>2000-03-05T00:00:00.000</tn:validFrom>
+        <dedication:reasonForChange codeSpace="http://www.os.uk/xml/codelists/ChangeTypeValue.xml">New</dedication:reasonForChange>
+        <dedication:dedication codeSpace="http://www.os.uk/xml/codelists/highways/DedicationValue.xml">Pedestrian Way Or Footpath</dedication:dedication>
+        <dedication:publicRightOfWay>false</dedication:publicRightOfWay>
+        <dedication:nationalCycleRoute>false</dedication:nationalCycleRoute>
+        <dedication:quietRoute>false</dedication:quietRoute>
+        <dedication:obstruction>false</dedication:obstruction>
+        <dedication:planningOrder>false</dedication:planningOrder>
+        <dedication:worksProhibited>false</dedication:worksProhibited>
+        <dedication:geometry>
+          <gml:LineString gml:id="LOCAL_ID_1_5955B72EB8AA4F31E0530B8EA00A862E" srsName="urn:ogc:def:crs:EPSG::27700">
+            <gml:posList srsDimension="2" count="3">361149.000 167691.000 361166.000 167691.000 361188.000 167685.000</gml:posList>
+          </gml:LineString>
+        </dedication:geometry>
+      </dedication:HighwayDedication>
+</os:featureMember>
+</os:FeatureCollection>
