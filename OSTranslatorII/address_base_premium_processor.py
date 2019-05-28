@@ -464,39 +464,39 @@ def main():
             default_db = 'training'
 
             print('Specify destination server (press ENTER for default)')
-            self.server = raw_input('(%s) >' % default_server)
+            self.server = input('(%s) >' % default_server)
             if self.server == '':
                 self.server = default_server
 
             print('Specify server port (press ENTER for default)')
-            self.port = raw_input('(%s) >' % default_port)
+            self.port = input('(%s) >' % default_port)
             if self.port == '':
                 self.port = int(default_port)
 
             print('Specify destination database (press ENTER for default)')
-            self.db = raw_input('(%s) >' % default_db)
+            self.db = input('(%s) >' % default_db)
             if self.db == '':
                 self.db = default_db
 
             print('Specify (existing) destination schema (press ENTER for default)')
-            self.schema = raw_input('(%s) >' % default_schema)
+            self.schema = input('(%s) >' % default_schema)
             if self.schema == '':
                 self.schema = default_schema
 
             print('Specify username (press ENTER for default)')
-            self.user = raw_input('(%s) >' % default_user)
+            self.user = input('(%s) >' % default_user)
             if self.user == '':
                 self.user = default_user
 
             print('Specify password (press ENTER for default)')
-            self.passwd = raw_input('(%s) >' % default_passwd)
+            self.passwd = input('(%s) >' % default_passwd)
             if self.passwd == '':
                 self.passwd = default_passwd
 
             self.source_folder = ''
             while not os.path.isdir(self.source_folder):
                 print('Specify folder containing source .CSV files (all CSV files in this folder [but not below it] will be processed)')
-                self.source_folder = raw_input('>').strip('"')
+                self.source_folder = input('>').strip('"')
 
             self.source_files = []
             for f in os.listdir(self.source_folder):
