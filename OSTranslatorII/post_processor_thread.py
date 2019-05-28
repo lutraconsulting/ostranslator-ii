@@ -126,10 +126,14 @@ class PostProcessorThread(QThread):
                         # There were no matching features imported so the table was not created, do not index
                         pass
                     elif e.message.splitlines()[0].strip().startswith('column') and e.message.splitlines()[0].strip().endswith('does not exist'):
-                        # Looks like we're using gml_id, not fid
-                        self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
-                        if not self.cur.statusmessage.startswith('DELETE'):
-                            self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                        try:
+                            # Looks like we're using gml_id, not fid
+                            self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
+                            if not self.cur.statusmessage.startswith('DELETE'):
+                                self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                        except psycopg2.ProgrammingError:
+                            # with ignore FID option it might fail here since it does not have gml_id column
+                            pass
                     else:
                         raise sys.exc_info()
                 else:
