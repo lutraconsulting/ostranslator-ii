@@ -186,7 +186,11 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
                 
         self.removeDuplicatesCheckBox.setCheckState( s.value("OsTranslatorII/removeDuplicates", QtCore.Qt.Checked, type=int) )
 
-        self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Unchecked, type=int))
+        # This option is now always disabled as it always seems to cause problems - will likely be removed completely
+        # in later versions.
+        # self.ignoreFidCheckBox.setCheckState( s.value("OsTranslatorII/ignoreFid", QtCore.Qt.Unchecked, type=int))
+        self.ignoreFidCheckBox.setCheckState(QtCore.Qt.Unchecked)
+        self.ignoreFidCheckBox.setEnabled(False)
 
         styleName = str(s.value("OsTranslatorII/styleName", ''))
         self.styleNameComboBox.setCurrentIndex(
@@ -559,7 +563,6 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
                       self.fieldsTreeWidget,
                       self.buttonBox,
                       self.createSpatialIndexCheckBox,
-
                       self.removeDuplicatesCheckBox]
 
         for ie in uiElements:

@@ -15,11 +15,12 @@ email=info@lutraconsulting.co.uk
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog=3.1 New features
-  - Migration of OS HN support and AB Premium import scripts to QGIS 3.x version
- <p>3.0 - New features
+changelog=3.1 Version bump
+ <p>3.0 - New features:
  - Support for QGIS 3.x
- <p>1.5.1 - Added Address Base Premium import scripts
+ <p>1.5.1 - New features:
+ - Added Address Base Premium import scripts
+ - Disabled the 'Ignore FID' option
  <p>1.5.0 - New features
  - OS HN support (Roads and RAMI, Paths)
  <p>1.4.3 - New features

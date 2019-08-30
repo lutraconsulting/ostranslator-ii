@@ -26,7 +26,7 @@ class Styler(object):
         self.cur = cur
         self.uri = uri
         self.schema = schema
-        self.osmm_schema = osmm_schema #7-9
+        self.osmm_schema = osmm_schema  # A string
         self.osmm_style_name = osmm_style_name
         self.tmpSchema = schema + '_tmp' # We work on the temporary version of the table
         self.styleSupportedTopoTables = ['topographicarea',
@@ -43,7 +43,7 @@ class Styler(object):
     def populate_locations(self):
         base_url = 'https://raw.githubusercontent.com/OrdnanceSurvey/OSMM-Topography-Layer-stylesheets'
 
-        if self.osmm_schema == 7:
+        if self.osmm_schema == '7':
             qml_base = base_url + '/v1.0.0/Schema%20version%207/Stylesheets/QGIS%20stylesheets%20%28QML%29/OSMM%20Topo%20-%20'
 
             self.qmlLocations = { 'topographicarea' : qml_base + 'Topographic%20Area.qml',
@@ -59,7 +59,7 @@ class Styler(object):
                 self.sqlLocations[t] = sql_base + t + sql_mode
 
 
-        elif self.osmm_schema == 9:
+        elif self.osmm_schema == '9':
             allowed_style_names = ["backdrop", "light", "standard", "outdoor"]
             if (not self.osmm_style_name in allowed_style_names):
                 self.osmm_style_name = "standard"
