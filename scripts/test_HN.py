@@ -11,7 +11,7 @@ def get_table_columns(connection, schema, table):
             cols.append(desc[0])
         cursor.close()
     except pg.Error as e:
-        print e
+        print(e)
     return cols
 
 def check_tables():
@@ -32,12 +32,12 @@ def check_tables():
                 cur.execute(sql)
                 results = cur.fetchall()
                 if results[0][0] is None:
-                    print t + ": " + c + " ...INVALID"
+                    print(t + ": " + c + " ...INVALID")
                 else:
-                    print t + ": " + c + " ...OK"
+                    print(t + ": " + c + " ...OK")
                 cur.close()
             except pg.Error as e:
-                print e
+                print(e)
 
 if __name__ == '__main__':
     check_tables()

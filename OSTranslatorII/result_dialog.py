@@ -9,15 +9,17 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+from __future__ import absolute_import
 import os
-from utils import OSII_icon_path
+from .utils import OSII_icon_path
 
-from PyQt4 import QtGui, QtCore, uic
+from qgis.PyQt import QtGui, QtCore, uic
+from qgis.PyQt import QtWidgets
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'ui', 'result_dialog_base.ui'))
 
 
-class ResultDialog(QtGui.QDialog, FORM_CLASS):
+class ResultDialog(QtWidgets.QDialog, FORM_CLASS):
     
     def __init__(self, parent=None):
         self.uiInitialised = False

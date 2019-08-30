@@ -1,8 +1,8 @@
 __author__ = 'Pete'
 
-import os, threading, psycopg2
+import os, threading
 
-from csv_processor import CsvProcessor
+from .csv_processor import CsvProcessor
 
 
 def copy_in(cur, stdin, schema, table):
@@ -445,9 +445,9 @@ class AddressBasePremiumProcessor(CsvProcessor):
             output_pipes[table_identifier]['write_f'].close()
             output_pipes[table_identifier]['copy_thread'].join()
 
-        print 'Counts:'
+        print('Counts:')
         for k in output_pipes.keys():
-            print '\t%d: %d' % (k, output_pipes[k]['write_count'])
+            print('\t%d: %d' % (k, output_pipes[k]['write_count']))
 
 def main():
 
@@ -456,7 +456,6 @@ def main():
     class dummy():
 
         def __init__(self):
-			
             default_server = 'localhost'
             default_port = '5432'
             default_user = 'postgres'
@@ -464,40 +463,40 @@ def main():
             default_schema = 'os_ab_premium'
             default_db = 'training'
 
-            print 'Specify destination server (press ENTER for default)'
-            self.server = raw_input('(%s) >' % default_server)
+            print('Specify destination server (press ENTER for default)')
+            self.server = input('(%s) >' % default_server)
             if self.server == '':
                 self.server = default_server
 
-            print 'Specify server port (press ENTER for default)'
-            self.port = raw_input('(%s) >' % default_port)
+            print('Specify server port (press ENTER for default)')
+            self.port = input('(%s) >' % default_port)
             if self.port == '':
                 self.port = int(default_port)
 
-            print 'Specify destination database (press ENTER for default)'
-            self.db = raw_input('(%s) >' % default_db)
+            print('Specify destination database (press ENTER for default)')
+            self.db = input('(%s) >' % default_db)
             if self.db == '':
                 self.db = default_db
 
-            print 'Specify (existing) destination schema (press ENTER for default)'
-            self.schema = raw_input('(%s) >' % default_schema)
+            print('Specify (existing) destination schema (press ENTER for default)')
+            self.schema = input('(%s) >' % default_schema)
             if self.schema == '':
                 self.schema = default_schema
 
-            print 'Specify username (press ENTER for default)'
-            self.user = raw_input('(%s) >' % default_user)
+            print('Specify username (press ENTER for default)')
+            self.user = input('(%s) >' % default_user)
             if self.user == '':
                 self.user = default_user
 
-            print 'Specify password (press ENTER for default)'
-            self.passwd = raw_input('(%s) >' % default_passwd)
+            print('Specify password (press ENTER for default)')
+            self.passwd = input('(%s) >' % default_passwd)
             if self.passwd == '':
                 self.passwd = default_passwd
 
             self.source_folder = ''
             while not os.path.isdir(self.source_folder):
-                print 'Specify folder containing source .CSV files (all CSV files in this folder [but not below it] will be processed)'
-                self.source_folder = raw_input('>').strip('"')
+                print('Specify folder containing source .CSV files (all CSV files in this folder [but not below it] will be processed)')
+                self.source_folder = input('>').strip('"')
 
             self.source_files = []
             for f in os.listdir(self.source_folder):

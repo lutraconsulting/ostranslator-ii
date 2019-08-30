@@ -9,13 +9,16 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-from PyQt4.QtGui import QAction, QIcon
+from __future__ import absolute_import
+from builtins import object
+from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtGui import QIcon
 
-from os_translator_ii_dialog import OsTranslatorIIDialog
-from utils import OSII_icon_path
+from .os_translator_ii_dialog import OsTranslatorIIDialog
+from .utils import OSII_icon_path
 
 
-class OsTranslatorII:
+class OsTranslatorII(object):
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):

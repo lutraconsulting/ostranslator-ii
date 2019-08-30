@@ -9,10 +9,12 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+from __future__ import absolute_import
+from builtins import str
 import traceback
 import sys
-from PyQt4.QtCore import *
-from styler import *
+from qgis.PyQt.QtCore import *
+from .styler import *
 
 class PostProcessorThread(QThread):
     
@@ -103,9 +105,10 @@ class PostProcessorThread(QThread):
                 if self.createSpatialIndex:
                     try:
                         self.cur.execute("""CREATE INDEX """ + table + """_wkb_geometry_gist ON """ + self.schema + """_tmp.""" + table + """ USING gist (wkb_geometry)""", qDic)
-                    except psycopg2.ProgrammingError, e:
-                        if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist') or \
-                           e.message.strip() == 'column "wkb_geometry" does not exist':
+                    except psycopg2.ProgrammingError as e:
+                        err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                        if err.startswith('relation') and err.endswith('does not exist') or \
+                           err == 'column "wkb_geometry" does not exist':
                             # There were no matching features imported so the table was not created, do not index
                             pass
                     else:
@@ -120,17 +123,23 @@ class PostProcessorThread(QThread):
                     self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE fid = 'osgb----------------' AND ogc_fid < 100""", qDic)
                     # This limits the sequential search for fids to only the first 100 rows (where the pioneers will be).
                     # It means we do no longer need to build an index for the fid column
-                except psycopg2.ProgrammingError, e:
-                    if e.message.splitlines()[0].strip().startswith('relation') and e.message.splitlines()[0].strip().endswith('does not exist'):
+                except psycopg2.ProgrammingError as e:
+                    err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                    if err.startswith('relation') and err.endswith('does not exist'):
                         # There were no matching features imported so the table was not created, do not index
                         pass
-                    elif e.message.splitlines()[0].strip().startswith('column') and e.message.splitlines()[0].strip().endswith('does not exist'):
-                        # Looks like we're using gml_id, not fid
-                        self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
-                        if not self.cur.statusmessage.startswith('DELETE'):
-                            self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                    elif err.startswith('column') and err.endswith('does not exist'):
+                        try:
+                            # Looks like we're using gml_id, not fid
+                            self.cur.execute("""DELETE FROM """ + self.schema + """_tmp.""" + table + """ WHERE gml_id = 'osgb----------------' AND ogc_fid < 100""", qDic)
+                            if not self.cur.statusmessage.startswith('DELETE'):
+                                self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
+                        except psycopg2.ProgrammingError:
+                            # neither fid nor gml_id delete queries were successful, related to ignore the FID option
+                            # see also https://github.com/lutraconsulting/ostranslator-ii/issues/48
+                            pass
                     else:
-                        raise sys.exc_info()
+                        raise Exception(str(sys.exc_info()))
                 else:
                     if not self.cur.statusmessage.startswith('DELETE'):
                         self.error.emit('Failed to delete pioneer rows for %s.%s' % (self.schema+'_tmp', table))
@@ -152,8 +161,9 @@ class PostProcessorThread(QThread):
                                                 """ + self.schema + """_tmp.""" + table + """.ogc_fid < dup.ogc_fid;""", qDic)
                         # Drop the index
                         self.cur.execute("""DROP INDEX """ + table + """_fid_hash""", qDic)
-                    except psycopg2.ProgrammingError, e:
-                        if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                    except psycopg2.ProgrammingError as e:
+                        err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                        if err.startswith('relation') and err.endswith('does not exist'):
                             # There were no matching features imported so the table was not created, do not index
                             pass
                 
@@ -170,15 +180,17 @@ class PostProcessorThread(QThread):
                     self.cur.execute("""DROP TABLE IF EXISTS """ + self.schema + """.""" + table, qDic)
                     self.cur.execute("""ALTER TABLE """ + self.schema + """_tmp.""" + table + """ SET SCHEMA """ + self.schema, qDic)
                     self.cur.execute("""COMMIT""", qDic)
-                except psycopg2.ProgrammingError, e:
-                    if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                except psycopg2.ProgrammingError as e:
+                    err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                    if err.startswith('relation') and err.endswith('does not exist'):
                         # There were no matching features imported so the table was not created, do not analyse
                         self.cur.execute("""ROLLBACK""", qDic)
                 
                 try:
                     self.cur.execute("""ANALYZE """ + self.schema + """.""" + table, qDic)
-                except psycopg2.ProgrammingError, e:
-                    if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                except psycopg2.ProgrammingError as e:
+                    err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                    if err.startswith('relation') and err.endswith('does not exist'):
                         # There were no matching features imported so the table was not created, do not analyse
                         pass
                 else:
@@ -215,8 +227,9 @@ class PostProcessorThread(QThread):
                                                     (%(f_table_catalog)s, %(schema)s, %(table)s, %(f_geometry_column)s, %(coord_dimension)s, %(srid)s, %(type)s)""", qDic)
                         else:
                             self.cur.execute("""UPDATE public.geometry_columns SET f_table_schema = %(schema)s WHERE f_table_schema = %(schema_tmp)s AND f_table_name = %(table)s""", qDic)
-                    except psycopg2.ProgrammingError, e:
-                        if e.message.strip().startswith('relation') and e.message.strip().endswith('does not exist'):
+                    except psycopg2.ProgrammingError as e:
+                        err = e.pgerror.splitlines()[0].replace('ERROR:', '').strip()
+                        if err.startswith('relation') and err.endswith('does not exist'):
                             # There were no matching features imported so the table was not created, do not analyse
                             pass
                     else:
