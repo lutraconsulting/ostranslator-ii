@@ -98,15 +98,23 @@ def _download_urllib2(url, handle):
 
 
 def get_OSMM_schema_ver(s):
-    """ Guess the OSMM schema version from the path or string"""
-    match = re.search(pattern=r'''.*\(v(\d).*''', string=s)
+    """ Extract the schema version (as a string) from the file name"""
+    supported_versions = dict()
+    supported_versions['OS Mastermap Topography'] = ['7', '9']
+    supported_versions['OS Mastermap ITN Urban Paths'] = ['8']
+    supported_versions['OS Mastermap ITN'] = ['7', '9']
+    supported_versions['OS Mastermap HN Roads and RAMI'] = ['2.2']
+    supported_versions['OS Mastermap HN Paths'] = ['2.2']
+    # match = re.search(pattern=r'''.*\(v(\d)\).*''', string=s)
+    match = re.search(pattern=r'''(.*)\(v(\d+(\.\d+)*)\).*''', string=s)
     if match:
         try:
-            sch = int(match.group(1)) #0 is whole string
+            dataset = match.group(1)  #0 is whole string
+            sch = match.group(2)
         except Exception:
             raise Exception("Unable to parse OSMM schema version from {}".format(s))
 
-        if sch not in [2, 7, 8, 9]:
+        if sch not in supported_versions[dataset]:
             raise Exception("Unsupported OSMM schema {}".format(sch))
 
         return sch

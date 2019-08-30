@@ -49,7 +49,6 @@ class PostProcessorThread(QThread):
         self.dedup = dedup
         self.addTopoStyleColumns = addTopoStyleColumns
         self.applyDefaultStyle = applyDefaultStyle
-        self.osmm_schema = osmm_schema  # 7-9
         self.osmm_style_name = osmm_style_name
 
         # Number of post-processing steps. Used to calculate the 
