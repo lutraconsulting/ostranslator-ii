@@ -117,7 +117,7 @@ def get_OSMM_schema_ver(s):
     supported_versions['OS Mastermap HN Roads and RAMI'] = ['2.2']
     supported_versions['OS Mastermap HN Paths'] = ['2.2']
     # match = re.search(pattern=r'''.*\(v(\d)\).*''', string=s)
-    match = re.search(pattern=r'''(.*)\(v(\d+(\.\d+)*)\).*''', string=s)
+    match = re.search(pattern=r'''(.*) \(v(\d+(\.\d+)*)\).*''', string=s)
     if match:
         try:
             dataset = match.group(1)  #0 is whole string
