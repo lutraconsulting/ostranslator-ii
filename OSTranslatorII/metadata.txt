@@ -17,6 +17,7 @@ email=info@lutraconsulting.co.uk
 # Uncomment the following line and add your changelog:
 changelog=1.5.1 - New features:
  - Added Address Base Premium import scripts
+ - Disabled the 'Ignore FID' option
  <p>1.5.0 - New features
  - OS HN support (Roads and RAMI, Paths)
  <p>1.4.3 - New features
