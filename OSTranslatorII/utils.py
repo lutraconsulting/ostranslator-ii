@@ -116,6 +116,7 @@ def get_OSMM_schema_ver(s):
     supported_versions['OS Mastermap ITN'] = ['7', '9']
     supported_versions['OS Mastermap HN Roads and RAMI'] = ['2.2']
     supported_versions['OS Mastermap HN Paths'] = ['2.2']
+    supported_versions['OS Mastermap Water Network'] = ['1']
     # match = re.search(pattern=r'''.*\(v(\d)\).*''', string=s)
     match = re.search(pattern=r'''(.*) \(v(\d+(\.\d+)*)\).*''', string=s)
     if match:
