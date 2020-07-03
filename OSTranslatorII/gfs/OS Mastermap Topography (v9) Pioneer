@@ -103,9 +103,13 @@
 <osgb:physicalLevel>1</osgb:physicalLevel>
 <osgb:physicalPresence>Boundary</osgb:physicalPresence>
 <osgb:polyline>
-<gml:LineString srsName='osgb:BNG'>
+<gml:MultiLineString srsName='osgb:BNG'>
+<gml:lineStringMember>
+<gml:LineString>
 <gml:coordinates>0.0,0.0 0.0,1.0 1.0,0.0</gml:coordinates>
 </gml:LineString>
+</gml:lineStringMember>
+</gml:MultiLineString>
 </osgb:polyline>
 </osgb:BoundaryLine>
 </osgb:boundaryMember>
@@ -125,9 +129,13 @@
 <osgb:physicalLevel>1</osgb:physicalLevel>
 <osgb:physicalPresence>Obstructing</osgb:physicalPresence>
 <osgb:polyline>
-<gml:LineString srsName='osgb:BNG'>
+<gml:MultiLineString srsName='osgb:BNG'>
+<gml:lineStringMember>
+<gml:LineString>
 <gml:coordinates>0.0,0.0 0.0,1.0 1.0,0.0</gml:coordinates>
 </gml:LineString>
+</gml:lineStringMember>
+</gml:MultiLineString>
 </osgb:polyline>
 </osgb:TopographicLine>
 </osgb:topographicMember>

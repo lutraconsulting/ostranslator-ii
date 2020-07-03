@@ -81,7 +81,7 @@
   <GMLFeatureClass>
     <Name>TopographicLine</Name>
     <ElementPath>TopographicLine</ElementPath>
-    <GeometryType>2</GeometryType>
+    <GeometryType>5</GeometryType>
     <SRSName>osgb:BNG</SRSName>
     <!-- The fid attribute is found automatically and we do not need to 
     define it as such -->
@@ -279,7 +279,7 @@
   <GMLFeatureClass>
     <Name>BoundaryLine</Name>
     <ElementPath>BoundaryLine</ElementPath>
-    <GeometryType>2</GeometryType>
+    <GeometryType>5</GeometryType>
     <SRSName>osgb:BNG</SRSName>
     <!-- The fid attribute is found automatically and we do not need to 
     define it as such -->
