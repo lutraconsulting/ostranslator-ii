@@ -2,7 +2,7 @@ __author__ = 'Pete'
 
 import os, threading
 
-from .csv_processor import CsvProcessor
+from csv_processor import CsvProcessor
 
 
 def copy_in(cur, stdin, schema, table):
@@ -379,7 +379,7 @@ class AddressBasePremiumProcessor(CsvProcessor):
     def process(self):
 
         output_pipes = {}
-        for table_identifier, table_name in self.dst_tables.iteritems():
+        for table_identifier, table_name in self.dst_tables.items():
             p_r, p_w = os.pipe()  # Make a pipe (read and write ends)
             output_pipes[table_identifier] = {
                 'read_pipe': p_r,
@@ -400,44 +400,18 @@ class AddressBasePremiumProcessor(CsvProcessor):
 
         for input_file_path in self.input_file_paths:
             input_file = open(input_file_path, 'r')
+            channel = 0
             for line in input_file:
-                if line.startswith('23,'):
-                    output_pipes[23]['write_f'].write(line)
-                    output_pipes[23]['write_count'] += 1
-                elif line.startswith('24,'):
-                    output_pipes[24]['write_f'].write(line)
-                    output_pipes[24]['write_count'] += 1
-                elif line.startswith('21,'):
-                    output_pipes[21]['write_f'].write(line)
-                    output_pipes[21]['write_count'] += 1
-                elif line.startswith('32,'):
-                    output_pipes[32]['write_f'].write(line)
-                    output_pipes[32]['write_count'] += 1
-                elif line.startswith('28,'):
-                    output_pipes[28]['write_f'].write(line)
-                    output_pipes[28]['write_count'] += 1
-                elif line.startswith('11,'):
-                    output_pipes[11]['write_f'].write(line)
-                    output_pipes[11]['write_count'] += 1
-                elif line.startswith('15,'):
-                    output_pipes[15]['write_f'].write(line)
-                    output_pipes[15]['write_count'] += 1
-                elif line.startswith('31,'):
-                    output_pipes[31]['write_f'].write(line)
-                    output_pipes[31]['write_count'] += 1
-                elif line.startswith('10,'):
-                    output_pipes[10]['write_f'].write(line)
-                    output_pipes[10]['write_count'] += 1
-                elif line.startswith('29,'):
-                    output_pipes[29]['write_f'].write(line)
-                    output_pipes[29]['write_count'] += 1
-                elif line.startswith('30,'):
-                    output_pipes[30]['write_f'].write(line)
-                    output_pipes[30]['write_count'] += 1
-                elif line.startswith('99,'):
-                    output_pipes[99]['write_f'].write(line)
-                    output_pipes[99]['write_count'] += 1
-
+                if len(line) > 1:
+                    # Then it's a real line and not just a blank line with \n on the end
+                    channel = int(line[:2])
+                    output_pipes[channel]['write_f'].write(line)
+                    output_pipes[channel]['write_count'] += 1
+            # We've now finished with the file, which should have ended with a blank line. If it does not, send a \n
+            # down the last used channel
+            if len(line) != 0:
+                # There was no blank line at the end of the file
+                output_pipes[channel]['write_f'].write('\n')
             input_file.close()
 
         for table_identifier in self.dst_tables.keys():
@@ -461,7 +435,7 @@ def main():
             default_user = 'postgres'
             default_passwd = 'postgres'
             default_schema = 'os_ab_premium'
-            default_db = 'training'
+            default_db = 'abp'
 
             print('Specify destination server (press ENTER for default)')
             self.server = input('(%s) >' % default_server)
