@@ -14,7 +14,10 @@ from qgis._core import QgsApplication, QgsAuthMethodConfig
 
 standard_library.install_aliases()
 from builtins import str
-import gdal
+try:
+    from osgeo import gdal
+except ImportError:
+    import gdal
 import re
 import os, urllib.request, urllib.error, urllib.parse
 import psycopg2

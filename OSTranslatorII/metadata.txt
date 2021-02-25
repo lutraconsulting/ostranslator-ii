@@ -6,7 +6,7 @@ qgisMinimumVersion=3.4
 qgismaximumversion=3.99
 description=A plugin for loading Ordnance Survey Products.
 about=OS Translator II makes loading GML-based datasets into PostGIS easy. It also performs a number of post-processing tasks on the data such as adding additional fields for styling and downloading 3rd-party stylesheets.
-version=3.2.2
+version=3.2.3
 author=Lutra Consulting
 email=info@lutraconsulting.co.uk
 
@@ -15,7 +15,9 @@ email=info@lutraconsulting.co.uk
 # Optional items:
 
 # Uncomment the following line and add your changelog:
-changelog=3.2.2 Bug fixes:
+changelog=3.2.3 Bug fixes:
+ - Fix loading for QGIS 3.18
+ <p> 3.2.2 Bug fixes:
  - Allow reading of .csv files with no trailing empty line
  <p>3.2.1 Bug fixes:
  - Allow multi-type features in boundary line and topographicline
