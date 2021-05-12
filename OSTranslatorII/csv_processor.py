@@ -14,6 +14,7 @@ class CsvProcessor():
         self.parent = parent
         self.concurrent_jobs = kwargs.get('concurrent_jobs', 1)
         self.dst_schema = kwargs.get('dest_schema', None)
+        self.src_encoding = kwargs.get('src_encoding', 'utf_8')
         self.input_file_paths = kwargs.get('input_files', list())  # Absolute paths to CSV files
         if not hasattr(parent, 'getDbCur'):
             raise Exception('parent must provide getDbCur method')

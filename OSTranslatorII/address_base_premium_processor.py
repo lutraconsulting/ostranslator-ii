@@ -384,8 +384,8 @@ class AddressBasePremiumProcessor(CsvProcessor):
             output_pipes[table_identifier] = {
                 'read_pipe': p_r,
                 'write_pipe': p_w,
-                'read_f': os.fdopen(p_r),
-                'write_f': os.fdopen(p_w, 'w'),
+                'read_f': os.fdopen(p_r, 'r', encoding=self.src_encoding),
+                'write_f': os.fdopen(p_w, 'w', encoding=self.src_encoding),
                 'write_count': 0
             }
             cur = self.parent.getDbCur()  # These cursors could be part of the same connection.
@@ -399,7 +399,7 @@ class AddressBasePremiumProcessor(CsvProcessor):
             output_pipes[table_identifier]['copy_thread'].start()
 
         for input_file_path in self.input_file_paths:
-            input_file = open(input_file_path, 'r')
+            input_file = open(input_file_path, 'r', encoding=self.src_encoding)
             channel = 0
             for line in input_file:
                 if len(line) > 1:
@@ -436,6 +436,7 @@ def main():
             default_passwd = 'postgres'
             default_schema = 'os_ab_premium'
             default_db = 'abp'
+            default_encoding = 'utf_8'
 
             print('Specify destination server (press ENTER for default)')
             self.server = input('(%s) >' % default_server)
@@ -472,6 +473,11 @@ def main():
                 print('Specify folder containing source .CSV files (all CSV files in this folder [but not below it] will be processed)')
                 self.source_folder = input('>').strip('"')
 
+            print('Specify source encoding (press ENTER for default)')
+            self.encoding = input('(%s) >' % default_encoding)
+            if self.encoding == '':
+                self.encoding = default_encoding
+
             self.source_files = []
             for f in os.listdir(self.source_folder):
                 if f.lower().endswith('.csv'):
@@ -489,6 +495,7 @@ def main():
 
     d = dummy()
     p = AddressBasePremiumProcessor(d,
+                                    src_encoding=d.encoding,
                                     input_files=d.source_files,
                                     dest_schema=d.schema)
     p.prepare()
