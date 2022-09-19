@@ -203,7 +203,7 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
             val = int(s.value("OsTranslatorII/simultaneousJobs", -1, type=int))
         if val == -1:
             val = multiprocessing.cpu_count() / 2 # div by 2 in case of HT
-        self.simultaneousJobsSpinBox.setValue( val )
+        self.simultaneousJobsSpinBox.setValue( int(val) )
         
         self.updateFieldsList()
         self.uiInitialised = True
