@@ -121,10 +121,10 @@ class Styler(object):
             
         """
         
-        if not table in list(self.qmlLocations.keys()):
+        if table not in list(self.qmlLocations.keys()):
             return False
         
-        defaultStyleName = 'Default OS Style'
+        defaultStyleName = f'{table} OS style'
         
         # Read the QML
         qmlPath = utils.download(self.qmlLocations[table], table + '.qml')
@@ -143,28 +143,45 @@ class Styler(object):
 
         if not success:
             raise Exception('Failed to load layer style: %s\n\nThis can happen when using free wifi connections requiring registration.' % message)
-        try:
-            # Technically we should only pass .. bool, string but there are some 
-            # issues with SIP that will be resolved shortly
-            # 2/7/15 Updated call below based on Martin's feedback of the 27/5/15
-            pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '', None)
-        except TypeError:
-            # For the case when the SIP files are fixed
-            # TODO: Clean this up (eventually)
-            pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '')
 
-        del pgLayer # Unload
-        
         # Update layer_styles to ensure the relavant row references the destination schema
         qDic = {}
         qDic['dest_schema'] = self.schema
         qDic['tmp_schema'] = self.schema + '_tmp'
         qDic['table'] = table
         qDic['style_name'] = defaultStyleName
+        try:
+            qDic['geom_type'] = pgLayer.geometryType().name
+        except AttributeError:
+            gtype = {
+                0: "Point",
+                1: "Line",
+                2: "Polygon",
+                3: "UnknownGeometry",
+                4: "NullGeometry",
+            }
+            qDic['geom_type'] = gtype.get(pgLayer.geometryType(), "UnknownGeometry")
+
         failedDbStyleSaveError = 'Failed to save style to database (postgres). Please first ensure you can successfully save ' \
                                  'layer styles to the database normally in QGIS: Right click a layer > Properties > Style > ' \
                                  'Save Style > Save in database (postgres). This error usually indicates an underlying ' \
                                  'database permissions issue.'
+
+        try:
+            self.cur.execute("""DELETE FROM layer_styles 
+                            WHERE
+                                f_table_schema = %(dest_schema)s AND
+                                f_table_name = %(table)s AND
+                                f_geometry_column = 'wkb_geometry' AND
+                                stylename = %(style_name)s""", qDic)
+        except:
+            pass
+            # it is possible the styles table doesn't exist yet
+
+        pgLayer.saveStyleToDatabase(defaultStyleName, '', True, '')
+
+        del pgLayer
+
         try:
             self.cur.execute("""UPDATE layer_styles SET
                                     f_table_schema = %(dest_schema)s
@@ -179,6 +196,19 @@ class Styler(object):
         except psycopg2.ProgrammingError:
             raise Exception('Error: %s' % failedDbStyleSaveError)
 
+        try:
+            self.cur.execute("""UPDATE layer_styles SET
+                                    type = %(geom_type)s
+                                WHERE
+                                    f_table_schema = %(dest_schema)s AND
+                                    f_table_name = %(table)s AND
+                                    f_geometry_column = 'wkb_geometry' AND
+                                    stylename = %(style_name)s""", qDic)
+            if self.cur.rowcount != 1:
+                # Either no rows have been updated or oddly more than one has
+                raise Exception('Error: %s' % failedDbStyleSaveError)
+        except psycopg2.ProgrammingError:
+            raise Exception(f'Error: Could not set geometry type for {table}')
 
         return True
 
