@@ -6,7 +6,7 @@ qgisMinimumVersion=3.4
 qgismaximumversion=3.99
 description=A plugin for loading Ordnance Survey Products.
 about=OS Translator II makes loading GML-based datasets into PostGIS easy. It also performs a number of post-processing tasks on the data such as adding additional fields for styling and downloading 3rd-party stylesheets.
-version=3.2.5
+version=3.2.6
 author=Lutra Consulting
 email=info@lutraconsulting.co.uk
 
