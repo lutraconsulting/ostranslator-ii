@@ -238,7 +238,7 @@ def credentials_user_pass(selectedConnection):
 
 
 def get_db_cur(con_details, conn_name=""):
-    if len(con_details['user']) == 0:
+    if len(con_details['password']) == 0:
         # try to use credentials according conn_name
         if conn_name:
             user, password = credentials_user_pass(conn_name)

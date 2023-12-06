@@ -43,7 +43,6 @@ class OsTranslatorII(object):
         self.toolbar = self.iface.addToolBar(u'OsTranslatorII')
         self.toolbar.setObjectName(u'OsTranslatorII')
 
-
     def add_action(
         self,
         icon_path,
@@ -117,7 +116,6 @@ class OsTranslatorII(object):
 
         return action
 
-    
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
@@ -126,14 +124,13 @@ class OsTranslatorII(object):
             text='OS Translator II',
             callback=self.run,
             parent=self.iface.mainWindow())
-        
-    
+
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu('OS Translator II', action)
             self.iface.removeToolBarIcon(action)
-
+        self.toolbar.deleteLater()
 
     def run(self):
         """Run method that performs all the real work"""

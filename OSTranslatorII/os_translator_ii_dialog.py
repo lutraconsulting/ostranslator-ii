@@ -13,16 +13,17 @@ from __future__ import absolute_import
 import string, multiprocessing
 import xml.etree.ElementTree as ET
 
+from math import floor
 from .import_manager import *
 from .result_dialog import *
 from .post_processor_thread import *
 from .utils import *
 
 try:
-    from qgis.core import QgsDataSourceURI
+    from qgis.core import QgsDataSourceURI, QgsSettings
     from qgis.PyQt.QtGui import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
 except ImportError:
-    from qgis.core import QgsDataSourceUri
+    from qgis.core import QgsDataSourceUri, QgsSettings
     from qgis.PyQt.QtWidgets import QDialog, QTreeWidgetItem, QFileDialog, QMessageBox
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'ui', 'os_translator_ii_dialog_base.ui'))
@@ -202,8 +203,8 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         except:
             val = int(s.value("OsTranslatorII/simultaneousJobs", -1, type=int))
         if val == -1:
-            val = multiprocessing.cpu_count() / 2 # div by 2 in case of HT
-        self.simultaneousJobsSpinBox.setValue( val )
+            val = max(1, floor(multiprocessing.cpu_count() / 2))  # div by 2 in case of HT
+        self.simultaneousJobsSpinBox.setValue(val)
         
         self.updateFieldsList()
         self.uiInitialised = True
@@ -317,19 +318,35 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
             self.dbDetails['password'] = 'postgres'
             self.dbDetails['port'] = 5432
             return
-        
-        s = QtCore.QSettings()
-        self.dbDetails['database'] = str(s.value("PostgreSQL/connections/%s/database" % selectedConnection, ''))
+
+        s = QgsSettings()
+        s.beginGroup("/PostgreSQL/connections/{0}".format(selectedConnection))
+        self.dbDetails['database'] = str(s.value("database", ""))
         if len(self.dbDetails['database']) == 0:
             # Looks like the preferred connection could not be found
             raise Exception('Details of the selected PostGIS connection could not be found, please check your settings')
-        self.dbDetails['host'] = str(s.value("PostgreSQL/connections/%s/host" % selectedConnection, ''))
-        self.dbDetails['user'] = str(s.value("PostgreSQL/connections/%s/username" % selectedConnection, ''))
-        self.dbDetails['password'] = str(s.value("PostgreSQL/connections/%s/password" % selectedConnection, ''))
+        self.dbDetails['host'] = str(s.value("host", ""))
         try:
-            self.dbDetails['port'], dummy = s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432).toInt()
+            self.dbDetails['port'], dummy = s.value("port", 5432).toInt()
         except:
-            self.dbDetails['port'] = int(s.value("PostgreSQL/connections/%s/port" % selectedConnection, 5432, type=int))
+            self.dbDetails['port'] = int(s.value("port", 5432, type=int))
+        # first try to get the credentials from AuthManager, then from the basic settings
+        authconf = s.value("authcfg", None)
+
+        if authconf:
+            conf = QgsAuthMethodConfig()
+            auth_manager = QgsApplication.authManager()
+            auth_manager.loadAuthenticationConfig(authconf, conf, True)
+            if conf.id():
+                self.dbDetails['user'] = conf.config("username", "")
+                self.dbDetails['password'] = conf.config("password", "")
+        else:
+            user = s.value("username", "")
+            pwd = s.value("password", "")
+            if not user or not pwd:
+                raise Exception(f"No username or password provided for the {selectedConnection} database connection")
+            self.dbDetails['user'] = user
+            self.dbDetails['password'] = pwd
         
     def getUri(self):
         try:
@@ -349,13 +366,16 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         if not os.path.isdir(inputFolder):
             QMessageBox.critical(None, 'Invalid Input Folder', '%s is not a valid folder path.' % inputFolder)
             return
-        
-        
+
         # Check a connection is selected
         if self.postgisConnectionComboBox.count() == 0:
             QMessageBox.critical(None, 'No PostGIS Connection Selected', 'No PostGIS connection was selected. Please configure a connection through Layer > Add PostGIS Layers...')
             return
-        self.extractPgConnectionDetails()
+        try:
+            self.extractPgConnectionDetails()
+        except Exception as e:
+            QMessageBox.critical(None, 'PostGIS connection problem', repr(e))
+            return
         
         # Ensure destination schema exists - prompt to create it
         self.schema_name = str(self.destSchema.text())
@@ -375,9 +395,9 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
             if reply == QMessageBox.No:
                 return
             self.schema_name = 'public'
-            
+
         try:
-            cur = get_db_cur(self.dbDetails, self.postgisConnectionComboBox.currentText())
+            cur = get_db_cur(self.dbDetails, conn_name=self.postgisConnectionComboBox.currentText())
         except:
             QMessageBox.critical(None, 'Failed to Connect to Database', 'Failed to make a connection to the database, detailed error was:\n\n%s' % traceback.format_exc())
             return
@@ -436,7 +456,7 @@ class OsTranslatorIIDialog(QDialog, FORM_CLASS):
         
         """ Add the jobs to the import manager """
         
-        if len(self.dbDetails['user']) == 0:
+        if len(self.dbDetails['password']) == 0:
             user, password = credentials_user_pass(self.postgisConnectionComboBox.currentText())
         else:
             user, password = self.dbDetails['user'], self.dbDetails['password']
