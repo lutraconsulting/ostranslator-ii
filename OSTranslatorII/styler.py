@@ -44,7 +44,7 @@ class Styler(object):
         base_url = 'https://raw.githubusercontent.com/OrdnanceSurvey/OS-Master-Map-Topography'
 
         if self.osmm_schema == '7':
-            qml_base = base_url + '/Styling/Stylesheets/Schema%20version%207/Stylesheets/QGIS%20stylesheets%20(QML)/'
+            qml_base = base_url + '/master/Styling/Stylesheets/Schema%20version%207/Stylesheets/QGIS%20stylesheets%20(QML)/'
 
             self.qmlLocations = { 'topographicarea' : qml_base + 'OSMM%20Topo%20-%20Topographic%20Area.qml',
                                   'cartographicsymbol' : qml_base + 'OSMM%20Topo%20-%20Cartographic%20Symbol.qml',
@@ -53,7 +53,7 @@ class Styler(object):
                                   'topographicline' : qml_base + 'OSMM%20Topo%20-%20Topographic%20Line.qml',
                                   'topographicpoint' : qml_base + 'OSMM%20Topo%20-%20Topographic%20Point.qml' }
 
-            sql_base = base_url + '/Styling/Stylesheets/Schema%20version%209/SQL/PostGIS/Array/'
+            sql_base = base_url + '/master/Styling/Stylesheets/Schema%20version%207/SQL/PostGIS/Array/'  # should this be version 7?
             sql_mode = '_createtable_array.sql'
             for t in self.styleSupportedTopoTables:
                 self.sqlLocations[t] = sql_base + t + sql_mode
