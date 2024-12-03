@@ -18,7 +18,7 @@ except ImportError:
     pass  # We may be calling the script from the console in which case this import is not used
 
 from qgis.PyQt.Qt import QDomDocument
-from . import utils
+import utils
 
 
 class Styler(object):

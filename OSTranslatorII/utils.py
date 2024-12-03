@@ -39,18 +39,15 @@ def OSII_icon_path():
 def download(packageUrl, destinationFileName):
     handle = tempfile.NamedTemporaryFile(delete=False, suffix=destinationFileName)
     name = handle.name
-
     try:
-        from qgis.core import QgsNetworkAccessManager
-        _download_qgis(packageUrl, handle)
-
+        import qgis.utils
+        in_qgis = qgis.utils.iface is not None
+        if in_qgis:
+            _download_qgis(packageUrl, handle)
+        else:
+            _download_urllib2(packageUrl, handle)
     except ImportError:
-        # in case we are using cli and qgis is not installed
         _download_urllib2(packageUrl, handle)
-    except Exception as err:
-        # in case we are using cli and qgis is not installed
-        _download_urllib2(packageUrl, handle)
-
     handle.close()
     return name
 

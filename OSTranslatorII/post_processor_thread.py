@@ -14,7 +14,7 @@ from builtins import str
 import traceback
 import sys
 from qgis.PyQt.QtCore import *
-from .styler import *
+from styler import *
 
 class PostProcessorThread(QThread):
     

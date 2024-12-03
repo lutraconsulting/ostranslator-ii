@@ -22,9 +22,9 @@ import sys
 import argparse
 import os
 from qgis.PyQt import QtCore
-from .import_manager import ImportManager
-from .post_processor_thread import PostProcessorThread
-from .utils import (
+from import_manager import ImportManager
+from post_processor_thread import PostProcessorThread
+from utils import (
     build_args,
     get_input_files,
     get_pioneer_file,
