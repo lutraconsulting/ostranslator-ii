@@ -14,10 +14,10 @@ import string, multiprocessing
 import xml.etree.ElementTree as ET
 
 from math import floor
-from .import_manager import *
-from .result_dialog import *
-from .post_processor_thread import *
-from .utils import *
+from OSTranslatorII.import_manager import *
+from OSTranslatorII.result_dialog import *
+from OSTranslatorII.post_processor_thread import *
+from OSTranslatorII.utils import *
 
 try:
     from qgis.core import QgsDataSourceURI, QgsSettings

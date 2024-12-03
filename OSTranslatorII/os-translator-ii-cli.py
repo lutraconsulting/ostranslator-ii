@@ -12,19 +12,20 @@
 # Fix ValueError: API 'QDate' has already been set to version 1
 from __future__ import print_function
 from __future__ import absolute_import
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 try:
     import qgis.PyQt
 except ImportError:
     pass
 
 import traceback
-import sys
 import argparse
-import os
 from qgis.PyQt import QtCore
-from .import_manager import ImportManager
-from .post_processor_thread import PostProcessorThread
-from .utils import (
+from import_manager import ImportManager
+from post_processor_thread import PostProcessorThread
+from utils import (
     build_args,
     get_input_files,
     get_pioneer_file,

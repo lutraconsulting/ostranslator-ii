@@ -18,7 +18,7 @@ except ImportError:
 
 import sys
 from qgis.PyQt import QtGui
-from .os_translator_ii_dialog import OsTranslatorIIDialog
+from OSTranslatorII.os_translator_ii_dialog import OsTranslatorIIDialog
 
 def main():
     app = QtGui.QApplication(sys.argv)

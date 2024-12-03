@@ -10,15 +10,14 @@
 # (at your option) any later version.
 
 from __future__ import absolute_import
-from builtins import object
 from qgis.PyQt.QtWidgets import QAction
 from qgis.PyQt.QtGui import QIcon
 
-from .os_translator_ii_dialog import OsTranslatorIIDialog
-from .utils import OSII_icon_path
+from OSTranslatorII.os_translator_ii_dialog import OsTranslatorIIDialog
+from OSTranslatorII.utils import OSII_icon_path
 
 
-class OsTranslatorII(object):
+class OsTranslatorII:
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
