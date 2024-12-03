@@ -64,7 +64,7 @@ class OSTranslatorCli(QtCore.QObject):
         self.con_details['host'] = host
         self.con_details['port'] = port
         self.con_details['user'] = user
-        self.con_details['password'] = "kopytko!"  # Retrieve it from PGPASSFILE instead
+        self.con_details['password'] = None  # Retrieve it from PGPASSFILE instead
 
         self.pp_thread = None
         self.pp_errors = []
