@@ -13,5 +13,5 @@
 
 def classFactory(iface):
     """Load OsTranslatorII class from file OsTranslatorII."""
-    from .os_translator_ii import OsTranslatorII
+    from OSTranslatorII.os_translator_ii import OsTranslatorII
     return OsTranslatorII(iface)

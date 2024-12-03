@@ -10,7 +10,6 @@
 # (at your option) any later version.
 
 from __future__ import absolute_import
-from builtins import object
 import psycopg2
 try:
     from qgis.core import QgsVectorLayer
@@ -18,10 +17,10 @@ except ImportError:
     pass  # We may be calling the script from the console in which case this import is not used
 
 from qgis.PyQt.Qt import QDomDocument
-import utils
+from OSTranslatorII import utils
 
 
-class Styler(object):
+class Styler:
     def __init__(self, cur, uri, schema, osmm_schema, osmm_style_name):
         self.cur = cur
         self.uri = uri

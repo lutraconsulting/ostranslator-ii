@@ -10,8 +10,7 @@
 # (at your option) any later version.
 
 from __future__ import absolute_import
-from builtins import str
-from import_task import *
+from OSTranslatorII.import_task import *
 import time
 
 class ImportManager(QObject):

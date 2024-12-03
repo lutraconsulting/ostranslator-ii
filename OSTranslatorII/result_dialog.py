@@ -11,7 +11,7 @@
 
 from __future__ import absolute_import
 import os
-from .utils import OSII_icon_path
+from OSTranslatorII.utils import OSII_icon_path
 
 from qgis.PyQt import QtGui, QtCore, uic
 from qgis.PyQt import QtWidgets

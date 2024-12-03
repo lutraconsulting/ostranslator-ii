@@ -12,15 +12,16 @@
 # Fix ValueError: API 'QDate' has already been set to version 1
 from __future__ import print_function
 from __future__ import absolute_import
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 try:
     import qgis.PyQt
 except ImportError:
     pass
 
 import traceback
-import sys
 import argparse
-import os
 from qgis.PyQt import QtCore
 from import_manager import ImportManager
 from post_processor_thread import PostProcessorThread
@@ -63,7 +64,7 @@ class OSTranslatorCli(QtCore.QObject):
         self.con_details['host'] = host
         self.con_details['port'] = port
         self.con_details['user'] = user
-        self.con_details['password'] = None  # Retrieve it from PGPASSFILE instead
+        self.con_details['password'] = "kopytko!"  # Retrieve it from PGPASSFILE instead
 
         self.pp_thread = None
         self.pp_errors = []
