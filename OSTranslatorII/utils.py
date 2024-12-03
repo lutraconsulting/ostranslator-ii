@@ -48,6 +48,8 @@ def download(packageUrl, destinationFileName):
             _download_urllib2(packageUrl, handle)
     except ImportError:
         _download_urllib2(packageUrl, handle)
+    except Exception:
+        _download_urllib2(packageUrl, handle)
     handle.close()
     return name
 
